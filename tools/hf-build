@@ -1,34 +1,30 @@
 #!/bin/bash
 
+# "wrapper" dpkg-buildpackage-ohjelmalle
+#
 # Kääntää uuden upstream-, downstream- tai arkkitehtuuriversion ja vaihtaa
 # .changes-tiedostoon uuden distron. Tämä skripti täytyy ajaa
 # lähdekoodihakemistossa, mutta itse kääntämistä varten luodaan
 # väliaikaishakemisto eikä lähdekoodihakemistoon kosketa.
 
-# Oletusasetukset...
+
+# Oletusasetukset
 default_action=deb
 default_key=e1ff97a0
 default_distribution=dapper
+# Lisäoptiot dpkg-buildpackagelle
+options="-i'.*debian/.*\.svn.*'"
 
-# ...jotka voidaan määritellä myös .hfrc-tiedostossa
+# Edelliset asetukset voidaan määritellä myös $HOME/.hfrc-tiedostossa
 [ -r $HOME/.hfrc ] && source $HOME/.hfrc
 
+
 script_name=$(basename $0)
-build_dir="../build-dir"
 tmp_changes="../changes.tmp" # Älä laita tätä .changes-päätteiseksi.
-orig_dir=$(pwd)
-
-
 action=${1:-$default_action}
 distribution=${2:-$default_distribution}
 key=${3:-$default_key}
 
-
-# Valmistetaan käännöshakemisto
-function prepare() {
-	rm -fr $build_dir
-	cp -r . $build_dir
-}
 
 # Kirjoitetaan uusi .changes-tiedosto entisen päälle.
 function new_binary_changes() {
@@ -47,32 +43,27 @@ function new_source_changes() {
 
 # .orig.tar.gz, .diff.gz, .deb
 function up() {
-	cd $build_dir
-	dpkg-buildpackage -sa -rfakeroot -k$key -uc -i'debian/.*\.svn.*' && new_binary_changes
+	dpkg-buildpackage -sa -rfakeroot -k$key -uc $options && new_binary_changes
 }
 
 # .diff.gz, .deb
 function down() {
-	cd $build_dir
-	dpkg-buildpackage -sd -rfakeroot -k$key -uc -i'debian/.*\.svn.*' && new_binary_changes
+	dpkg-buildpackage -sd -rfakeroot -k$key -uc $options && new_binary_changes
 }
 
 # .deb
 function deb() {
-	cd $build_dir
-	dpkg-buildpackage -sd -b -rfakeroot -k$key -uc -i'debian/.*\.svn.*' && new_binary_changes
+	dpkg-buildpackage -sd -b -rfakeroot -k$key -uc $options && new_binary_changes
 }
 
 # Vain sorsat: .orig.tar.gz, diff.gz
 function upsrc() {
-	cd $build_dir
-	dpkg-buildpackage -sa -S -rfakeroot -k$key -uc -i'debian/.*\.svn.*' && new_source_changes
+	dpkg-buildpackage -sa -S -rfakeroot -k$key -uc $options && new_source_changes
 }
 
 # Vain sorsat: diff.gz
 function downsrc() {
-	cd $build_dir
-	dpkg-buildpackage -sd -S -rfakeroot -k$key -uc -i'debian/.*\.svn.*' && new_source_changes
+	dpkg-buildpackage -sd -S -rfakeroot -k$key -uc $options && new_source_changes
 }
 
 # Siivotaan käännöshakemisto
@@ -81,11 +72,7 @@ function clean() {
 }
 
 case "$action" in
-	up|down|deb|upsrc|downsrc|clean)
-		prepare
-		$action
-		cd $orig_dir
-		;;
+	up|down|deb|upsrc|downsrc|clean) $action ;;
 	*)
 		echo "Usage: $script_name [up|down|deb|upsrc|downsrc|clean] [distribution] [gpg key]"
 		exit 1
