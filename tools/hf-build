@@ -1,7 +1,9 @@
 #!/bin/bash
+
 # Kääntää uuden upstream-, downstream- tai arkkitehtuuriversion ja vaihtaa
 # .changes-tiedostoon uuden distron. Tämä skripti täytyy ajaa
-# lähdekoodihakemistossa.
+# lähdekoodihakemistossa, mutta itse kääntämistä varten luodaan
+# väliaikaishakemisto eikä lähdekoodihakemistoon kosketa.
 
 default_action=deb
 default_key=e1ff97a0
