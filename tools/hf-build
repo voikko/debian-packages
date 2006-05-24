@@ -13,7 +13,6 @@
 
 default_distribution=""			# Tämä distro laitetaan .changes-tiedostoon
 default_key=""				# GPG-avain
-options="-i'.*debian/.*\.svn.*'"	# Lisäoptiot dpkg-buildpackagelle
 
 [ -r $HOME/.hfrc ] && source $HOME/.hfrc
 
@@ -24,6 +23,7 @@ action=$1
 distribution=${2:-$default_distribution}
 key=${3:-$default_key}
 gpg_options="" ; [ $key ] && gpg_options="--default-key $key"
+options="-i'.*debian/.*\.svn.*'"	# Lisäoptiot dpkg-buildpackagelle
 
 
 # Kirjoitetaan uusi .changes-tiedosto entisen päälle.
