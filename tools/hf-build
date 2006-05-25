@@ -18,12 +18,19 @@ default_key=""				# GPG-avain
 
 
 script_name=$(basename $0)
-tmp_changes="../changes.tmp" # Älä laita tätä .changes-päätteiseksi.
+tmp_changes="../changes.tmp"		# Älä laita tätä .changes-päätteiseksi.
 action=$1
 distribution=${2:-$default_distribution}
-key=${3:-$default_key}
-gpg_options="" ; [ $key ] && gpg_options="--default-key $key"
 options="-i'.*debian/.*\.svn.*'"	# Lisäoptiot dpkg-buildpackagelle
+key=${3:-$default_key}
+
+if [ $key ]
+then
+	gpg_options="--default-key $key"
+	options="$options -k$key"
+else
+	gpg_options=""
+fi
 
 
 # Kirjoitetaan uusi .changes-tiedosto entisen päälle.
@@ -43,27 +50,27 @@ function new_source_changes() {
 
 # .orig.tar.gz, .diff.gz, .deb
 function up() {
-	dpkg-buildpackage -sa -rfakeroot -k$key -uc $options && new_binary_changes
+	dpkg-buildpackage -sa -rfakeroot -uc $options && new_binary_changes
 }
 
 # .diff.gz, .deb
 function down() {
-	dpkg-buildpackage -sd -rfakeroot -k$key -uc $options && new_binary_changes
+	dpkg-buildpackage -sd -rfakeroot -uc $options && new_binary_changes
 }
 
 # .deb
 function deb() {
-	dpkg-buildpackage -sd -b -rfakeroot -k$key -uc $options && new_binary_changes
+	dpkg-buildpackage -sd -b -rfakeroot -uc $options && new_binary_changes
 }
 
 # Vain sorsat: .orig.tar.gz, diff.gz
 function upsrc() {
-	dpkg-buildpackage -sa -S -rfakeroot -k$key -uc $options && new_source_changes
+	dpkg-buildpackage -sa -S -rfakeroot -uc $options && new_source_changes
 }
 
 # Vain sorsat: diff.gz
 function downsrc() {
-	dpkg-buildpackage -sd -S -rfakeroot -k$key -uc $options && new_source_changes
+	dpkg-buildpackage -sd -S -rfakeroot -uc $options && new_source_changes
 }
 
 # Siivotaan käännöshakemisto
