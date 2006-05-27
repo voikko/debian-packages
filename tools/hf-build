@@ -35,14 +35,14 @@ fi
 
 # Kirjoitetaan uusi .changes-tiedosto entisen päälle.
 function new_binary_changes() {
-	changes=$(find .. -maxdepth 1 -name "*.changes" | grep -v '_source\.changes$' | sort | tail -n1)
+	changes=$(find .. -maxdepth 1 -type f -name '*.changes' -printf '%p\n' | grep -v '_source\.changes$' | sort | tail -n1)
 	sed_command="s/^Distribution: .*$/Distribution: $distribution/"
 	sed -e "$sed_command" $changes | gpg --clearsign $gpg_options >$tmp_changes
 	[ -e $tmp_changes ] && mv $tmp_changes $changes && cat $changes
 }
 
 function new_source_changes() {
-	changes=$(find .. -maxdepth 1 -name "*_source.changes" | sort | tail -n1)
+	changes=$(find .. -maxdepth 1 -type f -name '*_source.changes' -printf '%p\n' | sort | tail -n1)
 	sed_command="s/^Distribution: .*$/Distribution: $distribution/"
 	sed -e "$sed_command" $changes | gpg --clearsign $gpg_options >$tmp_changes
 	[ -e $tmp_changes ] && mv $tmp_changes $changes && cat $changes
