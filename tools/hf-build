@@ -21,7 +21,7 @@ script_name=$(basename $0)
 tmp_changes="../changes.tmp"		# Älä laita tätä .changes-päätteiseksi.
 action=$1
 distribution=${2:-$default_distribution}
-options="-i'.*\.svn.*'"			# Lisäoptiot dpkg-buildpackagelle
+options="-i -I.svn"			# Lisäoptiot dpkg-buildpackagelle
 key=${3:-$default_key}
 
 if [ $key ]
