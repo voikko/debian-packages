@@ -1,0 +1,6 @@
+# format version number, currently 3; this line is compulsory!
+version=3
+
+# Full-site-with-pattern  [Version  [Action]]
+#http://www.hunspell-fi.org/files/suomi-malaga-(.*)\.tar\.[gb]z2?
+#http://joyds1.joensuu.fi/sukija/suomi-malaga-(.*)\.tar\.bz2
