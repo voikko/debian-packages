@@ -1,0 +1,27 @@
+Source: oo2-voikko
+Section: text
+Priority: optional
+Maintainer: Teemu Likonen <tlikonen@iki.fi>
+Build-Depends: debhelper (>= 4.0.0), openoffice.org-dev (>= 2.0.2), zip
+Standards-Version: 3.6.2
+
+Package: openoffice.org-voikko
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libvoikko1 (>= 0.3)
+Conflicts: ${misc:Conflicts}
+Enhances: openoffice.org
+Provides: openoffice.org-spellcheck-fi, openoffice.org-hyphenation-fi
+Description: Oo2-voikko, a Finnish spell-checker and hyphenation for OpenOffice.org
+ OpenOffice.org is a full-featured office productivity suite that provides
+ a near drop-in replacement for Microsoft(R) Office.
+ .
+ This package contains Oo2-voikko, a Finnish spell-checking and hyphenation
+ component for OpenOffice.org.
+ .
+ NOTE: Usually spell-checking and hyphenation should be automatically activated
+ after installing this package. If this is not the case, go to "Writing Aids"
+ settings in OpenOffice.org and activate Voikko components manually. See
+ file /usr/share/doc/openoffice.org-voikko/README.Debian for more
+ information about using this package.
+ .
+ Homepage: http://www.hunspell-fi.org/

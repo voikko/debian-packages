@@ -1,0 +1,241 @@
+#!/bin/bash
+#
+# 	postinst - Configuration script for openoffice.org-voikko
+#
+# 	by Teemu Likonen <tlikonen@iki.fi>
+#
+# This script first removes any previously installed language components and
+# then registers the new one for OpenOffice.org package manager.
+
+
+# Names used in messages
+NAME_STRONG=Oo2-voikko
+NAME_WEAK=Oo2-voiko
+OPENOFFICEORG=OpenOffice.org
+
+# This package's name in Debian package manager. This is also the name of the
+# directory the language component is in.
+PACKAGE_NAME=openoffice.org-voikko
+
+# The name of the language component(s). There should be only one, though.
+LC_COLLATE=C
+COMPONENT_FULLPATH=/usr/lib/$PACKAGE_NAME/oo2-voikko-Linux_x86-*.uno.pkg
+
+# 'unopkg' registers and removes the language component to/from the
+# OpenOffice.org. This is the full path name to it.
+UNOPKG=/usr/lib/openoffice/program/unopkg
+
+# Lockfile that indicates OpenOffice.org is running.
+LOCKFILE=/root/.openoffice.org2/.lock
+
+
+# Here we define a function that will display messages to user.
+
+case "$(locale | grep ^LC_MESSAGES=)" in
+	*fi_FI*) MSG_LANG=finnish ;;
+	*) MSG_LANG="" ;;
+esac
+
+ICONV=""
+which iconv &>/dev/null && ICONV="| iconv --from-code=UTF-8 --to-code=//TRANSLIT"
+
+function msg() {
+	case "$1" in
+		upgrade_abort)
+			case "$MSG_LANG" in
+				finnish) echo VIRHE: postinst $2 $3
+				;;
+				*) echo ERROR: postinst $2 $3
+				;;
+			esac
+		;;
+		ooo_is_running)
+			case "$MSG_LANG" in
+				finnish) eval cat <<EOF $ICONV
+----------------------------------------------------------------------
+Näyttää siltä, että ${OPENOFFICEORG} on parasta aikaa käynnissä.
+Jos ${NAME_WEAK}n asentaa tai poistaa ${OPENOFFICEORG}in ollessa käynnissä,
+saattaa ${OPENOFFICEORG}in asennus rikkoutua. Mahdollisten ongelmien
+välttämiseksi sulje ensin ${OPENOFFICEORG} ja yritä sitten uudestaan.
+----------------------------------------------------------------------
+EOF
+				;;
+				*) eval cat <<EOF $ICONV
+----------------------------------------------------------------
+It seems that there are ${OPENOFFICEORG} processes running.
+To prevent possible breakage of your ${OPENOFFICEORG} installation
+please close all running ${OPENOFFICEORG} instances first.
+----------------------------------------------------------------
+EOF
+				;;
+			esac
+		;;
+		component_not_found)
+			case "$MSG_LANG" in
+				finnish) eval cat <<EOF $ICONV
+VAKAVA VIRHE: ${NAME_WEAK}n kielikomponenttitiedostoa, joka on tarkoitus asentaa,
+ei löydy! Mahdolliset syyt:
+  1) tämä ${PACKAGE_NAME}-asennuspaketti on viallinen
+  2) paketin asennusohjelmassa on ohjelmointivirhe
+  3) järjestelmässäsi ei ole awk-nimistä työkalua.
+EOF
+				;;
+				*) eval cat <<EOF $ICONV
+FATAL ERROR: Can’t find the ${NAME_STRONG} language component file that I’m supposed
+to install! Possible reasons:
+  1) this $PACKAGE_NAME package is corrupted
+  2) there’s a bug in package’s installation script
+  3) there’s no standard ‘awk’ utility in the system.
+EOF
+				;;
+			esac
+		;;
+		component_remove_previous)
+			case "$MSG_LANG" in
+				finnish) eval cat <<EOF $ICONV
+Vanha ${NAME_STRONG} poistettu ${OPENOFFICEORG}ista.
+EOF
+				;;
+				*) eval cat <<EOF $ICONV
+Old ${NAME_STRONG} removed from ${OPENOFFICEORG}.
+EOF
+				;;
+			esac
+		;;
+		component_remove_previous_failed)
+			case "$MSG_LANG" in
+				finnish) eval cat <<EOF $ICONV
+VIRHE: Vanhan ${NAME_WEAK}n poistaminen ${OPENOFFICEORG}ista epäonnistui.
+EOF
+				;;
+				*) eval cat <<EOF $ICONV
+ERROR: Failed to remove old ${NAME_STRONG} from ${OPENOFFICEORG}.
+EOF
+				;;
+			esac
+		;;
+		component_list_previous_failed)
+			case "$MSG_LANG" in
+				finnish) eval cat <<EOF $ICONV
+VIRHE: Mahdollisten aikaisemmin asennettujen ${OPENOFFICEORG}in
+kielikomponenttien tarkistaminen epäonnistui.
+EOF
+				;;
+				*) eval cat <<EOF $ICONV
+ERROR: Failed to check previously installed ${OPENOFFICEORG} language
+components.
+EOF
+				;;
+			esac
+		;;
+		component_register)
+			case "$MSG_LANG" in
+				finnish) eval cat <<EOF $ICONV
+${NAME_STRONG} asennettu ${OPENOFFICEORG}in käyttöön.
+EOF
+				;;
+				*) eval cat <<EOF $ICONV
+${NAME_STRONG} installed for ${OPENOFFICEORG}.
+EOF
+				;;
+			esac
+		;;
+		component_register_failed)
+			case "$MSG_LANG" in
+				finnish) eval cat <<EOF $ICONV
+VIRHE: ${NAME_STRONG}a ei onnistuttu asentamaan ${OPENOFFICEORG}in
+käyttöön. Tämä saattaa tarkoittaa, että
+  1) ${OPENOFFICEORG}in asennuksessa on jotain vikaa
+  2) tämä ${PACKAGE_NAME}-asennuspaketti ei ole täysin yhteensopiva
+     käyttämäsi ${OPENOFFICEORG}in kanssa
+  3) tämä ${PACKAGE_NAME}-asennuspaketti on viallinen.
+EOF
+				;;
+				*) eval cat <<EOF $ICONV
+ERROR: ${NAME_STRONG} was not installed succesfully for ${OPENOFFICEORG}.
+This may mean that
+  1) there’s something wrong with the ${OPENOFFICEORG} installation
+  2) this $PACKAGE_NAME package is not fully compatible with your
+     version of ${OPENOFFICEORG}
+  3) this $PACKAGE_NAME package is corrupted.
+EOF
+				;;
+			esac
+		;;
+	esac
+}
+
+
+### Copy these lines to form new message definitions #############
+#		message)
+#			case "$MSG_LANG" in
+#				finnish) eval cat <<EOF $ICONV
+#EOF
+#				;;
+#				*) eval cat <<EOF $ICONV
+#EOF
+#				;;
+#			esac
+#		;;
+##################################################################
+
+
+
+
+
+# If upgrading or removing has failed (i.e. prerm script returned non-zero
+# exit status) we must stop this script and exit with _zero_ status to leave
+# the current installation untouched.
+if [[ $1 == abort-upgrade || $1 == abort-remove ]]
+then
+	msg upgrade_abort $1 $2
+	exit 0
+fi
+
+# We check if the language component is really there.
+COMPONENT_FULLPATH=$(echo $COMPONENT_FULLPATH | awk '{ print $NF }')
+if [ ! -e $COMPONENT_FULLPATH ]
+then
+	msg component_not_found
+	exit 2
+fi
+
+
+# Registering program 'unopkg' writes things to $HOME/.openoffice* directory
+# (even with the '--shared' option). We must set $HOME to /root so that these
+# (root owned) files don't get written to the regular user's HOME in case
+# he/she runs this with sudo.
+export HOME=/root
+
+# We'll delete the lockfile too.
+rm -f $LOCKFILE
+
+
+# First we remove all language components that might exist in the system. These
+# can be previous versions or some other way installed ones.
+
+if $UNOPKG list --shared &>/dev/null
+then
+	COMPONENT_LIST="$($UNOPKG list --shared 2>/dev/null | sed -ne 's/^Name: \(oo2-voikko.*\)/\1/p')"
+	for COMPONENT in $COMPONENT_LIST
+	do
+		if $UNOPKG remove --shared $COMPONENT &>/dev/null
+		then msg component_remove_previous
+		else msg component_remove_previous_failed
+		fi
+	done
+else msg component_list_previous_failed
+fi
+
+
+# And then we register the new component for OpenOffice.org.
+
+if $UNOPKG add --shared $COMPONENT_FULLPATH &>/dev/null
+then msg component_register
+else
+	msg component_register_failed
+	exit 1
+fi
+
+
+exit 0
