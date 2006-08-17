@@ -1,0 +1,9 @@
+#!/bin/bash
+# Poistetaan huijaustiedostot
+
+suomi_aff='/usr/lib/ispell/suomi.aff'
+suomi_hash='/usr/lib/ispell/suomi.hash'
+
+[[ -f $suomi_aff && ! -s $suomi_aff ]] && rm $suomi_aff
+[[ -f $suomi_hash && ! -s $suomi_hash ]] && rm $suomi_hash
+

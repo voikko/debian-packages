@@ -1,0 +1,79 @@
+tmispell-voikko (0.5.0-0hf2) unstable; urgency=low
+
+  * Removed debconf from dependencies (debian/control)
+  * Removed debian/tmispell-voikko.conffiles because it added duplicate entry for
+    /etc/tmispell.conf
+
+ -- Teemu Likonen <tlikonen@iki.fi>  Wed,  2 Aug 2006 09:49:00 +0300
+
+tmispell-voikko (0.5.0-0hf1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Teemu Likonen <tlikonen@iki.fi>  Mon, 31 Jul 2006 11:46:41 +0300
+
+tmispell-voikko (0.4.3-0hf1) unstable; urgency=low
+
+  * New upstream release
+  * Added new conflict definitions: tmispell-voikko conflicts now with
+    tmispell and tmispell-soikko
+
+ -- Teemu Likonen <tlikonen@iki.fi>  Thu, 29 Jun 2006 19:53:13 +0300
+
+tmispell-voikko (0.4.2-0hf1) unstable; urgency=low
+
+  * New upstream release
+  * Moved from "contrib/text" to "text" since tmispell-voikko doesn't depend
+    on a non-free component (Soikko) anymore.
+  * tmispell-voikko and libenchant-voikko are now separate packages
+
+ -- Teemu Likonen <tlikonen@iki.fi>  Sun, 28 May 2006 22:15:21 +0300
+
+tmispell-voikko (0.4.1-0hf1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Teemu Likonen <tlikonen@iki.fi>  Sat, 27 May 2006 20:03:08 +0300
+
+tmispell-voikko (0.3-0hf1) unstable; urgency=low
+
+  * New upstream release
+  * New maintainer and package name
+
+ -- Teemu Likonen <tlikonen@iki.fi>  Sat, 27 May 2006 09:43:16 +0300
+
+tmispell (0.2.3-0.1.unofficial) unstable; urgency=low
+
+  * Version 0.2.3.
+
+ -- Pauli Virtanen <pauli.virtanen@hut.fi>  Mon, 19 May 2003 17:57:44 +0300
+
+tmispell (0.2.2-0.1.unofficial) unstable; urgency=low
+
+  * Version 0.2.2.
+
+ -- Pauli Virtanen <pauli.virtanen@hut.fi>  Thu, 15 May 2003 17:32:04 +0300
+
+tmispell (0.2.1-0.1.unofficial) unstable; urgency=low
+
+  * Version 0.2.1.
+
+ -- Pauli Virtanen <pauli.virtanen@hut.fi>  Tue, 13 May 2003 14:50:01 +0300
+
+tmispell (0.2-0.1.unofficial) unstable; urgency=low
+
+  * Version 0.2.
+
+ -- Pauli Virtanen <pauli.virtanen@hut.fi>  Mon, 12 May 2003 00:40:02 +0300
+
+tmispell (0.1.2-0.2.unofficial) unstable; urgency=low
+
+  * Adapted for use with libsoikko0.
+
+ -- Pauli Virtanen <pauli.virtanen@hut.fi>  Thu, 20 Feb 2003 22:28:50 +0200
+
+tmispell (0.1.2-0.1.unofficial) unstable; urgency=low
+
+  * Initial unofficial packaging.
+
+ -- Pauli Virtanen <pauli.virtanen@hut.fi>  Thu, 16 Jan 2003 21:18:18 +0200

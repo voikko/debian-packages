@@ -1,0 +1,40 @@
+Source: tmispell-voikko
+Priority: optional
+Maintainer: Teemu Likonen <tlikonen@iki.fi>
+Standards-Version: 3.5.8
+Build-Depends: debhelper, libenchant-dev, libncurses5-dev, libglib2.0-dev
+
+Package: tmispell-voikko
+Section: text
+Architecture: any
+Depends: ${shlibs:Depends}, libvoikko1 (>= 0.3)
+Conflicts: tmispell, tmispell-soikko
+Suggests: ispell
+Description: Ispell wrapper which uses Voikko for spell-checking
+ Voikko is a Finnish spell-checker and hyphenator based on Malaga and
+ Suomi-Malaga.
+ .
+ Tmispell is an Ispell wrapper that provides an Ispell-like interface for other
+ programs that need spelling checker. Many programs (e.g. mail clients, text
+ editors, and word processors) use Ispell for spell-checking. This package
+ makes it possible for such programs to use Voikko for Finnish spell-checking.
+ .
+ This package will set up Tmispell so that the command "ispell" actually starts
+ "tmispell". The real Ispell will be launched only if Tmispell does not support
+ the selected language.
+ .
+ Homepage: http://www.hunspell-fi.org/
+
+Package: libenchant-voikko
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, libvoikko1 (>= 0.3)
+Description: Voikko spell-checker libenchant plugin
+ Voikko is a Finnish spell-checker and hyphenator based on Malaga and
+ Suomi-Malaga.
+ .
+ This package contains a libenchant provider plugin that allows using Voikko in
+ any application that uses enchant library for spell-checking. For example
+ Abiword is one of these applications.
+ .
+ Homepage: http://www.hunspell-fi.org/
