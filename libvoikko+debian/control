@@ -1,7 +1,7 @@
 Source: libvoikko
 Priority: optional
 Maintainer: Harri Pitkänen <hatapitk@iki.fi>
-Build-Depends: debhelper (>= 4.0.0), libmalaga-dev (>= 7.4), autotools-dev, devscripts
+Build-Depends: debhelper (>= 4.0.0), libmalaga-dev (>= 7.4)
 Standards-Version: 3.6.2
 Section: libs
 
@@ -10,9 +10,9 @@ Section: libdevel
 Architecture: any
 Depends: libvoikko1 (= ${Source-Version})
 Description: Development files for libvoikko
- Voikko is a Finnish spellchecker and hyphenator based on
+ Voikko is a Finnish spell-checker and hyphenator based on
  Malaga and Suomi-Malaga. This package contains the files
- needed to build or develop applications that use voikko.
+ needed to build or develop applications that use Voikko.
  .
  Homepage: http://www.hunspell-fi.org
 
@@ -20,8 +20,8 @@ Package: libvoikko1
 Section: libs
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, voikko-fi
-Description: Finnish spellchecker and hyphenator library
- Voikko is a Finnish spellchecker and hyphenator based on
+Description: Finnish spell-checker and hyphenator library
+ Voikko is a Finnish spell-checker and hyphenator based on
  Malaga and Suomi-Malaga. This package contains the shared
  library.
  .
