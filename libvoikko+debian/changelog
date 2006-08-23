@@ -1,3 +1,9 @@
+libvoikko (1.0-0hf2) unstable; urgency=low
+
+  * Snapshot from SVN (r392)
+
+ -- Harri Pitkänen <hatapitk@iki.fi>  Wed, 23 Aug 2006 18:23:39 +0300
+
 libvoikko (1.0-0hf1) unstable; urgency=low
 
   * New upstream release
