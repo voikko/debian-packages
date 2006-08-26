@@ -1,3 +1,9 @@
+tmispell-voikko (0.6-0hf1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Teemu Likonen <tlikonen@iki.fi>  Sat, 26 Aug 2006 23:47:05 +0300
+
 tmispell-voikko (0.5.0-0hf2) unstable; urgency=low
 
   * Removed debconf from dependencies (debian/control)
