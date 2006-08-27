@@ -7,7 +7,7 @@ Build-Depends: debhelper, libenchant-dev, libncurses5-dev, libglib2.0-dev
 Package: tmispell-voikko
 Section: text
 Architecture: any
-Depends: ${shlibs:Depends}, libvoikko1 (>= 0.3)
+Depends: ${shlibs:Depends}
 Conflicts: tmispell, tmispell-soikko
 Suggests: ispell
 Description: Ispell wrapper which uses Voikko for spell-checking
@@ -28,7 +28,7 @@ Description: Ispell wrapper which uses Voikko for spell-checking
 Package: libenchant-voikko
 Section: libs
 Architecture: any
-Depends: ${shlibs:Depends}, libvoikko1 (>= 0.3)
+Depends: ${shlibs:Depends}
 Description: Voikko spell-checker libenchant plugin
  Voikko is a Finnish spell-checker and hyphenator based on Malaga and
  Suomi-Malaga.
