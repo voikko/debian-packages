@@ -27,5 +27,3 @@ longer use the old openoffice.org-voikko package; it has to be updated
 too (or compiled again from source package). Minor OpenOffice.org
 updates such as security updates should work without installing a new
 version of Oo2-voikko.
-
-	-- Teemu Likonen <tlikonen@iki.fi>
