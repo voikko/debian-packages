@@ -2,12 +2,12 @@ Source: oo2-voikko
 Section: text
 Priority: optional
 Maintainer: Teemu Likonen <tlikonen@iki.fi>
-Build-Depends: debhelper (>= 4.0.0), openoffice.org-dev (>= 2.0.2), zip
+Build-Depends: debhelper (>= 4.0.0), openoffice.org-dev (>= 2.0.2), libvoikko-dev (>= 0.3), zip
 Standards-Version: 3.6.2
 
 Package: openoffice.org-voikko
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libvoikko1 (>= 0.3)
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Conflicts: ${misc:Conflicts}
 Enhances: openoffice.org
 Provides: openoffice.org-spellcheck-fi, openoffice.org-hyphenation-fi
