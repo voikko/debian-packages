@@ -1,8 +1,8 @@
-oo2-voikko (1.0-0hf2) unstable; urgency=low
+oo2-voikko (1.0+svn20060829-0hf1) unstable; urgency=low
 
-  * Rebuilt for Debian unstable
+  * New SVN snapshot (r413)
 
- -- Teemu Likonen <tlikonen@iki.fi>  Mon, 28 Aug 2006 20:07:23 +0300
+ -- Teemu Likonen <tlikonen@iki.fi>  Tue, 29 Aug 2006 14:34:21 +0300
 
 oo2-voikko (1.0-0hf1) unstable; urgency=low
 
