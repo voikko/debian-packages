@@ -2,7 +2,7 @@ Source: libvoikko
 Priority: optional
 Maintainer: Harri Pitkänen <hatapitk@iki.fi>
 Build-Depends: debhelper (>= 4.0.0), libmalaga-dev (>= 7.4)
-Standards-Version: 3.6.2
+Standards-Version: 3.7.2
 Section: libs
 
 Package: libvoikko-dev
@@ -19,7 +19,7 @@ Description: Development files for libvoikko
 Package: libvoikko1
 Section: libs
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, voikko-fi
+Depends: ${shlibs:Depends}, ${misc:Depends}, voikko-fi (> 0.7.1+svn20060823)
 Description: Finnish spell-checker and hyphenator library
  Voikko is a Finnish spell-checker and hyphenator based on
  Malaga and Suomi-Malaga. This package contains the shared
