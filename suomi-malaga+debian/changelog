@@ -1,6 +1,12 @@
+suomi-malaga (0.7.1+svn20060901-0hf1) unstable; urgency=low
+
+  * New SVN snapshot (r428)
+
+ -- Teemu Likonen <tlikonen@iki.fi>  Fri,  1 Sep 2006 14:54:53 +0300
+
 suomi-malaga (0.7.1+svn20060823-0hf1) unstable; urgency=low
 
-  * New SVN snapsot
+  * New SVN snapshot
 
  -- Teemu Likonen <tlikonen@iki.fi>  Wed, 23 Aug 2006 22:30:12 +0300
 

@@ -1,2 +1,2 @@
-suomi.pro	usr/lib/voikko
-*_l		usr/lib/voikko
+voikko-fi_FI.pro	usr/lib/voikko
+voikko-fi_FI.*_l	usr/lib/voikko
