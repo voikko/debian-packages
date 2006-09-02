@@ -89,7 +89,7 @@ binary-arch: build install
 #	dh_makeshlibs
 	dh_installdeb
 #	dh_shlibdeps
-	sh debian/generate_dynamic_dependencies.sh
+	sh debian/generate_dependencies.sh
 	dh_gencontrol
 	dh_md5sums
 	dh_builddeb

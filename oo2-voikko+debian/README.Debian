@@ -13,9 +13,9 @@ following command (executed as root):
 
   dpkg-reconfigure openoffice.org-voikko
 
-2) The worst possible scenario is that in the future some new
-OpenOffice.org version is extremely incompatible with current versions
-of Oo2-voikko language component and the update process *breaks* the
+2) It is possible that in the future new versions of OpenOffice.org will
+become incompatible with the current versions of Oo2-voikko. The worst
+possible scenario is that this incompatibility will *break* the
 installation of Oo2-voikko and OpenOffice.org. This is really possible;
 I am not exaggerating here. OpenOffice.org has certain weak points in
 handling external components.
