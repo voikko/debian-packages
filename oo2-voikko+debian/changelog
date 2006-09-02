@@ -1,3 +1,9 @@
+oo2-voikko (1.1-0hf1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Teemu Likonen <tlikonen@iki.fi>  Sat,  2 Sep 2006 13:26:24 +0300
+
 oo2-voikko (1.0+svn20060829-0hf1) unstable; urgency=low
 
   * New SVN snapshot (r413)
