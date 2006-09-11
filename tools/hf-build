@@ -3,9 +3,7 @@
 # "wrapper" dpkg-buildpackage-ohjelmalle
 #
 # Kääntää uuden upstream-, downstream- tai arkkitehtuuriversion ja vaihtaa
-# .changes-tiedostoon uuden distron. Tämä skripti täytyy ajaa
-# lähdekoodihakemistossa, mutta itse kääntämistä varten luodaan
-# väliaikaishakemisto eikä lähdekoodihakemistoon kosketa.
+# .changes-tiedostoon uuden distron.
 
 
 # Seuraavat asetukset voidaan määritellä $HOME/.hfrc-tiedostossa, jolloin niitä
