@@ -1,3 +1,9 @@
+suomi-malaga (0.7.2-0hf1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Teemu Likonen <tlikonen@iki.fi>  Sat,  9 Sep 2006 15:54:51 +0300
+
 suomi-malaga (0.7.1+svn20060901-0hf1) unstable; urgency=low
 
   * New SVN snapshot (r428)
