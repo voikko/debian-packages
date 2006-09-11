@@ -32,7 +32,7 @@ LOCKFILE=/root/.openoffice.org2/.lock
 # Here we define a function that will display messages to user.
 
 case "$(locale | grep ^LC_MESSAGES=)" in
-	*fi_FI*) MSG_LANG=finnish ;;
+	*fi_*) MSG_LANG=finnish ;;
 	*) MSG_LANG="" ;;
 esac
 
