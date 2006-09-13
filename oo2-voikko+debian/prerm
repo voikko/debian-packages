@@ -19,7 +19,7 @@ PACKAGE_NAME=openoffice.org-voikko
 
 # The name of the language component
 COMPONENT_FULLPATH=/usr/lib/$PACKAGE_NAME/oo2-voikko-Linux_*.uno.pkg
-COMPONENT_BASENAME="$(basename $COMPONENT_FULLPATH) | sed -e 's/-Linux_.*$//'"
+COMPONENT_BASENAME=$(basename $COMPONENT_FULLPATH | sed -e 's/-Linux_.*$//')
 
 # 'unopkg' registers and removes the language component to/from the
 # OpenOffice.org. This is the full path name to it.
