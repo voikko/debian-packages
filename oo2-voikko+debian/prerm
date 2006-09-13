@@ -13,6 +13,14 @@ NAME_STRONG=Oo2-voikko
 NAME_WEAK=Oo2-voiko
 OPENOFFICEORG=OpenOffice.org
 
+# This package's name in Debian package manager. This is also the name of the
+# directory the language component is in.
+PACKAGE_NAME=openoffice.org-voikko
+
+# The name of the language component
+COMPONENT_FULLPATH=/usr/lib/$PACKAGE_NAME/oo2-voikko-Linux_*.uno.pkg
+COMPONENT_BASENAME="$(basename $COMPONENT_FULLPATH) | sed -e 's/-Linux_.*$//'"
+
 # 'unopkg' registers and removes the language component to/from the
 # OpenOffice.org. This is the full path name to it.
 UNOPKG=/usr/lib/openoffice/program/unopkg
@@ -118,7 +126,7 @@ rm -f $HOME/.openoffice.org2/.lock
 
 if $UNOPKG list --shared &>/dev/null
 then
-	COMPONENT_LIST="$($UNOPKG list --shared 2>/dev/null | sed -ne 's/^Name: \(oo2-voikko.*\)/\1/p')"
+	COMPONENT_LIST=$($UNOPKG list --shared 2>/dev/null | sed -ne "s/^Name: \\(${COMPONENT_BASENAME}.*\\)/\\1/p")
 	for COMPONENT in $COMPONENT_LIST
 	do
 		if $UNOPKG remove --shared $COMPONENT &>/dev/null
