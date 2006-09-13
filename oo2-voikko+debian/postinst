@@ -25,9 +25,6 @@ COMPONENT_FULLPATH=/usr/lib/$PACKAGE_NAME/oo2-voikko-Linux_x86-*.uno.pkg
 # OpenOffice.org. This is the full path name to it.
 UNOPKG=/usr/lib/openoffice/program/unopkg
 
-# Lockfile that indicates OpenOffice.org is running.
-LOCKFILE=/root/.openoffice.org2/.lock
-
 
 # Here we define a function that will display messages to user.
 
@@ -52,20 +49,19 @@ function msg() {
 		ooo_is_running)
 			case "$MSG_LANG" in
 				finnish) eval cat <<EOF $ICONV
-----------------------------------------------------------------------
-Näyttää siltä, että ${OPENOFFICEORG} on parasta aikaa käynnissä.
-Jos ${NAME_WEAK}n asentaa tai poistaa ${OPENOFFICEORG}in ollessa käynnissä,
-saattaa ${OPENOFFICEORG}in asennus rikkoutua. Mahdollisten ongelmien
-välttämiseksi sulje ensin ${OPENOFFICEORG} ja yritä sitten uudestaan.
-----------------------------------------------------------------------
+------------------------------------------------------------------------------
+VAROITUS: Näyttää siltä, että ${OPENOFFICEORG} on jollakin käyttäjällä
+käynnissä. Kun ${NAME_WEAK}n asentaa ${OPENOFFICEORG}in ollessa käynnissä,
+saattaa käyttäjän ${OPENOFFICEORG}issa esiintyä toimintahäiriöitä.
+------------------------------------------------------------------------------
 EOF
 				;;
 				*) eval cat <<EOF $ICONV
-----------------------------------------------------------------
-It seems that there are ${OPENOFFICEORG} processes running.
-To prevent possible breakage of your ${OPENOFFICEORG} installation
-please close all running ${OPENOFFICEORG} instances first.
-----------------------------------------------------------------
+------------------------------------------------------------------------------
+WARNING: It seems that there are ${OPENOFFICEORG} processes running. If
+${NAME_STRONG} is installed while ${OPENOFFICEORG} is running, it is possible
+that user’s ${OPENOFFICEORG} process don’t function properly.
+------------------------------------------------------------------------------
 EOF
 				;;
 			esac
@@ -208,7 +204,11 @@ fi
 export HOME=/root
 
 # We'll delete the lockfile too.
-rm -f $LOCKFILE
+rm -f $HOME/.openoffice.org2/.lock
+
+
+# We check if OpenOffice.org is running and give a warning if it is.
+pidof soffice.bin &>/dev/null && msg ooo_is_running
 
 
 # First we remove all language components that might exist in the system. These

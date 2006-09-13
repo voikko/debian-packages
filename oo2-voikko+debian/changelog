@@ -1,3 +1,11 @@
+oo2-voikko (1.1-0hf2) unstable; urgency=low
+
+  * Don't cancel install/remove even if OpenOffice is running. Warning is
+    given during configure instead.
+  * Remove "preinst" script.
+
+ -- Teemu Likonen <tlikonen@iki.fi>  Tue, 12 Sep 2006 18:38:28 +0300
+
 oo2-voikko (1.1-0hf1) unstable; urgency=low
 
   * New upstream release
