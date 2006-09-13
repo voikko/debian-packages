@@ -46,6 +46,26 @@ function msg() {
 				;;
 			esac
 		;;
+		ooo_is_running)
+			case "$MSG_LANG" in
+				finnish) eval cat <<EOF $ICONV
+------------------------------------------------------------------------------
+VAROITUS: Näyttää siltä, että ${OPENOFFICEORG} on jollakin käyttäjällä
+käynnissä. Kun ${NAME_WEAK}n poistaa ${OPENOFFICEORG}in ollessa käynnissä,
+saattaa käyttäjän ${OPENOFFICEORG}issa esiintyä toimintahäiriöitä.
+------------------------------------------------------------------------------
+EOF
+				;;
+				*) eval cat <<EOF $ICONV
+------------------------------------------------------------------------------
+WARNING: It seems that there are ${OPENOFFICEORG} processes running. If
+${NAME_STRONG} is removed while ${OPENOFFICEORG} is running, it is possible
+that user’s ${OPENOFFICEORG} process don’t function properly.
+------------------------------------------------------------------------------
+EOF
+				;;
+			esac
+		;;
 		component_remove)
 			case "$MSG_LANG" in
 				finnish) eval cat <<EOF $ICONV
@@ -120,6 +140,9 @@ export HOME=/root
 # We'll delete the lockfile too.
 rm -f $HOME/.openoffice.org2/.lock
 
+
+# We check if OpenOffice.org is running and give a warning if it is.
+[ $1 = remove ] && pidof soffice.bin &>/dev/null && msg ooo_is_running
 
 
 # We remove possible previously installed language component from the system.
