@@ -1,3 +1,10 @@
+libvoikko (1.1-0hf1) unstable; urgency=low
+
+  * New upstream release
+  * Use >> instead of > in Depends
+
+ -- Harri Pitkänen <hatapitk@iki.fi>  Sat,  9 Sep 2006 15:05:15 +0300
+
 libvoikko (1.0+svn20060901-0hf2) unstable; urgency=low
 
   * libvoikko requires voikko-fi > 0.7.1+svn20060823

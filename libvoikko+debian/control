@@ -19,7 +19,7 @@ Description: Development files for libvoikko
 Package: libvoikko1
 Section: libs
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, voikko-fi (> 0.7.1+svn20060823)
+Depends: ${shlibs:Depends}, ${misc:Depends}, voikko-fi (>> 0.7.1+svn20060823)
 Description: Finnish spell-checker and hyphenator library
  Voikko is a Finnish spell-checker and hyphenator based on
  Malaga and Suomi-Malaga. This package contains the shared
