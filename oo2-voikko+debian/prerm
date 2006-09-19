@@ -140,11 +140,7 @@ fi
 # (even with the '--shared' option). We must set $HOME to some temporary
 # directory so that these (root owned) files don't get written to the regular
 # user's HOME in case he/she runs this with sudo.
-if ! TMP_HOME=$(mktemp -d /tmp/$PACKAGE_NAME.XXXXXX)
-then
-	TMP_HOME=/tmp/$PACKAGE_NAME
-	mkdir -p $TMP_HOME
-fi
+TMP_HOME=$(mktemp -t -d $PACKAGE_NAME.XXXXXXXXXX) || exit 1
 export HOME=$TMP_HOME
 
 # Workaround for the issue
