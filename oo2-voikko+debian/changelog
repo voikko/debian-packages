@@ -1,3 +1,10 @@
+oo2-voikko (1.1-0hf4) unstable; urgency=low
+
+  * Use /tmp instead of /root as a temporary HOME directory for unopkg
+  * Add workaround for the bug #387224 (Debian Bug Tracking System)
+
+ -- Teemu Likonen <tlikonen@iki.fi>  Mon, 18 Sep 2006 23:17:08 +0300
+
 oo2-voikko (1.1-0hf3) unstable; urgency=low
 
   * Remove "preinst" script.
