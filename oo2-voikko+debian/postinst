@@ -202,7 +202,7 @@ pidof soffice.bin &>/dev/null && msg ooo_is_running
 # (even with the '--shared' option). We must set $HOME to some temporary
 # directory so that these (root owned) files don't get written to the regular
 # user's HOME in case he/she runs this with sudo.
-TMP_HOME=$(mktemp -t -d $PACKAGE_NAME.XXXXXXXXXX) || exit 1
+TMP_HOME=$(mktemp -t -d $PACKAGE_NAME.XXXXXX) || exit 1
 export HOME=$TMP_HOME
 
 # Workaround for the issue
