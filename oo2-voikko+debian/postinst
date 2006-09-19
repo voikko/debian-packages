@@ -194,16 +194,19 @@ then
 	exit 2
 fi
 
-
 # We check if OpenOffice.org is running and give a warning if it is.
 pidof soffice.bin &>/dev/null && msg ooo_is_running
 
 
 # Registering program 'unopkg' writes things to $HOME/.openoffice* directory
-# (even with the '--shared' option). We must set $HOME to some temporaty
+# (even with the '--shared' option). We must set $HOME to some temporary
 # directory so that these (root owned) files don't get written to the regular
 # user's HOME in case he/she runs this with sudo.
-TMP_HOME=$(mktemp -d /tmp/$PACKAGE_NAME.XXXXXX)
+if ! TMP_HOME=$(mktemp -d /tmp/$PACKAGE_NAME.XXXXXX)
+then
+	TMP_HOME=/tmp/$PACKAGE_NAME
+	mkdir -p $TMP_HOME
+fi
 export HOME=$TMP_HOME
 
 # Workaround for the issue
@@ -216,7 +219,7 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema" oor:name="Setup"
 oor:package="org.openoffice">
  <node oor:name="L10N">
   <prop oor:name="ooLocale" oor:type="xs:string">
-   <value>xxx</value>
+   <value>en</value>
   </prop>
  </node>
 </oor:component-data>
