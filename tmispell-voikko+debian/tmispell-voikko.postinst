@@ -1,6 +1,5 @@
 #!/bin/sh
-# Jotta ohjelmat tajuaisivat suomen kielen oikoluvun olevan käytössä, luodaan
-# huijaustiedostot sitä varten.
+# Create files to indicate "suomi" language is available.
 
 [ -d /usr/lib/ispell ] || mkdir -p /usr/lib/ispell
 touch /usr/lib/ispell/suomi.{aff,hash}

@@ -1,9 +1,8 @@
-#!/bin/bash
-# Poistetaan huijaustiedostot
+#!/bin/sh
+# We'll remove empty "suomi" files.
 
 suomi_aff='/usr/lib/ispell/suomi.aff'
 suomi_hash='/usr/lib/ispell/suomi.hash'
 
-[[ -f $suomi_aff && ! -s $suomi_aff ]] && rm $suomi_aff
-[[ -f $suomi_hash && ! -s $suomi_hash ]] && rm $suomi_hash
-
+[ -f $suomi_aff -a ! -s $suomi_aff ] && rm $suomi_aff
+[ -f $suomi_hash -a ! -s $suomi_hash ] && rm $suomi_hash
