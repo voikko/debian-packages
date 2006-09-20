@@ -36,7 +36,7 @@ build-stamp: configure-stamp
 	dh_testdir
 
 	# Add here commands to compile the package.
-	sh -c "source /usr/lib/openoffice/sdk/setsdkenv_unix.sh && $(MAKE)"
+	sh -c ". /usr/lib/openoffice/sdk/setsdkenv_unix.sh && $(MAKE)"
 
 	touch build-stamp
 

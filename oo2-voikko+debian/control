@@ -3,7 +3,7 @@ Section: text
 Priority: optional
 Maintainer: Teemu Likonen <tlikonen@iki.fi>
 Build-Depends: debhelper (>= 4.0.0), openoffice.org-dev (>= 2.0.2), libvoikko-dev (>= 0.3), zip
-Standards-Version: 3.6.2
+Standards-Version: 3.7.2
 
 Package: openoffice.org-voikko
 Architecture: any
