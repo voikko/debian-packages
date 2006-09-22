@@ -1,3 +1,9 @@
+oo2-voikko (1.1-0hf5) unstable; urgency=low
+
+  * Fix sh compatibility issue in debian/rules
+
+ -- Teemu Likonen <tlikonen@iki.fi>  Fri, 22 Sep 2006 10:47:00 +0300
+
 oo2-voikko (1.1-0hf4) unstable; urgency=low
 
   * Use /tmp instead of /root as a temporary HOME directory for unopkg
