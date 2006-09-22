@@ -1,8 +1,9 @@
 Source: tmispell-voikko
+Section: text
 Priority: optional
 Maintainer: Teemu Likonen <tlikonen@iki.fi>
 Standards-Version: 3.7.2
-Build-Depends: debhelper, libenchant-dev, libncurses5-dev, libglib2.0-dev
+Build-Depends: debhelper (>= 4.0.0), libenchant-dev, libncurses5-dev, libglib2.0-dev
 
 Package: tmispell-voikko
 Section: text
