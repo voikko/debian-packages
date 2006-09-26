@@ -1,9 +1,9 @@
-malaga (7.8-0hf1) UNRELEASED; urgency=low
+malaga (7.8-0hf1) unstable; urgency=low
 
   * New upstream release
   * Copy most of the new packaging from 7.8-2 by Timo Jyrinki
 
- -- Harri Pitkänen <hatapitk@iki.fi>  Fri, 30 Jun 2006 10:07:29 +0300
+ -- Harri Pitkänen <hatapitk@iki.fi>  Tue, 26 Sep 2006 20:05:54 +0300
 
 malaga (7.5-0hf2) unstable; urgency=low
 
