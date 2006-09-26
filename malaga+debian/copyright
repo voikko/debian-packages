@@ -1,0 +1,47 @@
+This package is one of the four Debian binary packages that contain
+Malaga version 4.3.  The four packages are malaga-bin, libmalaga2,
+libmalaga-dev and malaga-doc.
+
+The four packages were debianized by Antti-Juhani Kaijanaho
+<gaia@iki.fi>.  The upstream sources were obtained from
+<URL:ftp://ftp.linguistik.uni-erlangen.de/pub/malaga/malaga-4.3.tar.gz>
+on December 20, 1999.  Only minor modifications were made to the
+upstream Makefile to facilitate proper building of the shared and
+static libraries, and some portability fixes were made to the source.
+These changes are documented with proper comments in the source
+package.
+
+Malaga has been written by Bjoern Beutel.  Starting from version 4.2,
+Malaga is under the GNU GPL.  The source files all have essentially
+the same copyright notice on them - the following sample notice is
+from malmake.c:
+
+8<--- begin quote
+/* This file is part of Malaga, a system for Natural Language Analysis.
+ * Copyright (C) 1995-1999 Bjoern Beutel
+ *
+ * Bjoern Beutel
+ * Universitaet Erlangen-Nuernberg
+ * Abteilung fuer Computerlinguistik
+ * Bismarckstrasse 12
+ * D-91054 Erlangen
+ * e-mail: malaga@linguistik.uni-erlangen.de 
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA */
+
+8<--- end quote
+
+On Debian systems the complete text of GNU General Public License is
+located in the file /usr/share/common-licenses/copyright/GPL .

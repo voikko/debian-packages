@@ -1,0 +1,199 @@
+#!/usr/bin/make -f
+# Written by Antti-Juhani Kaijanaho.  Use, distribute and modify as
+# you please.
+
+soname = 7
+libname = libmalaga.so.7.0.0
+
+install         := install -o root -g root
+install_exec    := $(install) -m 0755 -s
+install_nonex   := $(install) -m 0644
+install_dir     := $(install) -m 0755 -d
+install_script  := $(install) -m 0755
+install_symlink := ln -s
+
+gzip           := gzip -9
+strip_lib      := strip --strip-unneeded -R .comment
+
+tmpdir := $(shell pwd)/debian/tmp
+
+package_base := malaga
+
+# These must not be :='s!
+rootdir = $(tmpdir)/$(package)
+ctldir = $(rootdir)/DEBIAN
+bindir = $(rootdir)/usr/bin
+docdir = $(rootdir)/usr/share/doc/$(package)
+exampledir = $(docdir)/examples
+mandir = $(rootdir)/usr/share/man
+elispdir = $(rootdir)/usr/share/emacs/site-lisp
+emacs_d_dir = $(rootdir)/etc/emacs/site-start.d
+man1dir = $(mandir)/man1
+sharedir = $(rootdir)/usr/share/$(package_base)
+libdir = $(rootdir)/usr/lib/$(package_base)
+docbasedir = $(rootdir)/usr/share/doc-base
+usrlib = $(rootdir)/usr/lib
+includedir = $(rootdir)/usr/include
+infodir = $(rootdir)/usr/share/info
+
+default:
+	@echo You need to specify a target.
+	@exit 1
+
+update-autotools:
+	rm -f config.sub config.guess install-sh missing ltmain.sh
+	cp /usr/share/misc/config.sub .
+	cp /usr/share/misc/config.guess .
+	cp /usr/share/automake-1.9/install-sh .
+	cp /usr/share/automake-1.9/missing .
+	cp /usr/share/libtool/ltmain.sh .
+	aclocal
+	autoconf
+
+.PHONY: default build build-bin build-lib build-doc \
+        binary binary-bin binary-dev binary-lib binary-doc \
+	clean clean-build clean-binary binary-arch binary-indep \
+	update-autotools
+
+# The published interface begins
+build: build-bin build-doc build-lib
+binary: binary-arch binary-indep
+binary-arch: binary-bin binary-lib binary-dev
+binary-indep: binary-doc
+clean: clean-build clean-binary
+# The published interface ends
+
+INCLUDE_SPEC=CPPFLAGS="-I/usr/include/tcl8.4"
+COMPILE_OPTS=OPTIONS="-Wall -g -O2 -I/usr/include/tcl8.4" 
+
+build-bin: debian/build-bin.stamp
+debian/build-bin.stamp:
+	rm -rf build-bin
+	mkdir build-bin
+	cd build-bin && $(INCLUDE_SPEC) ../configure --prefix=/usr
+	$(MAKE) -C build-bin $(COMPILE_OPTS) fpic="" \
+                malaga maldump \
+	        mallex malmake \
+	        malrul malsym malshow \
+		malaga.el info
+	touch $@
+
+build-lib: debian/build-lib.stamp
+debian/build-lib.stamp:
+	rm -rf build-lib
+	mkdir build-lib
+	cd build-lib && $(INCLUDE_SPEC) ../configure --prefix=/usr
+	$(MAKE) -C build-lib $(COMPILE_OPTS) \
+	   libmalaga.la
+	touch $@
+
+build-doc: debian/build-doc.stamp
+debian/build-doc.stamp:
+	rm -rf build-doc
+	mkdir build-doc
+	cd build-doc && $(INCLUDE_SPEC) ../configure --prefix=/usr
+	$(MAKE) -C build-doc $(COMPILE_OPTS) \
+		dvi html ps pdf
+	touch $@
+
+clean-build:
+	$(RM) debian/build-*.stamp
+	rm -rf build-bin build-lib build-doc build-matrix
+	find . -name '*~'  | xargs $(RM)
+
+define prebinary
+	$(RM) -r $(rootdir)
+	$(install_dir) $(ctldir)
+	$(install_dir) $(docdir)
+	$(install_nonex) debian/copyright $(docdir)
+	$(install_nonex) debian/changelog $(docdir)/changelog.Debian
+	$(install_nonex) CHANGES.txt $(docdir)/changelog
+	$(gzip) $(docdir)/changelog $(docdir)/changelog.Debian
+endef
+
+define postbinary
+	chmod -R g-s $(rootdir)
+	dpkg-gencontrol -isp -p$(package) -P$(rootdir)
+	dpkg --build $(rootdir) ..
+endef
+
+binary-bin: debian/binary-bin.stamp
+debian/binary-bin.stamp: package=malaga-bin
+debian/binary-bin.stamp: debian/build-bin.stamp
+	$(prebinary)
+	$(install_dir) $(infodir)
+	$(install_script) debian/postinst-$(package) $(ctldir)/postinst
+	$(install_nonex) README.txt $(docdir)/README.txt
+	$(install_nonex) malaga.info $(infodir)/malaga.info
+	gzip -9 $(infodir)/malaga.info
+	$(install_dir) $(exampledir)
+	set -e ; for sd in formal numeral german ; \
+	  do \
+	    $(install_dir) $(exampledir)/$$sd ; \
+	    $(install_nonex) grammars/$$sd/* $(exampledir)/$$sd ; \
+	  done
+	$(install_dir) $(elispdir)
+	$(install_nonex) malaga.el $(elispdir)
+	$(install_dir) $(emacs_d_dir)
+	$(install_nonex) debian/emacs-startup.bin \
+	    $(emacs_d_dir)/50$(package).el
+	$(install_nonex) debian/bin-conffiles $(ctldir)/conffiles
+	$(install_dir) $(bindir)
+	$(install_exec) $(addprefix build-bin/, malaga maldump mallex \
+	                                    malshow malmake malrul malsym) \
+	               $(bindir)
+	dpkg-shlibdeps -pbin-shlibs $(bindir)/*
+	$(postbinary)
+	touch $@
+
+binary-doc: debian/binary-doc.stamp
+debian/binary-doc.stamp: package=malaga-doc
+debian/binary-doc.stamp: debian/build-doc.stamp
+	$(prebinary)
+	$(install_dir) $(docdir)
+	$(install_dir) $(docdir)/html
+	$(install_script) debian/postinst-$(package) $(ctldir)/postinst
+	$(install_script) debian/prerm-$(package) $(ctldir)/prerm
+	$(install_nonex) build-doc/malaga.ps $(docdir)
+	$(gzip) $(docdir)/malaga.ps
+	$(install_nonex) build-doc/malaga.html/* $(docdir)/html
+	$(install_nonex) build-doc/malaga.dvi $(docdir)
+	$(gzip) $(docdir)/malaga.dvi
+	$(install_nonex) build-doc/malaga.pdf $(docdir)
+	$(gzip) $(docdir)/malaga.pdf
+	$(install_dir) $(docbasedir)
+	$(install_nonex) debian/doc-control $(docbasedir)/malaga-doc
+	$(postbinary)
+	touch $@
+
+binary-lib: debian/binary-lib.stamp
+debian/binary-lib.stamp: package=libmalaga$(soname)
+debian/binary-lib.stamp: debian/build-lib.stamp
+	$(prebinary)
+	$(install_dir) $(usrlib)
+	$(install_script) debian/postinst-$(package) $(ctldir)/postinst
+	cd build-lib; ./libtool install -c -m 644 libmalaga.la $(usrlib)/libmalaga.la
+	rm $(usrlib)/libmalaga.{a,la,so}
+	$(strip_lib) $(usrlib)/$(libname)
+	$(install_nonex) debian/shlibs.lib $(ctldir)/shlibs
+	dpkg-shlibdeps -plib-shlibs $(usrlib)/$(libname)
+	$(postbinary)
+	touch $@
+
+binary-dev: debian/binary-dev.stamp
+debian/binary-dev.stamp: package=libmalaga-dev
+debian/binary-dev.stamp: debian/build-lib.stamp
+	$(prebinary)
+	$(install_dir) $(usrlib)
+	cd build-lib; ./libtool install -c -m 644 libmalaga.la $(usrlib)/libmalaga.la
+	rm $(usrlib)/$(libname)
+	rm $(usrlib)/libmalaga.so.$(soname)
+	$(install_dir) $(includedir)/$(package_base)
+	$(install_nonex) malaga.h $(includedir)/$(package_base)
+	$(postbinary)
+	touch $@
+
+clean-binary:
+	$(RM) debian/binary-*.stamp
+	$(RM) -r $(tmpdir)
+	$(RM) debian/files debian/substvars

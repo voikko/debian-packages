@@ -1,0 +1,365 @@
+malaga (7.5-0hf2) unstable; urgency=low
+
+  * Fix the shared library by linking it against libreadline.
+
+ -- Harri Pitkänen <hatapitk@iki.fi>  Fri, 30 Jun 2006 10:07:29 +0300
+
+malaga (7.5-0hf1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/rules: Add new target "update-autotools" to temporarily
+    work around incorrect names of installed libraries due to use of
+    outdated libtool in the original source.
+  * debian/control: Add Build-Depends: libreadline5-dev to take
+    advantage of the new readline support in this release.
+
+ -- Harri Pitkänen <hatapitk@iki.fi>  Thu, 29 Jun 2006 19:46:55 +0300
+
+malaga (7.4-0hf1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Harri Pitkänen <hatapitk@iki.fi>  Sat, 20 May 2006 14:11:22 +0300
+
+malaga (7.3-0hf1) unstable; urgency=low
+
+  * This is an unofficial build for Hunspell-fi -project by someone
+    who has never built Debian packages before. Use with care!
+    Not all Debian-specific fixes from 6.13-6 have been included in
+    this version.
+  * New upstream release.
+  * configure: Patch to produce sensible library names.
+  
+ -- Harri Pitkänen <hatapitk@iki.fi>  Thu, 13 Apr 2006 22:58:54 +0300
+
+malaga (6.13-6) unstable; urgency=low
+
+  * debian/control (libmalag6a) [Conflicts]: Separate names with comma.
+  * debian/control (libmalaga-dev) [Conflicts]: Likewise.
+    (Closes: #358462)
+  
+ -- Thomas Bushnell, BSG <tb@debian.org>  Wed, 22 Mar 2006 13:53:23 -0800
+
+malaga (6.13-5) unstable; urgency=low
+
+  * debian/control (malaga-doc Recommends): Suggest gv as a
+    postscript-viewer instead of ghostview.  (Closes: #289701).
+
+ -- Thomas Bushnell, BSG <tb@debian.org>  Mon, 10 Jan 2005 11:52:04 -0800
+
+malaga (6.13-4) unstable; urgency=high
+
+  * This should have been urgency=high, because it is an important and
+    long-delayed accomodation to new upstream with a bajillion bug fixes.
+
+ -- Thomas Bushnell, BSG <tb@debian.org>  Fri, 20 Aug 2004 12:58:50 -0700
+
+malaga (6.13-3) unstable; urgency=low
+
+  * debian/rules (strip_lib): Remove .comment sections too.
+  * debian/control (Build-Depends): Require tetex-extra too; this is needed for
+  kpathsea to build the lcircle10 font, which is in turn needed for dvi2pdf,
+  all of which when you use @cartouche in the texinfo source.  Closes: #266280.
+  
+ -- Thomas Bushnell, BSG <tb@debian.org>  Tue, 17 Aug 2004 13:55:53 -0700
+
+malaga (6.13-2) unstable; urgency=low
+
+  * prerm-malaga-doc, postinst-malaga-doc: New files, to call install-docs.
+  * rules (binary-doc): And put them in the package.
+  * control (malaga-doc Recommends): Suggest ghostview as a postscript-viewer.
+  Suggest lynx as a www-brower.  Don't recommend dvi-viewer; it's not
+  a real virtual package.  Also recommend xpdf | pdf-viewer.
+  (malaga-bin Recommends): It's info-browser, not info-viewer; and suggest info
+  as a possibility.
+  
+ -- Thomas Bushnell, BSG <tb@debian.org>  Sat,  7 Aug 2004 00:25:06 -0700
+
+malaga (6.13-1) unstable; urgency=low
+
+  * New upstream release.  Closes: Bug#92452.
+  * rules: massive changes in every regard.
+  * malaga.texi: Remove use of @ commands in @node names.
+    Put tex-specific code in @iftex, not @ifnotinfo.
+  * prerm-malaga-bin, prerm-malaga-doc, prerm-libmalaga-dev, prerm-libmalaga2
+    postinst-libmalaga-dev, postinst-malaga-bin, postinst-malaga-doc:
+    Remove unneeded transition files.
+  * bin-README.Debian: No longer relevant.
+  * control: Library package is now libmalaga6.
+  * postinst-libmalaga2: Remove transition material; rename to be
+    postinst-libmalaga6.
+  * control (malaga-bin, malaga-doc): Fix all the doc-related recommendations.
+  * control (Build-Depends): Include texinfo; not hevea.
+  * dev-README.Debian: Remove file; no longer relevant.
+  
+ -- Thomas Bushnell, BSG <tb@debian.org>  Fri,  6 Aug 2004 21:26:01 -0700
+
+malaga (4.3-8) unstable; urgency=low
+
+  * Recommend tk8.4 | wish instead of tk8.0.  Should have been done in
+    version 4.3-6 when we upgraded to using 8.4 to build.  Closes: #262235.
+
+ -- Thomas Bushnell, BSG <tb@debian.org>  Tue,  3 Aug 2004 17:45:17 -0700
+
+malaga (4.3-7) unstable; urgency=low
+
+  * Don't mention emacs20 in the Suggests for malaga-bin; merely
+    suggesting emacsen in sufficient.  Closes: #232770.
+
+ -- Thomas Bushnell, BSG <tb@debian.org>  Sat,  5 Jun 2004 14:20:31 -0700
+
+malaga (4.3-6) unstable; urgency=low
+
+  * Conform to override file: All packages should be priority optional,
+    not extra.  libmalag-dev goes into libdevel, not devel.
+  
+  * Switch to tcl/tk version 8.4.  Closes: #205923.
+
+ -- Thomas Bushnell, BSG <tb@debian.org>  Sat,  5 Jun 2004 12:37:10 -0700
+
+malaga (4.3-5) unstable; urgency=low
+
+  * Use hevea instead of latex2html.  Thanks to Ralf Treinen for the patch.
+  Closes #229937.
+
+ -- Thomas Bushnell, BSG <tb@debian.org>  Fri,  4 Jun 2004 23:34:00 -0700
+
+malaga (4.3-4) unstable; urgency=low
+
+  * Priority for libmalaga2 should be extra.
+
+ -- Thomas Bushnell, BSG <tb@debian.org>  Thu,  3 Jan 2002 13:26:22 -0800
+
+malaga (4.3-3) unstable; urgency=low
+
+  * Set maintainer to Thomas Bushnell, BSG <tb@debian.org>.  Closes: #68290.
+
+ -- Thomas Bushnell, BSG <tb@debian.org>  Thu,  3 Jan 2002 00:44:51 -0800
+
+malaga (4.3-2) unstable; urgency=low
+
+  * Acknowledge NMU, Closes: #53613.
+  * Fix changelog singature for 4.3-1.1.
+  * debian/control (Maintainer): Orphaned.
+
+ -- Antti-Juhani Kaijanaho <ajk@debian.org>  Tue, 30 May 2000 15:41:27 +0300
+
+malaga (4.3-1.1) unstable; urgency=low
+
+  * NMU with maintaintainer blessing to fix bug: #53613
+    - wrong Build-Depends.
+
+ -- Petr Cech <cech@atrey.karlin.mff.cuni.cz>  Fri, 31 Dec 1999 17:07:55 +0100
+
+malaga (4.3-1) unstable; urgency=low
+
+  * New upstream release.  Closes: #46887.
+  * debian/{rules,control}: Change library soname to 2.
+  * source/Makefile.in:
+      + Link .so explicitly with -lc.
+      + Add a VPATH definition.
+  * debian/rules:
+      + Forget about Makefile.gen
+      + Build the different pkgs in different directories,
+        using VPATH as your helper
+  * debian/{prerm,postinst}-libmalaga1: Renamed to -libmalaga2
+  * debian/copyright: Updated.
+  * source/display.c: If no display_command_line, make one.
+  * tcl/display.tcl: Hardcode the libmatrix path... ugly ugly ugly...
+  * debian/control (Build-Depends-{,Indep}): Added.
+  * debian/control (Standards-Version): 3.1.1
+
+ -- Antti-Juhani Kaijanaho <ajk@debian.org>  Mon, 20 Dec 1999 23:19:03 +0200
+
+malaga (4.2.5p2-3) unstable; urgency=low
+
+  * Implement the /usr/doc transition method (yuck!)
+      + debian/rules: Install a prerm and a postinst for all packages
+        in $(prebinary)
+      + debian/postinst.doc: Renamed to postinst-malaga-doc, added FHS stub
+      + debian/prerm.doc: Renamed to prerm-malaga-doc, added FHS stub
+      + debian/postinst.lib: Renamed to postinst-libmalaga1, added FHS stub
+      + debian/prerm-libmalaga1: Added FHS stub.
+      + debian/{postinst,prerm}.malaga-bin: Added FHS stubs.
+      + debian/{postinst,prerm}.libmalaga-dev: Added FHS stubs.
+  * debian/rules: Install libmalaga.h into /usr/include/malaga/ .
+  * debian/rules (libmalaga-dev): Install the so symlink under debian/tmp!
+
+ -- Antti-Juhani Kaijanaho <ajk@debian.org>  Fri,  8 Oct 1999 00:21:51 +0300
+
+malaga (4.2.5p2-2) unstable; urgency=low
+
+  * debian/rules: Did a complete rewrite (no changes to functionality).
+  * source/Makefile: Compile the library objects twice, once to .o and
+    once to .os.
+  * debian/rules: Install malaga.dvi compressed.
+  * debian/rules: Do not precompile examples.
+  * grammars/Makefile: Reverted to upstream version.
+  * debian/bin-conffiles, debian/rules: Make the Emacs startup file a
+    conffile for malaga-bin.
+  * debian/copyright: Correct the location of the upstream sources
+    and the date of fetching them.
+
+ -- Antti-Juhani Kaijanaho <ajk@debian.org>  Mon, 16 Aug 1999 02:47:24 +0300
+
+malaga (4.2.5p2-1) unstable; urgency=low
+
+  * New upstream release.
+  * source/libmatrix.c: Use upstream version, which now has Tk 8 support.
+  * source/transmit_process.c: Removed the index variable hack, it is no
+    longer needed as upstream has renamed that variable into "top".
+  * malaga.el: Upstream now has the C-c LETTER -> C-c C-LETTER fix. 
+    Closes: bug#36885.
+  * debian/changelog: Fixed an annoying typo in the 4.2.5p1-3 entry
+    (dpkg-gencontrol was typoed).
+  * debian/copyright: Removed "functionality changes in this package",
+    as they no longer apply.
+  * source/malmake.c: Removed note about Debian-specific changes,
+    as there are none.  This file is now pristine.
+  * debian/copyright: GPL is in /usr/share.
+  * bin-README.Debian: There are no longer any differences between
+    upstream and Debian Emacs keybindings, so removed that note.
+
+ -- Antti-Juhani Kaijanaho <ajk@debian.org>  Sun, 15 Aug 1999 13:16:54 +0300
+
+malaga (4.2.5p1-3) unstable; urgency=low
+
+  * malaga.el: Change keybindings for malaga-mode so that
+    C-c LETTER is changed into C-c C-LETTER.  This fix is in the
+    unreleased upstream 4.3 tree.  Fixes: 36885.
+  * source/libmatrix.c: merged in hangul guards and Tk 8 support from
+    the unreleased 4.3 tree.
+  * source/display_process.c: use wish8.0, not wish4.2.
+  * source/display_process.c: check the return value of strdup.
+  * debian/control: malaga-bin depends now on tk8.0, not tk4.2.
+  * debian/bin-README.Debian: Updated homepage URL.
+  * debian/bin-README.Debian: Mention the keybinding change in malaga-mode.
+  * debian/copyright: Mention Tk 8.0 and keybinding changes.
+  * debian/{control,rules,doc-control}, source/display_process.c,
+    tcl/display.tcl:
+    Policy 3.0.0.0
+       - /usr/doc -> /usr/share/doc
+       - /usr/lib/malaga/*.tcl -> /usr/share/malaga
+  * debian/rules: Use -isp with dpkg-gencontrol.
+  * debian/control: Removed Suggests: libmalaga-dev from malaga-bin and
+    libmalaga1
+
+ -- Antti-Juhani Kaijanaho <ajk@debian.org>  Sun, 25 Jul 1999 13:06:52 +0300
+
+malaga (4.2.5p1-2) unstable; urgency=medium
+
+  * Reinstated the library packages. The problem turned out to
+    be fixable after all.
+  * I feel stupid.
+
+ -- Antti-Juhani Kaijanaho <ajk@debian.org>  Tue,  8 Jun 1999 22:39:24 +0300
+
+malaga (4.2.5p1-1) unstable; urgency=low
+
+  * New upstream release
+  * Dropped the packages libmalaga1 and libmalaga-dev due
+    to unfixable libc conflicts.  The packages may be reinstated
+    after a new upstream version.  Fixes build problems on glibc2.1
+    systems.
+
+ -- Antti-Juhani Kaijanaho <ajk@debian.org>  Wed, 26 May 1999 17:46:31 +0300
+
+malaga (4.2.5-1) unstable; urgency=low
+
+  * New upstream version.
+  * The header files basic.h, source/pools.h and values.h
+    are now installed into /usr/include/malaga.  Together with
+    the libmalaga-dev README.Debian, this addresses bug #32533.
+  * libmalaga-dev: Added a README.Debian explaining the situation
+    with the header files.
+  * malaga-bin: Renamed README.debian to README.Debian.
+  * source/transmit_process.c: Kluged around the fact that GNU libc
+    version 2 defines index () in <string.h>.  I'm informing upstream
+    about this.
+
+ -- Antti-Juhani Kaijanaho <ajk@debian.org>  Sun, 31 Jan 1999 16:35:32 +0200
+
+malaga (4.2.4-3) unstable; urgency=low
+
+  * malaga-bin suggested libmalaga1-dev, which was renamed to
+    libmalaga-dev.  Corrected this.
+
+ -- Antti-Juhani Kaijanaho <ajk@debian.org>  Mon, 18 Jan 1999 01:07:07 +0200
+
+malaga (4.2.4-2) unstable; urgency=low
+
+  * Updated maintainer address.
+  * Updated the short descriptions.  "Automatic language analysis" is
+    much more succinct than "left-associative grammars", and it's much
+    more understandable to us Earthers (as opposed to linguists :-), too.
+  * The series of mistakes continue.  Include libmalaga.h, not
+    malaga_lib.h in the -dev package.
+  * Added the home page URL to README.Debian.
+  * malaga-doc: Registered the HTML documentation to doc-base.
+  * malaga-doc: fixed the HTML docs build.  Images were not generated
+    because of a typo in debian/rules.
+
+ -- Antti-Juhani Kaijanaho <ajk@debian.org>  Sun, 17 Jan 1999 14:08:21 +0200
+
+malaga (4.2.4-1) unstable; urgency=low
+
+  * New upstream source.
+  * Bumped standards version to 2.5.0.0.  No changes were needed.
+  * Mmmh.  I hadn't changed the suggests and recommend as I claim below
+    having done.  Added emacsen to suggests of malaga-bin, and lyx & gv
+    to malaga-doc recommends.
+  * Renamed libmalaga1-dev to libmalaga-dev, made the new dev package
+    depend on the exact version of the lib package, and made the lib package
+    and the new dev package conflict with the old dev package.
+  * Updated debian/copyright.
+  * Removed the shlibs files in debian/ - the shlibs file that gets used is
+    created on the fly by debian/rules.
+  * Added an Emacs startup script.
+  * Upstream had adopted my manpages but moved them to a different location.
+    Updated debian/rules accordingly.
+  * De-bashismed the postinst.  Thanks, lintian.
+
+ -- Antti-Juhani Kaijanaho <gaia@iki.fi>  Sun, 20 Dec 1998 22:00:45 +0200
+
+malaga (4.2.3-3) unstable; urgency=low
+
+  * malaga.el /does/ work with xemacsen.  Changed suggests appropriately.
+  * Added real packages to malaga-doc recommends; previously there were
+    only virtual packages.
+  * Made `debian/rules clean' clean /all/ backup files.  My last try (-2)
+    was quite unsuccessful.
+
+ -- Antti-Juhani Kaijanaho <gaia@iki.fi>  Tue,  3 Nov 1998 19:36:03 +0200
+
+malaga (4.2.3-2) unstable; urgency=low
+
+  * Backups of the new man pages weren't cleaned. Embarrassing.
+
+ -- Antti-Juhani Kaijanaho <gaia@iki.fi>  Mon,  2 Nov 1998 05:32:10 +0200
+
+malaga (4.2.3-1) unstable; urgency=low
+  
+  * New upstream source.
+  * 4.2-1 was never uploaded anywhere.
+  * libmatrix was not --strip-unneeded'ed.  Thanks, lintian.
+	
+ -- Antti-Juhani Kaijanaho <gaia@iki.fi>  Tue, 27 Oct 1998 01:27:05 +0200
+
+malaga (4.2-1) unstable; urgency=low
+
+  * Initial revision.
+  * Wrote manpages for the binaries.
+  * When building, malmake is not in the path (grammars/Makefile).
+  * malmake.c needs <sys/types.h> for pid_t, contrary to what the
+    manpage for fork(2) says.
+  * Removed MALAGA_DISPLAY, since this is the simplest way to make
+    malaga conform to policy (no environment variables may be needed
+    for normal operation) without breaking anything. (display_process.c,
+    tcl/display.tcl).
+  * Numerous changes to the upstream source/Makefile to conform to
+    Debian policy.  See the comments on the file.
+  * Gave libmalaga the soname libmalaga.so.1.
+
+ -- Antti-Juhani Kaijanaho <gaia@iki.fi>  Sat, 24 Oct 1998 17:01:50 +0300
+
+

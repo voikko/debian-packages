@@ -1,0 +1,11 @@
+Document: malaga-doc
+Title: Malaga
+Author: Björn Beutel
+Abstract: This manual describes the Malaga programs
+ and the Malaga programming language.  Malaga is a
+ system for automatic language analysis
+Section: Apps/Misc
+
+Format: HTML
+Index: /usr/share/doc/malaga-doc/html/index.html
+Files: /usr/share/doc/malaga-doc/html/*
