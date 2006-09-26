@@ -3,14 +3,14 @@ Section: misc
 Priority: optional
 Maintainer: Teemu Likonen <tlikonen@iki.fi>
 Build-Depends: debhelper (>= 4.0.0), malaga-bin (>= 7.0)
-Standards-Version: 3.6.2
+Standards-Version: 3.7.2
 
 Package: voikko-fi
 Section: text
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Conflicts: libvoikko1 (<= 1.0-0hf2)
-Description: Description of Finnish morphology written in Malaga. 
+Description: A description of Finnish morphology written in Malaga. 
  Suomi-Malaga is a description of Finnish morphology written in Malaga.
  .
  This package contains a compiled version of Suomi-Malaga and basic Finnish
