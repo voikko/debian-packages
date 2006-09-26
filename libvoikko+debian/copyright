@@ -1,11 +1,33 @@
-This package was debianized by Harri Pitkänen <hatapitk@iki.fi> on
-Fri, 14 Apr 2006 17:28:24 +0300.
+This package was first debianized by Harri Pitkänen <hatapitk@iki.fi> on
+Fri, 14 Apr 2006 17:28:24 +0300. The work was continued by Timo Jyrinki
+<timo.jyrinki@iki.fi> on Mon, 25 Apr 2006 18:50:23 +0300.
 
-It was downloaded from http://www.hunspell-fi.org/files/
+The current Debian maintainer is Timo Jyrinki <timo.jyrinki@iki.fi>
 
-Copyright Holder: Harri Pitkänen <hatapitk@iki.fi>
+It was downloaded from http://www.hunspell-fi.org/files/libvoikko-1.1.tar.gz
+
+Upstream author: Harri Pitkänen <hatapitk@iki.fi>
 
 License: the GNU General Public License (GPL), version 2 or later
 
+Copyright (C) 2006  Harri Pitkänen
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
 On Debian GNU/Linux systems you can find the complete GPL licence
-in /usr/share/common-licenses/GPL .
+in /usr/share/common-licenses/GPL.
+
+Packaging has been done under the same license as the package itself (GPL),
+copyright are owned by Timo Jyrinki and Harri Pitkänen.

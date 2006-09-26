@@ -1,3 +1,14 @@
+libvoikko (1.1-0hf2) UNRELEASED; urgency=low
+
+  * Merge packaging fixes from 1.1-2 by Timo Jyrinki
+    - Indent homepage by two spaces in debian/control
+    - Clean debian/rules, remove dh_shlibdeps extra parameters
+    - Update debian/copyright
+    - Add dependency to autotools-dev (config.sub/guess)
+  * Make libvoikko-dev depend on libmalaga-dev
+
+ -- Harri Pitkänen <hatapitk@iki.fi>  Sat, 26 Sep 2006 15:05:15 +0300
+
 libvoikko (1.1-0hf1) unstable; urgency=low
 
   * New upstream release
