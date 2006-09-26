@@ -1,0 +1,7 @@
+debian/tmp/usr/share/info/*
+debian/tmp/usr/share/emacs/*
+debian/tmp/usr/bin/*
+debian/tmp/usr/share/doc/malaga-bin/*
+debian/tmp/usr/share/man/*
+debian/tmp/usr/share/malaga/malaga.el usr/share/emacs/site-lisp/malaga.el
+grammars/* usr/share/doc/malaga-bin/examples/

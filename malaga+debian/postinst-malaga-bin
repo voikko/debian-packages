@@ -1,3 +1,0 @@
-#!/bin/sh
-
-install-info --quiet --section Linguistics Linguistics /usr/share/info/malaga.info

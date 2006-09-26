@@ -1,199 +1,109 @@
 #!/usr/bin/make -f
-# Written by Antti-Juhani Kaijanaho.  Use, distribute and modify as
-# you please.
 
-soname = 7
-libname = libmalaga.so.7.0.0
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
 
-install         := install -o root -g root
-install_exec    := $(install) -m 0755 -s
-install_nonex   := $(install) -m 0644
-install_dir     := $(install) -m 0755 -d
-install_script  := $(install) -m 0755
-install_symlink := ln -s
+export DH_COMPAT=4
 
-gzip           := gzip -9
-strip_lib      := strip --strip-unneeded -R .comment
+# These are used for cross-compiling and for saving the configure script
+# from having to guess our platform (since we know it already)
+DEB_HOST_GNU_TYPE   ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+DEB_BUILD_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
 
-tmpdir := $(shell pwd)/debian/tmp
+CFLAGS = -Wall -g
 
-package_base := malaga
+ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
+	CFLAGS += -O0
+else
+	CFLAGS += -O2
+endif
 
-# These must not be :='s!
-rootdir = $(tmpdir)/$(package)
-ctldir = $(rootdir)/DEBIAN
-bindir = $(rootdir)/usr/bin
-docdir = $(rootdir)/usr/share/doc/$(package)
-exampledir = $(docdir)/examples
-mandir = $(rootdir)/usr/share/man
-elispdir = $(rootdir)/usr/share/emacs/site-lisp
-emacs_d_dir = $(rootdir)/etc/emacs/site-start.d
-man1dir = $(mandir)/man1
-sharedir = $(rootdir)/usr/share/$(package_base)
-libdir = $(rootdir)/usr/lib/$(package_base)
-docbasedir = $(rootdir)/usr/share/doc-base
-usrlib = $(rootdir)/usr/lib
-includedir = $(rootdir)/usr/include
-infodir = $(rootdir)/usr/share/info
+version=`ls src/.libs/lib*.so.* | \
+ awk '{if (match($$0,/[0-9]+\.[0-9]+\.[0-9]+$$/)) print substr($$0,RSTART)}'`
+major=`ls src/.libs/lib*.so.* | \
+ awk '{if (match($$0,/\.so\.[0-9]+$$/)) print substr($$0,RSTART+4)}'`
 
-default:
-	@echo You need to specify a target.
-	@exit 1
+config.status: configure
+	dh_testdir
+ifneq "$(wildcard /usr/share/misc/config.sub)" ""
+	cp -f /usr/share/misc/config.sub config.sub
+endif
+ifneq "$(wildcard /usr/share/misc/config.guess)" ""
+	cp -f /usr/share/misc/config.guess config.guess
+endif
+	# Add here commands to configure the package.
+	./configure --host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE) --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info CFLAGS="$(CFLAGS)" LDFLAGS="-Wl,-z,defs"
 
-update-autotools:
-	rm -f config.sub config.guess install-sh missing ltmain.sh
-	cp /usr/share/misc/config.sub .
-	cp /usr/share/misc/config.guess .
-	cp /usr/share/automake-1.9/install-sh .
-	cp /usr/share/automake-1.9/missing .
-	cp /usr/share/libtool/ltmain.sh .
-	aclocal
-	autoconf
+build: build-stamp build-doc
+build-stamp:  config.status
+	dh_testdir
 
-.PHONY: default build build-bin build-lib build-doc \
-        binary binary-bin binary-dev binary-lib binary-doc \
-	clean clean-build clean-binary binary-arch binary-indep \
-	update-autotools
+	# Add here commands to compile the package.
+	$(MAKE)
 
-# The published interface begins
-build: build-bin build-doc build-lib
-binary: binary-arch binary-indep
-binary-arch: binary-bin binary-lib binary-dev
-binary-indep: binary-doc
-clean: clean-build clean-binary
-# The published interface ends
-
-INCLUDE_SPEC=CPPFLAGS="-I/usr/include/tcl8.4"
-COMPILE_OPTS=OPTIONS="-Wall -g -O2 -I/usr/include/tcl8.4" 
-
-build-bin: debian/build-bin.stamp
-debian/build-bin.stamp:
-	rm -rf build-bin
-	mkdir build-bin
-	cd build-bin && $(INCLUDE_SPEC) ../configure --prefix=/usr
-	$(MAKE) -C build-bin $(COMPILE_OPTS) fpic="" \
-                malaga maldump \
-	        mallex malmake \
-	        malrul malsym malshow \
-		malaga.el info
 	touch $@
 
-build-lib: debian/build-lib.stamp
-debian/build-lib.stamp:
-	rm -rf build-lib
-	mkdir build-lib
-	cd build-lib && $(INCLUDE_SPEC) ../configure --prefix=/usr
-	$(MAKE) -C build-lib $(COMPILE_OPTS) \
-	   libmalaga.la
-	touch $@
-
-build-doc: debian/build-doc.stamp
-debian/build-doc.stamp:
-	rm -rf build-doc
+build-doc: build-doc-stamp
+build-doc-stamp:
 	mkdir build-doc
-	cd build-doc && $(INCLUDE_SPEC) ../configure --prefix=/usr
-	$(MAKE) -C build-doc $(COMPILE_OPTS) \
-		dvi html ps pdf
+	cd build-doc && ../configure --prefix=/usr
+	$(MAKE) -C build-doc dvi html ps pdf
 	touch $@
 
-clean-build:
-	$(RM) debian/build-*.stamp
-	rm -rf build-bin build-lib build-doc build-matrix
-	find . -name '*~'  | xargs $(RM)
+clean: 
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp 
+	rm -f build-doc-stamp
 
-define prebinary
-	$(RM) -r $(rootdir)
-	$(install_dir) $(ctldir)
-	$(install_dir) $(docdir)
-	$(install_nonex) debian/copyright $(docdir)
-	$(install_nonex) debian/changelog $(docdir)/changelog.Debian
-	$(install_nonex) CHANGES.txt $(docdir)/changelog
-	$(gzip) $(docdir)/changelog $(docdir)/changelog.Debian
-endef
+	# Add here commands to clean up after the build process.
+	-$(MAKE) clean
+	# (no distclean available, make some manual cleaning)
+	rm -f config.status config.log config.cache config.guess config.sub libtool Makefile
+	rm -rf build-doc
+	rm -f debian/substvars
 
-define postbinary
-	chmod -R g-s $(rootdir)
-	dpkg-gencontrol -isp -p$(package) -P$(rootdir)
-	dpkg --build $(rootdir) ..
-endef
+	dh_clean 
 
-binary-bin: debian/binary-bin.stamp
-debian/binary-bin.stamp: package=malaga-bin
-debian/binary-bin.stamp: debian/build-bin.stamp
-	$(prebinary)
-	$(install_dir) $(infodir)
-	$(install_script) debian/postinst-$(package) $(ctldir)/postinst
-	$(install_nonex) README.txt $(docdir)/README.txt
-	$(install_nonex) malaga.info $(infodir)/malaga.info
-	gzip -9 $(infodir)/malaga.info
-	$(install_dir) $(exampledir)
-	set -e ; for sd in formal numeral german ; \
-	  do \
-	    $(install_dir) $(exampledir)/$$sd ; \
-	    $(install_nonex) grammars/$$sd/* $(exampledir)/$$sd ; \
-	  done
-	$(install_dir) $(elispdir)
-	$(install_nonex) malaga.el $(elispdir)
-	$(install_dir) $(emacs_d_dir)
-	$(install_nonex) debian/emacs-startup.bin \
-	    $(emacs_d_dir)/50$(package).el
-	$(install_nonex) debian/bin-conffiles $(ctldir)/conffiles
-	$(install_dir) $(bindir)
-	$(install_exec) $(addprefix build-bin/, malaga maldump mallex \
-	                                    malshow malmake malrul malsym) \
-	               $(bindir)
-	dpkg-shlibdeps -pbin-shlibs $(bindir)/*
-	$(postbinary)
-	touch $@
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k 
+	dh_installdirs
 
-binary-doc: debian/binary-doc.stamp
-debian/binary-doc.stamp: package=malaga-doc
-debian/binary-doc.stamp: debian/build-doc.stamp
-	$(prebinary)
-	$(install_dir) $(docdir)
-	$(install_dir) $(docdir)/html
-	$(install_script) debian/postinst-$(package) $(ctldir)/postinst
-	$(install_script) debian/prerm-$(package) $(ctldir)/prerm
-	$(install_nonex) build-doc/malaga.ps $(docdir)
-	$(gzip) $(docdir)/malaga.ps
-	$(install_nonex) build-doc/malaga.html/* $(docdir)/html
-	$(install_nonex) build-doc/malaga.dvi $(docdir)
-	$(gzip) $(docdir)/malaga.dvi
-	$(install_nonex) build-doc/malaga.pdf $(docdir)
-	$(gzip) $(docdir)/malaga.pdf
-	$(install_dir) $(docbasedir)
-	$(install_nonex) debian/doc-control $(docbasedir)/malaga-doc
-	$(postbinary)
-	touch $@
+	$(MAKE) install prefix=$(CURDIR)/debian/tmp/usr
+	
+	# Add placeholder man-pages
+	mkdir -p debian/tmp/usr/share/man/man1
+	for x in `find debian/tmp/usr/bin -type f`; do \
+	sed "s/undocumented/`basename $$x`/g" debian/undocumented.1 > debian/tmp/usr/share/man/man1/`basename $$x`.1; \
+	done
 
-binary-lib: debian/binary-lib.stamp
-debian/binary-lib.stamp: package=libmalaga$(soname)
-debian/binary-lib.stamp: debian/build-lib.stamp
-	$(prebinary)
-	$(install_dir) $(usrlib)
-	$(install_script) debian/postinst-$(package) $(ctldir)/postinst
-	cd build-lib; ./libtool install -c -m 644 libmalaga.la $(usrlib)/libmalaga.la
-	rm $(usrlib)/libmalaga.{a,la,so}
-	$(strip_lib) $(usrlib)/$(libname)
-	$(install_nonex) debian/shlibs.lib $(ctldir)/shlibs
-	dpkg-shlibdeps -plib-shlibs $(usrlib)/$(libname)
-	$(postbinary)
-	touch $@
+# Build architecture-independent files here.
+binary-indep: build install
+# We have nothing to do by default.
 
-binary-dev: debian/binary-dev.stamp
-debian/binary-dev.stamp: package=libmalaga-dev
-debian/binary-dev.stamp: debian/build-lib.stamp
-	$(prebinary)
-	$(install_dir) $(usrlib)
-	cd build-lib; ./libtool install -c -m 644 libmalaga.la $(usrlib)/libmalaga.la
-	rm $(usrlib)/$(libname)
-	rm $(usrlib)/libmalaga.so.$(soname)
-	$(install_dir) $(includedir)/$(package_base)
-	$(install_nonex) malaga.h $(includedir)/$(package_base)
-	$(postbinary)
-	touch $@
+# Build architecture-dependent files here.
+binary-arch: build install
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs CHANGES.txt
+	dh_installdocs
+	dh_installexamples
+	dh_install
+	dh_installemacsen
+	dh_installinfo
+	dh_installman
+	dh_link
+	dh_strip
+	dh_compress
+	dh_fixperms
+	dh_makeshlibs
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
 
-clean-binary:
-	$(RM) debian/binary-*.stamp
-	$(RM) -r $(tmpdir)
-	$(RM) debian/files debian/substvars
+binary: binary-indep binary-arch
+.PHONY: build build-doc clean binary-indep binary-arch binary install 

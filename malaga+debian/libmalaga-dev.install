@@ -1,0 +1,4 @@
+debian/tmp/usr/lib/libmalaga.la
+debian/tmp/usr/lib/libmalaga.a
+debian/tmp/usr/lib/libmalaga.so
+debian/tmp/usr/include/*

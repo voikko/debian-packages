@@ -1,0 +1,5 @@
+debian/tmp/usr/share/doc/malaga-doc/*
+build-doc/malaga.pdf  usr/share/doc/malaga-doc
+build-doc/malaga.dvi  usr/share/doc/malaga-doc
+build-doc/malaga.ps   usr/share/doc/malaga-doc
+build-doc/malaga.html/* usr/share/doc/malaga-doc/html/

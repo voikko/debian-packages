@@ -1,0 +1,3 @@
+# watch control file for uscan
+version=3
+http://home.arcor.de/bjoern-beutel/malaga/malaga-(.*)\.tgz

@@ -1,15 +1,15 @@
 Source: malaga
-Maintainer: Thomas Bushnell, BSG <tb@debian.org>
+Maintainer: Timo Jyrinki <timo.jyrinki@iki.fi>
 Section: misc
 Priority: optional
-Build-Depends: tetex-bin, libgtk2.0-dev, texinfo, tetex-extra, libreadline5-dev
-Standards-Version: 3.1.1
+Build-Depends: tetex-bin, libgtk2.0-dev, libglib2.0-dev, texinfo, tetex-extra, libreadline5-dev, dpkg-dev, debhelper ( >= 4.0.0 ), autotools-dev
+Standards-Version: 3.7.2
 
 Package: malaga-bin
 Architecture: any
 Section: misc
 Priority: optional
-Depends: ${bin-shlibs:Depends}
+Depends: ${shlibs:Depends}
 Recommends: malaga-doc, info | info-browser
 Suggests: emacsen
 Description: A system for automatic language analysis
@@ -30,7 +30,7 @@ Package: libmalaga7
 Architecture: any
 Section: libs
 Priority: optional
-Depends: ${lib-shlibs:Depends}
+Depends: ${shlibs:Depends}
 Conflicts: libmalaga1-dev, libmalaga2-dev
 Description: An automatic language analysis library
  Malaga is a system for implementing natural language analysers:
@@ -47,7 +47,7 @@ Package: libmalaga-dev
 Architecture: any
 Section: libdevel
 Priority: optional
-Depends: libmalaga7 (= ${Source-Version})
+Depends: libmalaga7 (= ${Source-Version}), libglib2.0-dev
 Conflicts: libmalaga1-dev, libmalaga2-dev
 Suggests: malaga-bin
 Description: Developer's library for automatic language analysis
@@ -65,9 +65,7 @@ Package: malaga-doc
 Architecture: all
 Section: doc
 Priority: optional
-Recommends: gv | postscript-viewer, lynx | www-browser, 
-	tetex-bin, xpdf | pdf-viewer
-Suggests: malaga-bin
+Suggests: malaga-bin, doc-base
 Description: Documentation for an automatic language analysis system
  Malaga is a system for implementing natural language analysers:
  both grammars and morphologies can be created.
