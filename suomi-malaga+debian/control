@@ -8,7 +8,7 @@ Standards-Version: 3.7.2
 Package: voikko-fi
 Section: text
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, libmalaga7 (>= 7.8)
 Conflicts: libvoikko1 (<= 1.0-0hf2)
 Description: A description of Finnish morphology written in Malaga. 
  Suomi-Malaga is a description of Finnish morphology written in Malaga.
