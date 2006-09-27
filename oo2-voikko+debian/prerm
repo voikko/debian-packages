@@ -140,13 +140,13 @@ fi
 # (even with the '--shared' option). We must set $HOME to some temporary
 # directory so that these (root owned) files don't get written to the regular
 # user's HOME in case he/she runs this with sudo.
-TMP_HOME=$(mktemp -t -d $PACKAGE_NAME.XXXXXX) || exit 1
-export HOME=$TMP_HOME
+TMP_HOME="$(mktemp -t -d $PACKAGE_NAME.XXXXXX)" || exit 1
+export HOME="$TMP_HOME"
 
 # Workaround for the issue
 # <http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=387224>
-mkdir -p $HOME/.openoffice.org2/user/registry/data/org/openoffice
-cat <<EOF >$HOME/.openoffice.org2/user/registry/data/org/openoffice/Setup.xcu
+mkdir -p "$HOME/.openoffice.org2/user/registry/data/org/openoffice"
+cat << EOF > "$HOME/.openoffice.org2/user/registry/data/org/openoffice/Setup.xcu"
 <?xml version="1.0" encoding="UTF-8"?>
 <oor:component-data xmlns:oor="http://openoffice.org/2001/registry" 
 xmlns:xs="http://www.w3.org/2001/XMLSchema" oor:name="Setup" 
@@ -176,6 +176,8 @@ else msg component_list_failed
 fi
 
 # Delete the temporary HOME directory
-rm -fr $TMP_HOME
+rm -fr "$TMP_HOME"
+
+#DEBHELPER#
 
 exit 0
