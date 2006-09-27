@@ -1,8 +1,8 @@
 Source: suomi-malaga
-Section: misc
+Section: text
 Priority: optional
 Maintainer: Teemu Likonen <tlikonen@iki.fi>
-Build-Depends: debhelper (>= 4.0.0), malaga-bin (>= 7.0)
+Build-Depends: debhelper (>= 4.0.0), malaga-bin (>= 7.8)
 Standards-Version: 3.7.2
 
 Package: voikko-fi
@@ -16,4 +16,4 @@ Description: A description of Finnish morphology written in Malaga.
  This package contains a compiled version of Suomi-Malaga and basic Finnish
  vocabulary suitable for use in spell-checking and hyphenation system Voikko.
  .
- Homepage: http://www.hunspell-fi.org/
+   Homepage: http://www.hunspell-fi.org/
