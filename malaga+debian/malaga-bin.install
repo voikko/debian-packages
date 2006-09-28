@@ -3,5 +3,5 @@ debian/tmp/usr/share/emacs/*
 debian/tmp/usr/bin/*
 debian/tmp/usr/share/doc/malaga-bin/*
 debian/tmp/usr/share/man/*
-debian/tmp/usr/share/malaga/malaga.el usr/share/emacs/site-lisp/malaga.el
+debian/tmp/usr/share/malaga/malaga.el usr/share/emacs/site-lisp/
 grammars/* usr/share/doc/malaga-bin/examples/
