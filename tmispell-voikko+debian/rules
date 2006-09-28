@@ -29,7 +29,7 @@ configure: configure-stamp
 configure-stamp:
 	dh_testdir
 	# Add here commands to configure the package.
-	CFLAGS="$(CFLAGS) -Wl,-z,defs" ./configure --host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE) --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info --sysconfdir=/etc
+	CFLAGS="$(CFLAGS)" LDFLAGS="-z defs" ./configure --host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE) --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info --sysconfdir=/etc
 
 
 build: build-stamp
@@ -67,6 +67,8 @@ install: build
 	# Add here commands to install the package into debian/tmispell-voikko.
 	$(MAKE) install DESTDIR=$(CURDIR)/debian/tmp
 	install -D -m 0644 tmispell.conf.example debian/tmp/etc/tmispell.conf
+	mkdir -p $(CURDIR)/debian/tmp/usr/share/lintian/overrides
+	echo "tmispell-voikko binary: binary-without-manpage ispell" > $(CURDIR)/debian/tmp/usr/share/lintian/overrides/tmispell-voikko
 
 # Build architecture-independent files here.
 binary-indep: build install

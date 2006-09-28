@@ -3,3 +3,5 @@
 
 [ -d /usr/lib/ispell ] || mkdir -p /usr/lib/ispell
 touch /usr/lib/ispell/suomi.aff /usr/lib/ispell/suomi.hash
+
+#DEBHELPER#

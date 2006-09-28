@@ -5,3 +5,5 @@ then
 	dpkg-divert --package tmispell-voikko --add --rename \
 		--divert /usr/bin/ispell.real /usr/bin/ispell
 fi
+
+#DEBHELPER#
