@@ -4,7 +4,9 @@
 suomi_aff='/usr/lib/ispell/suomi.aff'
 suomi_hash='/usr/lib/ispell/suomi.hash'
 
-[ -f $suomi_aff -a ! -s $suomi_aff ] && rm $suomi_aff
-[ -f $suomi_hash -a ! -s $suomi_hash ] && rm $suomi_hash
+[ -f $suomi_aff -a ! -s $suomi_aff ] && rm -f $suomi_aff
+[ -f $suomi_hash -a ! -s $suomi_hash ] && rm -f $suomi_hash
 
 #DEBHELPER#
+
+exit 0

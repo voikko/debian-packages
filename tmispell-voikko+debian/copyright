@@ -4,6 +4,7 @@ on Sat, 27 May 2006 16:20:18 +0300.
 It was downloaded from http://www.hunspell-fi.org/
 
 Upstream authors:
+
   Tmispell is Copyright (C) 2002-2003  Pauli Virtanen.
   Modifications and Voikko integration (2006) by Harri Pitkänen
   <hatapitk@iki.fi>.
@@ -28,4 +29,4 @@ On Debian GNU/Linux systems you can find the complete GPL licence
 in /usr/share/common-licenses/GPL.
 
 The Debian packaging is (C) 2006, Teemu Likonen <tlikonen@iki.fi> and
-Timo Jyrinki <timo.jyrinki@iki.fi> and is licensed under the GPL, see above
+Timo Jyrinki <timo.jyrinki@iki.fi> and is licensed under the GPL, see above.
