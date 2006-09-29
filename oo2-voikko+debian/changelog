@@ -1,8 +1,9 @@
 oo2-voikko (1.1-0hf6) unstable; urgency=low
 
   * Merge (mostly) with Debian package 1.1-2 by Timo Jyrinki
+  * Rebuild for Debian unstable
 
- -- Teemu Likonen <tlikonen@iki.fi>  Thu, 28 Sep 2006 13:47:07 +0300
+ -- Teemu Likonen <tlikonen@iki.fi>  Fri, 29 Sep 2006 09:47:06 +0300
 
 oo2-voikko (1.1-0hf5) unstable; urgency=low
 
