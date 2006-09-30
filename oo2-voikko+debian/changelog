@@ -1,3 +1,10 @@
+oo2-voikko (1.1-0hf7) unstable; urgency=low
+
+  * Ignore prerelease versions (~) when generating the "Conflicts" field
+    against future upstream versions. Let us hope this is safe.
+
+ -- Teemu Likonen <tlikonen@iki.fi>  Sat, 30 Sep 2006 10:18:08 +0300
+
 oo2-voikko (1.1-0hf6) unstable; urgency=low
 
   * Merge (mostly) with Debian package 1.1-2 by Timo Jyrinki

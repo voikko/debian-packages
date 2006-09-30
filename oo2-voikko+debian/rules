@@ -16,7 +16,6 @@ configure-stamp:
 	touch configure-stamp
 
 build: build-stamp
-
 build-stamp: configure-stamp 
 	dh_testdir
 	sh -c ". /usr/lib/openoffice/sdk/setsdkenv_unix.sh && $(MAKE)"
