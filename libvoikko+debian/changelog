@@ -1,3 +1,11 @@
+libvoikko (1.1+svn594-0hf1) unstable; urgency=low
+
+  * New upstream SVN snapshot
+  * This version adds a new exported function, modify shlibs
+    accordingly
+
+ -- Harri Pitkänen <hatapitk@iki.fi>  Fri,  6 Oct 2006 15:39:16 +0300
+
 libvoikko (1.1+svn534-0hf1) unstable; urgency=low
 
   * New upstream SVN snapshot
