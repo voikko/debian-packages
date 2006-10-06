@@ -1,24 +1,20 @@
 IMPORTANT NOTES
 
-0) This Debian binary package is named "openoffice.org-voikko" due to
-Debian's naming conventions with OpenOffice.org components. The language
-component's real name is "Oo2-voikko".
-
-1) The functionality of Oo2-voikko language component depends heavily on
-fairly static OpenOffice.org installation. If the structure of your
-OpenOffice.org installation changes (due to software update for
-example), it is possible for the language component to get lost in the
+1) The functionality of openoffice.org-voikko language component depends
+heavily on fairly static OpenOffice.org installation. If the structure
+of your OpenOffice.org installation changes (due to software update for
+example), it is possible that the language component gets lost in the
 process. You may need to reinstall the language component with the
 following command (executed as root):
 
   dpkg-reconfigure openoffice.org-voikko
 
 2) It is possible that in the future new versions of OpenOffice.org will
-become incompatible with current versions of Oo2-voikko. The worst
-possible scenario is that this incompatibility will *break* the
-installation of Oo2-voikko and OpenOffice.org. This is really possible;
-I am not exaggerating here. OpenOffice.org has certain weak points in
-handling external components.
+become incompatible with current versions of openoffice.org-voikko. The
+worst possible scenario is that this incompatibility will *break* the
+installation of both openoffice.org-voikko and OpenOffice.org. This is
+really possible; I am not exaggerating here. OpenOffice.org has certain
+weak points in handling external components.
 
 To solve the problem, this openoffice.org-voikko binary package has been
 set to conflict with any newer (and older) OpenOffice.org versions. It
@@ -26,4 +22,4 @@ means that when you install a new version of OpenOffice.org, you can no
 longer use the old openoffice.org-voikko package; it has to be updated
 too (or compiled again from source package). Minor OpenOffice.org
 updates such as security updates should work without installing a new
-version of Oo2-voikko.
+version of openoffice.org-voikko.
