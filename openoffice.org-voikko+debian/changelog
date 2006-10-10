@@ -2,8 +2,10 @@ openoffice.org-voikko (1.1+svn613-0hf1) unstable; urgency=low
 
   * New SVN snapshot
   * Add Recommends field
+  * Language component is now named openoffice.org-voikko in the upstream.
+    Adjust postinst, prerm and openoffice.org-voikko.install accordingly.
 
- -- Teemu Likonen <tlikonen@iki.fi>  Tue, 10 Oct 2006 12:54:34 +0300
+ -- Teemu Likonen <tlikonen@iki.fi>  Tue, 10 Oct 2006 13:03:08 +0300
 
 openoffice.org-voikko (1.1-0hf8) unstable; urgency=low
 
