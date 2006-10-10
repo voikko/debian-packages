@@ -9,8 +9,8 @@
 
 
 # Names used in messages
-NAME_STRONG=Oo2-voikko
-NAME_WEAK=Oo2-voiko
+NAME_STRONG=Voikko
+NAME_WEAK=Voiko
 OPENOFFICEORG=OpenOffice.org
 
 # This package's name in Debian package manager. This is also the name of the
@@ -18,7 +18,7 @@ OPENOFFICEORG=OpenOffice.org
 PACKAGE_NAME=openoffice.org-voikko
 
 # The name of the language component
-COMPONENT_BASENAME=oo2-voikko
+COMPONENT_BASENAME=openoffice.org-voikko
 COMPONENT_FULLPATH=/usr/lib/$PACKAGE_NAME/$COMPONENT_BASENAME-*.uno.pkg
 
 # 'unopkg' registers and removes the language component to/from the
