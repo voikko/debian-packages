@@ -205,22 +205,6 @@ pidof soffice.bin &>/dev/null && msg ooo_is_running
 TMP_HOME="$(mktemp -t -d $PACKAGE_NAME.XXXXXX)" || exit 1
 export HOME="$TMP_HOME"
 
-# Workaround for the issue
-# <http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=387224>
-mkdir -p "$HOME/.openoffice.org2/user/registry/data/org/openoffice"
-cat << EOF > "$HOME/.openoffice.org2/user/registry/data/org/openoffice/Setup.xcu"
-<?xml version="1.0" encoding="UTF-8"?>
-<oor:component-data xmlns:oor="http://openoffice.org/2001/registry" 
-xmlns:xs="http://www.w3.org/2001/XMLSchema" oor:name="Setup" 
-oor:package="org.openoffice">
- <node oor:name="L10N">
-  <prop oor:name="ooLocale" oor:type="xs:string">
-   <value>en</value>
-  </prop>
- </node>
-</oor:component-data>
-EOF
-
 
 # First we remove all language components that might exist in the system. These
 # can be previous versions or some other way installed ones.

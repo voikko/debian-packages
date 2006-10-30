@@ -1,3 +1,9 @@
+openoffice.org-voikko (1.1+svn613-0hf2) unstable; urgency=low
+
+  * Remove workaround hack for the bug #387224 since it has been fixed now.
+
+ -- Teemu Likonen <tlikonen@iki.fi>  Mon, 30 Oct 2006 08:22:30 +0200
+
 openoffice.org-voikko (1.1+svn613-0hf1) unstable; urgency=low
 
   * New SVN snapshot
