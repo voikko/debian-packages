@@ -1,3 +1,10 @@
+libvoikko (1.2-0hf1) unstable; urgency=low
+
+  * New upstream release
+  * Clean up debian/rules a bit
+
+ -- Harri Pitkänen <hatapitk@iki.fi>  Fri,  3 Nov 2006 18:30:09 +0200
+
 libvoikko (1.1+svn594-0hf1) unstable; urgency=low
 
   * New upstream SVN snapshot

@@ -24,19 +24,10 @@ else
 	CFLAGS += -O2
 endif
 
-# shared library versions, option 1
-#version=0.0.0
-#major=0
-# option 2, assuming the library is created as src/.libs/libfoo.so.2.0.5 or so
-version=`ls src/.libs/lib*.so.* | \
- awk '{if (match($$0,/[0-9]+\.[0-9]+\.[0-9]+$$/)) print substr($$0,RSTART)}'`
-major=`ls src/.libs/lib*.so.* | \
- awk '{if (match($$0,/\.so\.[0-9]+$$/)) print substr($$0,RSTART+4)}'`
-
 config.status: configure
 	dh_testdir
 	# Add here commands to configure the package.
-	CFLAGS="$(CFLAGS) -Wl,-z,defs" ./configure --host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE) --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info --with-dictionary-path=/usr/lib/voikko
+	./configure --host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE) --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info --with-dictionary-path=/usr/lib/voikko
 
 
 build: build-stamp
@@ -91,7 +82,7 @@ binary-arch: build install
 	dh_strip
 	dh_compress
 	dh_fixperms
-	dh_makeshlibs -V "libvoikko1 (>= 1.1+svn594)"
+	dh_makeshlibs -V "libvoikko1 (>= 1.2)"
 	dh_installdeb
 	dh_shlibdeps
 	dh_gencontrol
