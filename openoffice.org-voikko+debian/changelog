@@ -1,3 +1,9 @@
+openoffice.org-voikko (1.2-0hf1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Teemu Likonen <tlikonen@iki.fi>  Mon,  6 Nov 2006 09:25:28 +0200
+
 openoffice.org-voikko (1.1+svn613-0hf2) unstable; urgency=low
 
   * Remove workaround hack for the bug #387224 since it has been fixed now.
