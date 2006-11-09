@@ -1,38 +1,9 @@
-suomi-malaga (0.7.2+svn699-0hf1) unstable; urgency=low
+suomi-malaga (0.7.3-0hf1) unstable; urgency=low
 
-  * New SVN snapshot
+  * New upstream release
+  * Clean old SVN snapshot entries from this changelog
 
- -- Teemu Likonen <tlikonen@iki.fi>  Sun, 29 Oct 2006 09:41:53 +0200
-
-suomi-malaga (0.7.2+svn654-0hf1) unstable; urgency=low
-
-  * New SVN snapshot
-
- -- Teemu Likonen <tlikonen@iki.fi>  Wed, 18 Oct 2006 19:53:33 +0300
-
-suomi-malaga (0.7.2+svn603-0hf1) unstable; urgency=low
-
-  * New SVN snapshot
-
- -- Teemu Likonen <tlikonen@iki.fi>  Sun,  8 Oct 2006 13:36:47 +0300
-
-suomi-malaga (0.7.2+svn580-0hf1) unstable; urgency=low
-
-  * New SVN snapshot
-
- -- Teemu Likonen <tlikonen@iki.fi>  Tue,  3 Oct 2006 19:42:06 +0300
-
-suomi-malaga (0.7.2+svn532-0hf1) unstable; urgency=low
-
-  * New SVN snapshot
-
- -- Teemu Likonen <tlikonen@iki.fi>  Wed, 27 Sep 2006 11:58:00 +0300
-
-suomi-malaga (0.7.2+svn526-0hf1) unstable; urgency=low
-
-  * New SVN snapshot
-
- -- Teemu Likonen <tlikonen@iki.fi>  Tue, 26 Sep 2006 17:42:13 +0300
+ -- Teemu Likonen <tlikonen@iki.fi>  Thu,  9 Nov 2006 13:09:47 +0200
 
 suomi-malaga (0.7.2-0hf1) unstable; urgency=low
 
@@ -40,66 +11,11 @@ suomi-malaga (0.7.2-0hf1) unstable; urgency=low
 
  -- Teemu Likonen <tlikonen@iki.fi>  Sat,  9 Sep 2006 15:54:51 +0300
 
-suomi-malaga (0.7.1+svn20060901-0hf1) unstable; urgency=low
-
-  * New SVN snapshot (r428)
-
- -- Teemu Likonen <tlikonen@iki.fi>  Fri,  1 Sep 2006 14:54:53 +0300
-
-suomi-malaga (0.7.1+svn20060823-0hf1) unstable; urgency=low
-
-  * New SVN snapshot
-
- -- Teemu Likonen <tlikonen@iki.fi>  Wed, 23 Aug 2006 22:30:12 +0300
-
 suomi-malaga (0.7.1-0hf1) unstable; urgency=low
 
   * New upstream release
 
  -- Teemu Likonen <tlikonen@iki.fi>  Mon, 31 Jul 2006 11:35:27 +0300
-
-suomi-malaga (0.6.99+svn20060729-0hf1) unstable; urgency=low
-
-  * New SVN snapshot
-
- -- Teemu Likonen <tlikonen@iki.fi>  Sat, 29 Jul 2006 16:41:33 +0300
-
-suomi-malaga (0.6.99+svn20060728-0hf1) unstable; urgency=low
-
-  * New SVN snapshot
-
- -- Teemu Likonen <tlikonen@iki.fi>  Fri, 28 Jul 2006 17:54:10 +0300
-
-suomi-malaga (0.6.99+svn20060724-0hf1) unstable; urgency=low
-
-  * New SVN snapshot
-
- -- Teemu Likonen <tlikonen@iki.fi>  Mon, 24 Jul 2006 17:31:39 +0300
-
-suomi-malaga (0.6.99+svn20060709-0hf1) unstable; urgency=low
-
-  * New SVN snapshot
-
- -- Teemu Likonen <tlikonen@iki.fi>  Sun,  9 Jul 2006 18:32:51 +0300
-
-suomi-malaga (0.6.99+svn20060703-0hf2) unstable; urgency=low
-
-  * Another SVN snapshot from this day: Fixes annoying bug with some verb
-    derivatives. Probably introduces some new bugs :-)
-
- -- Teemu Likonen <tlikonen@iki.fi>  Mon,  3 Jul 2006 20:15:17 +0300
-
-suomi-malaga (0.6.99+svn20060703-0hf1) unstable; urgency=low
-
-  * New SVN snapshot
-
- -- Teemu Likonen <tlikonen@iki.fi>  Mon,  3 Jul 2006 07:48:58 +0300
-
-suomi-malaga (0.6.99+svn20060630-0hf1) unstable; urgency=low
-
-  * New SVN snapshot
-
- -- Teemu Likonen <tlikonen@iki.fi>  Fri, 30 Jun 2006 12:08:33 +0300
 
 suomi-malaga (0.6-0hf4) unstable; urgency=low
 
