@@ -9,7 +9,7 @@ version=3
 # Uncomment to examine a Webpage 
 # <Webpage URL> <string match>
 #http://www.example.com/downloads.php oo2-voikko-(.*)\.tar\.gz
-http://www.hunspell-fi.org/tiedostot.php .*oo2-voikko-(.*)\.tar\.gz
+http://www.hunspell-fi.org/tiedostot.php .*openoffice.org-voikko-(.*)\.tar\.gz
 
 # Uncomment to examine a Webserver directory
 #http://www.hunspell-fi.org/files/oo2-voikko-(.*)\.tar\.gz
