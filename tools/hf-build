@@ -79,7 +79,7 @@ function clean() {
 
 # Pääohjelma
 
-if [[ ! $action || ! $distribution ]]; then
+if [[ "$action" != "clean" && ! "$distribution" ]]; then
 	action=""
 	distribution=""
 fi
@@ -90,9 +90,9 @@ case "$action" in
 		echo "Where"
 		echo "  action         is one of the following: up, down, deb, upsrc, downsrc or clean"
 		echo "  distribution   is the target distribution. This must be set either in command line or in"
-		echo "                 ~/.hfrc file. For example: default_distribution=unstable"
+		echo "                 ~/.hfrc file. For example: \"default_distribution=unstable\""
 		echo "  gpg_key        GPG key used for signing .dsc and .changes files. This is optional and"
-		echo "                 can be defined also in ~/.hfrc file: default_key=abcd1234"
+		echo "                 can be defined also in ~/.hfrc file: \"default_key=abcd1234\""
 		exit 1
 	;;
 esac
