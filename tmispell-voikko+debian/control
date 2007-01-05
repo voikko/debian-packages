@@ -24,7 +24,7 @@ Description: Ispell wrapper which uses Voikko for spell-checking
  "tmispell". The real Ispell will be launched only if Tmispell does not support
  the selected language.
  .
-   Homepage: http://www.hunspell-fi.org/
+   Homepage: http://voikko.sourceforge.net
 
 Package: libenchant-voikko
 Section: libs
@@ -38,4 +38,4 @@ Description: Voikko spell-checker libenchant plugin
  any application that uses enchant library for spell-checking. For example
  Abiword is one of these applications.
  .
-   Homepage: http://www.hunspell-fi.org/
+   Homepage: http://voikko.sourceforge.net
