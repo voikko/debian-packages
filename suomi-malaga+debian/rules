@@ -52,7 +52,7 @@ install: build
 	dh_installdirs
 
 	# Add here commands to install the package into debian/voikko-fi.
-	#$(MAKE) install DESTDIR=$(CURDIR)/debian/voikko-fi
+	$(MAKE) voikko-install DESTDIR=$(CURDIR)/debian/voikko-fi
 
 # Build architecture-independent files here.
 binary-indep: build install
