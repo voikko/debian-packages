@@ -8,11 +8,5 @@ current_version=$(dpkg-query --showformat='${Version}\n' --show openoffice.org-d
 depends=${current_version%-*}
 conflicts=${depends%~*}.1
 
-#LD_LIBRARY_PATH="/usr/lib/openoffice/program" dpkg-shlibdeps -O build/pkg/Linux_*/*.so >$substvars 2>/dev/null
-# In Ubuntu Dapper LD_LIBRARY_PATH does not help us to get correct dependencies
-# for openoffice.org-core. We must insert it manually.
-dpkg-shlibdeps -O build/pkg/Linux_*/*.so >$substvars 2>/dev/null
-cat <<EOF >>$substvars
-misc:Depends=openoffice.org-core (>= $depends)
-misc:Conflicts=openoffice.org-core (>= $conflicts)
-EOF
+LD_LIBRARY_PATH="/usr/lib/openoffice/program" dpkg-shlibdeps -O build/oxt/*.so >$substvars 2>/dev/null
+echo "misc:Conflicts=openoffice.org-core (>= $conflicts)" >>$substvars
