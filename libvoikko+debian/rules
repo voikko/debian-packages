@@ -82,7 +82,7 @@ binary-arch: build install
 	dh_strip
 	dh_compress
 	dh_fixperms
-	dh_makeshlibs -V "libvoikko1 (>= 1.2)"
+	dh_makeshlibs -V "libvoikko1 (>= 1.3)"
 	dh_installdeb
 	dh_shlibdeps
 	dh_gencontrol

@@ -14,7 +14,7 @@ Description: Development files for libvoikko
  Malaga and Suomi-Malaga. This package contains the files
  needed to build or develop applications that use Voikko.
  .
-  Homepage: http://voikko.sourceforge.net
+  Homepage: http://voikko.sourceforge.net/
 
 Package: libvoikko1
 Section: libs
@@ -25,4 +25,4 @@ Description: Finnish spell-checker and hyphenator library
  Malaga and Suomi-Malaga. This package contains the shared
  library.
  .
-  Homepage: http://voikko.sourceforge.net
+  Homepage: http://voikko.sourceforge.net/

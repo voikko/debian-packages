@@ -1,8 +1,15 @@
-libvoikko (1.3.1-0hf1) unstable; urgency=low
+libvoikko (1.4~rc1-0hf1) unstable; urgency=low
+
+  * New upstream release candidate
+
+ -- Harri Pitkänen <hatapitk@iki.fi>  Mon, 09 Apr 2007 19:57:23 +0300
+
+libvoikko (1.3.1-1) unstable; urgency=low
 
   * New upstream version
+  * Update homepage, dependencies, watch file
 
- -- Teemu Likonen <tlikonen@iki.fi>  Wed, 14 Feb 2007 22:50:12 +0200
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Sat, 31 Mar 2007 17:05:09 +0300
 
 libvoikko (1.2-1) unstable; urgency=low
 
