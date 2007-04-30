@@ -162,6 +162,7 @@ EOF
 case $component in
 	libvoikko|ooovoikko|tmispell|suomimalaga)
 		check_package build-essential
+		check_package fakeroot
 		check_package subversion
 		case $action in
 			url)
