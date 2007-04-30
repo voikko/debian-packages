@@ -6,11 +6,16 @@ target="$3"
 svnroot="https://voikko.svn.sourceforge.net/svnroot/voikko"
 
 check_package() { #{{{1
-	local package=$1
-	if ! dpkg --list $package 2>/dev/null | grep ^ii >/dev/null; then
-		echo "ERROR: You must have package \"$package\" installed"
-		exit 1
-	fi
+	local all_packages=$*
+	local package error=0
+	for package in $all_packages
+	do
+		if ! dpkg --list $package 2>/dev/null | grep ^ii >/dev/null; then
+			echo "ERROR: You must have package \"$package\" installed"
+			error=1
+		fi
+	done
+	[ $error -eq 1 ] && exit 1
 	}
 
 get_svn() { #{{{1
@@ -85,8 +90,7 @@ tmispell() { #{{{1
 	cd $component || exit 1
 	if [ $action = "svn" ]; then
 		svn_revision=$target
-		check_package libtool
-		check_package autoconf
+		check_package libtool automake
 		sh autogen.sh
 	fi
 	get_svn trunk/debian/tmispell-voikko+debian debian $svn_revision
@@ -116,8 +120,7 @@ libvoikko() { #{{{1
 	cd $component || exit 1
 	if [ $action = "svn" ]; then
 		svn_revision=$target
-		check_package libtool
-		check_package autoconf
+		check_package libtool automake
 		sh autogen.sh
 	fi
 	get_svn trunk/debian/libvoikko+debian debian $svn_revision
@@ -159,9 +162,7 @@ EOF
 #{{{1 Parse command line parameters
 case $component in
 	libvoikko|ooovoikko|tmispell|suomimalaga)
-		check_package build-essential
-		check_package fakeroot
-		check_package subversion
+		check_package build-essential fakeroot subversion
 		case $action in
 			url)
 				get_url "$target"
