@@ -130,12 +130,10 @@ print_usage() { #{{{1
 	cat <<EOF
 $name - build tool for developers and testers of Voikko
 
-Usage: $name <component> <action>
+Usage: $name <component> <source>
 
   component = suomimalaga | ooovoikko | libvoikko | tmispell
-  action    = svn [revision]
-              url http://...
-	      file filename.tar.gz
+  source    = svn [revision] | url <URL> | file <filename>
 
 Examples:
 
@@ -148,8 +146,8 @@ Examples:
   Download and build libvoikko's SVN revision at given date and time:
   $ $name libvoikko svn {20070430T1830}
 
-  Build openoffice.org-voikko from given .tar.gz archive (gzip and bzip2
-  archives are supported):
+  Build openoffice.org-voikko from given .tar.gz archive (gzip or bzip2
+  compressed tar archives are supported):
   $ $name ooovoikko file openoffice.org-voikko-2.0.tar.gz
 
   Download and build tmispell-voikko from given URL:
