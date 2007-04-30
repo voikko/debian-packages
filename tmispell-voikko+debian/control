@@ -1,9 +1,9 @@
 Source: tmispell-voikko
 Section: text
 Priority: optional
-Maintainer: Teemu Likonen <tlikonen@iki.fi>
+Maintainer: Timo Jyrinki <timo.jyrinki@iki.fi>
 Standards-Version: 3.7.2
-Build-Depends: debhelper (>= 4.0.0), autotools-dev, libenchant-dev, libncurses5-dev, libvoikko-dev, libmalaga-dev
+Build-Depends: debhelper (>= 4), libenchant-dev, libncurses5-dev, autotools-dev, libvoikko-dev, libmalaga-dev
 
 Package: tmispell-voikko
 Section: text
@@ -24,7 +24,7 @@ Description: Ispell wrapper which uses Voikko for spell-checking
  "tmispell". The real Ispell will be launched only if Tmispell does not support
  the selected language.
  .
-   Homepage: http://voikko.sourceforge.net
+  Homepage: http://voikko.sourceforge.net/
 
 Package: libenchant-voikko
 Section: libs
@@ -34,8 +34,8 @@ Description: Voikko spell-checker libenchant plugin
  Voikko is a Finnish spell-checker and hyphenator based on Malaga and
  Suomi-Malaga.
  .
- This package contains a libenchant provider plugin that allows using Voikko in
+ This package contains a libenchant provider plugin that allows using Voikko in
  any application that uses enchant library for spell-checking. For example
  Abiword is one of these applications.
  .
-   Homepage: http://voikko.sourceforge.net
+  Homepage: http://voikko.sourceforge.net/

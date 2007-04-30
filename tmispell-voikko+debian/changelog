@@ -1,14 +1,52 @@
-tmispell-voikko (0.6.1-0hf1) unstable; urgency=low
+tmispell-voikko (0.6.1-2) unstable; urgency=low
 
-  * New upstream release
+  * Fix FTBFS with GCC 4.3 (Closes: #417726)
+  * Update homepage, watch file
 
- -- Teemu Likonen <tlikonen@iki.fi>  Wed, 18 Oct 2006 18:22:30 +0300
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Wed,  4 Apr 2007 19:08:52 +0300
 
-tmispell-voikko (0.6-0hf2) unstable; urgency=low
+tmispell-voikko (0.6.1-1) unstable; urgency=low
 
-  * Merge (mostly) with Debian package 0.6-3 by Timo Jyrinki
+  * New upstream version
+  * Remove LD_FLAGS from rules (unnecessary, prevents eg. ppc build)
+  * Fix README.FI -> README.fi
 
- -- Teemu Likonen <tlikonen@iki.fi>  Thu, 28 Sep 2006 14:31:37 +0300
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Wed, 18 Oct 2006 20:04:10 +0300
+
+tmispell-voikko (0.6-4) unstable; urgency=low
+
+  * Install LUEMINUT as README.fi
+
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Sat, 30 Sep 2006 15:35:57 +0300
+
+tmispell-voikko (0.6-3) unstable; urgency=low
+
+  * Add lintian override for "missing" manpage for ispell
+  * Remove libglib2.0-dev dependency (comes now from libmalaga-dev)
+
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Tue, 26 Sep 2006 19:01:21 +0300
+
+tmispell-voikko (0.6-2) unstable; urgency=low
+
+  * Complete ITP (Closes: #388802)
+  * Indent homepage by two spaces in debian/control
+  * Uncomment config.sub/guess in debian/rules, add autotools-dev dependency
+  * Remove commented dh_-calls from debian/rules
+  * Move -z defs to LDFLAGS in debian/rules
+  * Remove cruft from debian/watch
+  * Add dependencies to libvoikko-dev, libmalaga-dev
+  * Update debian/copyright
+
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Mon, 25 Sep 2006 19:44:03 +0300
+
+tmispell-voikko (0.6-1) unstable; urgency=low
+
+  * Update Standard-Version to 3.7.2
+  * Translate some comments in debian-directory to English.
+  * Lintian cleaning: fix bashism, add #DEBHELPER#:s
+  * Linda cleaning: add section, remove erronous characters, dh4 dependency
+
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Wed, 20 Sep 2006 19:21:19 +0300
 
 tmispell-voikko (0.6-0hf1) unstable; urgency=low
 
