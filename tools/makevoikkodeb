@@ -23,6 +23,7 @@ get_svn() { #{{{1
 
 get_url() { #{{{1 
 	local url="$1"
+	if [ ! $url ]; then echo "ERROR: URL is missing"; exit 1; fi
 	wget "$url" || exit 1
 	}
 
