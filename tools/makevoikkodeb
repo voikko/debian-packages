@@ -1,14 +1,55 @@
 #!/bin/bash
 
 component=$1
+action=$2
+target="$3"
 svnroot="https://voikko.svn.sourceforge.net/svnroot/voikko"
 
-update_changelog() {
-	svn_revision=$(svn info | awk '/^Revision:/ { print $2 }')
-	package=$(dpkg-parsechangelog | awk '/^Source:/ { print $2 }')
-	version=$(dpkg-parsechangelog | awk '/^Version:/ { print $2 }')
+check_package() { #{{{1
+	local package=$1
+	if ! dpkg --list $package | grep ^ii >/dev/null; then
+		echo "ERROR: You must have package \"$package\" installed"
+		exit 1
+	fi
+	}
+
+get_svn() { #{{{1
+	local svn_dir="$1"
+	local base_dir="$2"
+	local svn_revision=$3
+	[ ! $svn_revision ] && svn_revision=HEAD
+	svn co --revision $svn_revision "$svnroot/$svn_dir" "$base_dir" || exit 1
+	}
+
+get_url() { #{{{1 
+	local url="$1"
+	wget "$url" || exit 1
+	}
+
+uncompress_archive() { #{{{1
+	local component=$1
+	local filename="$2"
+	if [ ! -f "$filename" ]; then
+		echo "ERROR: File not found: $filename"
+		exit 1
+	fi
+	if file "$filename" | grep 'gzip compressed data' >/dev/null; then
+		tar --extract --verbose --gzip --file "$filename" --show-transformed --transform=s,^[^/]*,$component, || exit 1
+	elif file "$filename" | grep 'bzip2 compressed data' >/dev/null; then
+		check_package bzip2
+		tar --extract --verbose --bzip2 --file "$filename" --show-transformed --transform=s,^[^/]*,$component, || exit 1
+	else
+		echo "ERROR: Unknown archive format in file $filename"
+		exit 1
+	fi
+	}
+
+update_changelog() { #{{{1
+	local svn_revision=$(svn info debian | awk '/^Revision:/ { print $2 }')
+	local package=$(dpkg-parsechangelog | awk '/^Source:/ { print $2 }')
+	local version=$(dpkg-parsechangelog | awk '/^Version:/ { print $2 }')
+	local changelognew=debian/changelog.new
 	version=${version%-*}; version=${version%+*}
-	changelognew=debian/changelog.new
 	echo -e "$package (${version}+svn${svn_revision}) unstable; urgency=low\n" >$changelognew
 	echo -e "  * New upstream development snapshot\n" >>$changelognew
 	echo -e " -- Nobody <nobody@nowhere.invalid>  $(date -R)\n" >>$changelognew
@@ -16,56 +57,137 @@ update_changelog() {
 	mv debian/changelog.new debian/changelog
 	}
 
-build() {
+build_deb() { #{{{1
+	dpkg-checkbuilddeps || exit 1
 	dpkg-buildpackage -rfakeroot -b -uc
 	}
 
-suomimalaga() {
-	# We should check that required tools exist
-	dir=suomimalaga
-	svn co $svnroot/trunk/$dir || exit 1
-	svn co $svnroot/trunk/debian/suomi-malaga+debian $dir/debian || exit 1
-	cd $dir || exit 1
+suomimalaga() { #{{{1
+	local component=suomimalaga
+	local action="$1"
+	local target="$2"
+	local svn_revision=""
+	cd $component || exit 1
+	if [ $action = "svn" ]; then
+		svn_revision=$target
+	fi
+	get_svn trunk/debian/suomi-malaga+debian debian $svn_revision
 	update_changelog
-	build
+	build_deb
 	}
 
-tmispell() {
-	# We should check that required tools exist
-	dir=tmispell
-	svn co $svnroot/trunk/$dir || exit 1
-	svn co $svnroot/trunk/debian/tmispell-voikko+debian $dir/debian || exit 1
-	cd $dir || exit 1
-	sh autogen.sh
+tmispell() { #{{{1
+	local component=tmispell
+	local action="$1"
+	local target="$2"
+	local svn_revision=""
+	cd $component || exit 1
+	if [ $action = "svn" ]; then
+		svn_revision=$target
+		check_package libtool
+		check_package autoconf
+		sh autogen.sh
+	fi
+	get_svn trunk/debian/tmispell-voikko+debian debian $svn_revision
 	update_changelog
-	build
+	build_deb
 	}
 
-ooovoikko() {
-	# We should check that required tools exist
-	dir=ooovoikko
-	svn co $svnroot/trunk/$dir || exit 1
-	svn co $svnroot/trunk/debian/openoffice.org-voikko+debian $dir/debian || exit 1
-	cd $dir || exit 1
+ooovoikko() { #{{{1
+	local component=ooovoikko
+	local action="$1"
+	local target="$2"
+	local svn_revision=""
+	cd $component || exit 1
+	if [ $action = "svn" ]; then
+		svn_revision=$target
+	fi
+	get_svn trunk/debian/openoffice.org-voikko+debian debian $svn_revision
 	update_changelog
-	build
+	build_deb
 	}
 
-libvoikko() {
-	# We should check that required tools exist
-	dir=libvoikko
-	svn co $svnroot/trunk/$dir || exit 1
-	svn co $svnroot/trunk/debian/$dir+debian $dir/debian || exit 1
-	cd $dir || exit 1
-	sh autogen.sh
+libvoikko() { #{{{1
+	local component=libvoikko
+	local action="$1"
+	local target="$2"
+	local svn_revision=""
+	cd $component || exit 1
+	if [ $action = "svn" ]; then
+		svn_revision=$target
+		check_package libtool
+		check_package autoconf
+		sh autogen.sh
+	fi
+	get_svn trunk/debian/libvoikko+debian debian $svn_revision
 	update_changelog
-	build
+	build_deb
 	}
 
+print_usage() { #{{{1
+	local name=$(basename $0)
+	cat <<EOF
+$name - build tool for developers and testers of Voikko
+
+Usage: $name <component> <action>
+
+  component = suomimalaga | ooovoikko | libvoikko | tmispell
+  action    = svn [revision]
+              url http://...
+	      file filename.tar.gz
+
+Examples:
+
+  Download and build the current SVN revision of suomi-malaga (voikko-fi):
+  $ $name suomimalaga svn
+
+  Download and build libvoikko's SVN revision 1200:
+  $ $name libvoikko svn 1200
+
+  Download and build libvoikko's SVN revision at given date and time:
+  $ $name libvoikko svn {20070430T1830}
+
+  Build openoffice.org-voikko from given .tar.gz archive (gzip and bzip2
+  archives are supported):
+  $ $name ooovoikko file openoffice.org-voikko-2.0.tar.gz
+
+  Download and build tmispell-voikko from given URL:
+  $ $name tmispell url http://downloads.sourceforge.net/voikko/tmispell-voikko-0.6.1.tar.gz
+
+EOF
+	}
+
+#{{{1 Parse command line parameters
 case $component in
-	libvoikko|ooovoikko|tmispell|suomimalaga) $component ;;
+	libvoikko|ooovoikko|tmispell|suomimalaga)
+		check_package build-essential
+		check_package subversion
+		case $action in
+			url)
+				get_url "$target"
+				uncompress_archive $component "$(basename $target)"
+				$component $action $target
+				;;
+			file)
+				uncompress_archive $component "$target"
+				$component $action $target
+				;;
+			svn)
+				get_svn trunk/$component $component $target
+				$component $action $target
+				;;
+			*)
+				echo 'ERROR: Incorrent action'
+				print_usage
+				exit 1
+				;;
+		esac
+		;;
 	*)
-		echo -e "Usage:\n  $(basename $0) libvoikko|ooovoikko|tmispell|suomimalaga"
+		print_usage
 		exit 1
 		;;
 esac
+
+# vim: nowrap
+# vim600: foldmethod=marker
