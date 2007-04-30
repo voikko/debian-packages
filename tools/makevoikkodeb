@@ -5,11 +5,11 @@ svnroot="https://voikko.svn.sourceforge.net/svnroot/voikko"
 
 update_changelog() {
 	svn_revision=$(svn info | awk '/^Revision:/ { print $2 }')
-	source=$(dpkg-parsechangelog | awk '/^Source:/ { print $2 }')
+	package=$(dpkg-parsechangelog | awk '/^Source:/ { print $2 }')
 	version=$(dpkg-parsechangelog | awk '/^Version:/ { print $2 }')
 	version=${version%-*}; version=${version%+*}
 	changelognew=debian/changelog.new
-	echo -e "$source (${version}+svn${svn_revision}) unstable; urgency=low\n" >$changelognew
+	echo -e "$package (${version}+svn${svn_revision}) unstable; urgency=low\n" >$changelognew
 	echo -e "  * New upstream development snapshot\n" >>$changelognew
 	echo -e " -- Nobody <nobody@nowhere.invalid>  $(date -R)\n" >>$changelognew
 	cat debian/changelog >>debian/changelog.new
@@ -22,9 +22,9 @@ build() {
 
 suomimalaga() {
 	# We should check that required tools exist
-	dir=tmispell
+	dir=suomimalaga
 	svn co $svnroot/trunk/$dir || exit 1
-	svn co $svnroot/trunk/debian/$dir+debian $dir/debian || exit 1
+	svn co $svnroot/trunk/debian/suomi-malaga+debian $dir/debian || exit 1
 	cd $dir || exit 1
 	update_changelog
 	build
