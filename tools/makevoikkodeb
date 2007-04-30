@@ -1,0 +1,71 @@
+#!/bin/bash
+
+component=$1
+svnroot="https://voikko.svn.sourceforge.net/svnroot/voikko"
+
+update_changelog() {
+	svn_revision=$(svn info | awk '/^Revision:/ { print $2 }')
+	source=$(dpkg-parsechangelog | awk '/^Source:/ { print $2 }')
+	version=$(dpkg-parsechangelog | awk '/^Version:/ { print $2 }')
+	version=${version%-*}; version=${version%+*}
+	changelognew=debian/changelog.new
+	echo -e "$source (${version}+svn${svn_revision}) unstable; urgency=low\n" >$changelognew
+	echo -e "  * New upstream development snapshot\n" >>$changelognew
+	echo -e " -- Nobody <nobody@nowhere.invalid>  $(date -R)\n" >>$changelognew
+	cat debian/changelog >>debian/changelog.new
+	mv debian/changelog.new debian/changelog
+	}
+
+build() {
+	dpkg-buildpackage -rfakeroot -b -uc
+	}
+
+suomimalaga() {
+	# We should check that required tools exist
+	dir=tmispell
+	svn co $svnroot/trunk/$dir || exit 1
+	svn co $svnroot/trunk/debian/$dir+debian $dir/debian || exit 1
+	cd $dir || exit 1
+	update_changelog
+	build
+	}
+
+tmispell() {
+	# We should check that required tools exist
+	dir=tmispell
+	svn co $svnroot/trunk/$dir || exit 1
+	svn co $svnroot/trunk/debian/tmispell-voikko+debian $dir/debian || exit 1
+	cd $dir || exit 1
+	sh autogen.sh
+	update_changelog
+	build
+	}
+
+ooovoikko() {
+	# We should check that required tools exist
+	dir=ooovoikko
+	svn co $svnroot/trunk/$dir || exit 1
+	svn co $svnroot/trunk/debian/openoffice.org-voikko+debian $dir/debian || exit 1
+	cd $dir || exit 1
+	update_changelog
+	build
+	}
+
+libvoikko() {
+	# We should check that required tools exist
+	dir=libvoikko
+	svn co $svnroot/trunk/$dir || exit 1
+	svn co $svnroot/trunk/debian/$dir+debian $dir/debian || exit 1
+	cd $dir || exit 1
+	sh autogen.sh
+	update_changelog
+	build
+	}
+
+case $component in
+	libvoikko|ooovoikko|tmispell|suomimalaga) $component ;;
+	*)
+		echo -e "Usage:\n  $(basename $0) libvoikko|ooovoikko|tmispell|suomimalaga"
+		exit 1
+		;;
+esac
