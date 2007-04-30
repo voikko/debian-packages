@@ -7,7 +7,7 @@ svnroot="https://voikko.svn.sourceforge.net/svnroot/voikko"
 
 check_package() { #{{{1
 	local package=$1
-	if ! dpkg --list $package | grep ^ii >/dev/null; then
+	if ! dpkg --list $package 2>/dev/null | grep ^ii >/dev/null; then
 		echo "ERROR: You must have package \"$package\" installed"
 		exit 1
 	fi
@@ -46,16 +46,16 @@ uncompress_archive() { #{{{1
 	}
 
 update_changelog() { #{{{1
-	local svn_revision=$(svn info debian | awk '/^Revision:/ { print $2 }')
-	local package=$(dpkg-parsechangelog | awk '/^Source:/ { print $2 }')
-	local version=$(dpkg-parsechangelog | awk '/^Version:/ { print $2 }')
+	local svn_revision=$(svn info debian | awk '/^Revision:/ {print $2}')
+	local package=$(dpkg-parsechangelog | awk '/^Source:/ {print $2}')
+	local version=$(dpkg-parsechangelog | awk '/^Version:/ {print $2}')
 	local changelognew=debian/changelog.new
 	version=${version%-*}; version=${version%+*}
 	echo -e "$package (${version}+svn${svn_revision}) unstable; urgency=low\n" >$changelognew
 	echo -e "  * New upstream development snapshot\n" >>$changelognew
 	echo -e " -- Nobody <nobody@nowhere.invalid>  $(date -R)\n" >>$changelognew
-	cat debian/changelog >>debian/changelog.new
-	mv debian/changelog.new debian/changelog
+	cat debian/changelog >>$changelognew
+	mv $changelognew debian/changelog
 	}
 
 build_deb() { #{{{1
