@@ -1,4 +1,7 @@
 #!/bin/bash
+# vim600: foldmethod=marker
+# 
+# Debian build tool for Voikko components by Teemu Likonen <tlikonen@iki.fi>
 
 component=$1
 action=$2
@@ -7,15 +10,17 @@ svnroot="https://voikko.svn.sourceforge.net/svnroot/voikko"
 
 check_package() { #{{{1
 	local all_packages=$*
-	local package error=0
+	local package error=""
 	for package in $all_packages
 	do
 		if ! dpkg --list $package 2>/dev/null | grep ^ii >/dev/null; then
-			echo "ERROR: You must have package \"$package\" installed"
-			error=1
+			error="$error $package"
 		fi
 	done
-	[ $error -eq 1 ] && exit 1
+	if [ "$error" ]; then
+		echo "ERROR: You must have the following packages installed:$error"
+		exit 1
+	fi
 	}
 
 get_svn() { #{{{1
@@ -139,12 +144,12 @@ libvoikko() { #{{{1
 print_usage() { #{{{1
 	local name=$(basename $0)
 	cat <<EOF
-$name - build tool for developers and testers of Voikko
+$name - Debian build tool for Voikko components
 
 Usage: $name <component> <source>
 
-  component = suomimalaga | ooovoikko | libvoikko | tmispell
-  source    = svn [revision] | url <URL> | file <filename>
+  component = suomimalaga | libvoikko | ooovoikko | tmispell
+  source    = svn [revision] | file <filename> | url <URL>
 
 Examples:
 
@@ -186,7 +191,7 @@ case $component in
 				$component $action $target
 				;;
 			*)
-				echo 'ERROR: Incorrent action'
+				echo "ERROR: Incorrent source"
 				print_usage
 				exit 1
 				;;
@@ -197,6 +202,3 @@ case $component in
 		exit 1
 		;;
 esac
-
-# vim: nowrap
-# vim600: foldmethod=marker
