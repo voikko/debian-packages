@@ -80,6 +80,8 @@ suomimalaga() { #{{{1
 	get_svn trunk/debian/suomi-malaga+debian debian $svn_revision
 	update_changelog
 	build_deb
+	echo; dpkg-parsechangelog
+	echo; svn revert debian/changelog
 	}
 
 tmispell() { #{{{1
@@ -96,6 +98,8 @@ tmispell() { #{{{1
 	get_svn trunk/debian/tmispell-voikko+debian debian $svn_revision
 	update_changelog
 	build_deb
+	echo; dpkg-parsechangelog
+	echo; svn revert debian/changelog
 	}
 
 ooovoikko() { #{{{1
@@ -110,6 +114,8 @@ ooovoikko() { #{{{1
 	get_svn trunk/debian/openoffice.org-voikko+debian debian $svn_revision
 	update_changelog
 	build_deb
+	echo; dpkg-parsechangelog
+	echo; svn revert debian/changelog
 	}
 
 libvoikko() { #{{{1
