@@ -153,7 +153,7 @@ Usage: $name <component> <source>
 
 Examples:
 
-  Download and build the current SVN revision of suomi-malaga (voikko-fi):
+  Download and build current SVN revision of suomi-malaga (voikko-fi):
   $ $name suomimalaga svn
 
   Download and build libvoikko's SVN revision 1200:
