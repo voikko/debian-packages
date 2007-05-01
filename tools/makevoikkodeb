@@ -54,11 +54,11 @@ update_changelog() { #{{{1
 	local svn_revision=$(svn info debian | awk '/^Revision:/ {print $2}')
 	local package=$(dpkg-parsechangelog | awk '/^Source:/ {print $2}')
 	local version=$(dpkg-parsechangelog | awk '/^Version:/ {print $2}')
-	local changelognew=debian/changelog.new
 	version=${version%-*}; version=${version%+*}
+	local changelognew=debian/changelog.new
 	echo -e "$package (${version}+svn${svn_revision}) unstable; urgency=low\n" >$changelognew
 	echo -e "  * New upstream development snapshot\n" >>$changelognew
-	echo -e " -- Nobody <nobody@nowhere.invalid>  $(date -R)\n" >>$changelognew
+	echo -e " -- ${DEBFULLNAME:-Nobody} <${DEBEMAIL:-nobody@invalid}>  $(date -R)\n" >>$changelognew
 	cat debian/changelog >>$changelognew
 	mv $changelognew debian/changelog
 	}
@@ -126,6 +126,8 @@ libvoikko() { #{{{1
 	get_svn trunk/debian/libvoikko+debian debian $svn_revision
 	update_changelog
 	build_deb
+	echo; dpkg-parsechangelog
+	echo; svn revert debian/changelog
 	}
 
 print_usage() { #{{{1
