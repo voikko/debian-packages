@@ -60,14 +60,18 @@ uncompress_archive() { #{{{1
 	}
 
 update_changelog() { #{{{1
-	local svn_revision=$(svn info debian | awk '/^Revision:/ {print $2}')
-	local package=$(dpkg-parsechangelog | awk '/^Source:/ {print $2}')
-	local version=$(dpkg-parsechangelog | awk '/^Version:/ {print $2}')
+	local svn_revision svn_last_changed_deb svn_last_changed_source package version changelognew
+	svn_revision=$(svn info debian | awk '/^Revision:/ {print $2}')
+	svn_last_changed_source=$(svn info 2>/dev/null | awk '/^Last Changed Date:/ {printf "%s %s %s\n",$4,$5,$6}')
+	#svn_last_changed_deb=$(svn info debian 2>/dev/null | awk '/^Last Changed Date:/ {printf "%s %s %s\n",$4,$5,$6}')
+	package=$(dpkg-parsechangelog | awk '/^Source:/ {print $2}')
+	version=$(dpkg-parsechangelog | awk '/^Version:/ {print $2}')
 	version=${version%-*}
 	version=${version%+svn*}
-	local changelognew=debian/changelog.new
+	changelognew=debian/changelog.new
 	echo -e "$package (${version}+svn${svn_revision}) unstable; urgency=low\n" >$changelognew
-	echo -e "  * New upstream development snapshot\n" >>$changelognew
+	echo -e "  * New upstream development snapshot" >>$changelognew
+	echo -e "    Source tree last changed: ${svn_last_changed_source:-(no info)}\n" >>$changelognew
 	echo -e " -- ${DEBFULLNAME:-Nobody} <${DEBEMAIL:-nobody@invalid}>  $(date -R)\n" >>$changelognew
 	cat debian/changelog >>$changelognew
 	mv $changelognew debian/changelog
