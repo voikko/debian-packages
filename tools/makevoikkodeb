@@ -2,6 +2,8 @@
 # vim600: foldmethod=marker
 # 
 # Debian build tool for Voikko components by Teemu Likonen <tlikonen@iki.fi>
+#
+# This script is public domain.
 
 component=$1
 action=$2
@@ -10,15 +12,15 @@ svnroot="https://voikko.svn.sourceforge.net/svnroot/voikko"
 
 check_package() { #{{{1
 	local all_packages=$*
-	local package error=""
+	local package not_installed=""
 	for package in $all_packages
 	do
 		if ! dpkg --list $package 2>/dev/null | grep ^ii >/dev/null; then
-			error="$error $package"
+			not_installed="$not_installed $package"
 		fi
 	done
-	if [ "$error" ]; then
-		echo "ERROR: You must have the following packages installed:$error"
+	if [ "$not_installed" ]; then
+		echo "ERROR: You must have following packages installed:$not_installed"
 		exit 1
 	fi
 	}
@@ -49,6 +51,8 @@ uncompress_archive() { #{{{1
 	elif file "$filename" | grep 'bzip2 compressed data' >/dev/null; then
 		check_package bzip2
 		tar --extract --verbose --bzip2 --file "$filename" --show-transformed --transform=s,^[^/]*,$component, || exit 1
+	elif file "$filename" | grep 'tar archive' >/dev/null; then
+		tar --extract --verbose --file "$filename" --show-transformed --transform=s,^[^/]*,$component, || exit 1
 	else
 		echo "ERROR: Unknown archive format in file $filename"
 		exit 1
@@ -147,18 +151,22 @@ print_usage() { #{{{1
 	cat <<EOF
 $name - Debian build tool for Voikko components
 
+Description: This tool obtains Voikko's source code from user defined location
+and creates a ready-to-install .deb package from it. The .deb package as well
+as building directory is created under the current directory.
+
 Usage: $name <component> <source>
 
-  component = suomimalaga | libvoikko | ooovoikko | tmispell
-  source    = svn [revision] | file <filename> | url <URL>
+  <component> = suomimalaga | libvoikko | ooovoikko | tmispell
+  <source>    = svn [revision] | file <filename> | url <URL>
 
 Examples:
 
   Download and build current SVN revision of suomi-malaga (voikko-fi):
   $ $name suomimalaga svn
 
-  Download and build libvoikko's SVN revision 1200:
-  $ $name libvoikko svn 1200
+  Download and build libvoikko's SVN revision 1372:
+  $ $name libvoikko svn 1372
 
   Download and build libvoikko's SVN revision at given date and time:
   $ $name libvoikko svn {20070430T1830}

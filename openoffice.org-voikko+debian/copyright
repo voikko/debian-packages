@@ -2,13 +2,11 @@ This package was debianized by Teemu Likonen <tlikonen@iki.fi> on
 Sat, 15 Apr 2006 21:56:52 +0300. Some modifications by
 Timo Jyrinki <timo.jyrinki@iki.fi> in September 2006.
 
-It was downloaded from http://www.hunspell-fi.org/
+It was downloaded from
 
-Upstream authors: Harri Pitkänen <hatapitk@iki.fi>, others (see below)
+  http://downloads.sourceforge.net/voikko/openoffice.org-voikko-2.0.tar.gz
 
-Script linux-installer is partially based on Debian installation scripts by
-Teemu Likonen (tlikonen@iki.fi) and is released under GNU General Public
-License. 
+Upstream author: Harri Pitkänen <hatapitk@iki.fi>
 
 The Debian packaging is (C) 2006, Harri Pitkänen, Teemu Likonen 
 and Timo Jyrinki and is licensed under the GNU General Public License.
@@ -27,31 +25,5 @@ and Timo Jyrinki and is licensed under the GNU General Public License.
   if not, write to the Free Software Foundation, Inc., 51 Franklin St, 
   Fifth Floor, Boston, MA  02110-1301  USA
 
-  On Debian systems, the complete text of the GNU General Public
-  License, version 2, can be found in /usr/share/common-licenses/GPL-2.
-
-Windows installer script copyright 2006 Oikeat Oliot Oy. Script has 
-been written by Kai Solehmainen (kai.solehmainen@oikeatoliot.fi). Installer 
-is distributed under the terms of GNU Lesser General Public License.
-
-Everything else in this package is distributed under the terms of GNU Lesser
-General Public License. The primary copyright holder is Harri Pitkänen 
-(hatapitk@iki.fi), but also Pasi Ryhänen and Kai Solehmainen have copyrights
-on some parts. They are listed in the individual source files.
-
-  This library is free software; you can redistribute it and/or
-  modify it under the terms of the GNU Lesser General Public
-  License as published by the Free Software Foundation; either
-  version 2.1 of the License, or (at your option) any later version.
-
-  This library is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-  Lesser General Public License for more details.
-
-  You should have received a copy of the GNU Lesser General Public
-  License along with this library; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-  On Debian systems, the complete text of the GNU Lesser General Public
-  License, can be found in /usr/share/common-licenses/LGPL.
+On Debian systems, the complete text of the GNU General Public
+License, version 2, can be found in /usr/share/common-licenses/GPL-2.

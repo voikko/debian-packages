@@ -4,6 +4,9 @@
 #
 # Kääntää uuden upstream-, downstream- tai arkkitehtuuriversion ja vaihtaa
 # .changes-tiedostoon uuden distron.
+#
+# Tämä komentotiedosto on yleistä omaisuutta.
+# This script is public domain.
 
 
 # Seuraavat asetukset voidaan määritellä $HOME/.hfrc-tiedostossa, jolloin niitä
