@@ -68,7 +68,7 @@ update_changelog() { #{{{1
 	version=${version%-*}
 	version=${version%+svn*}
 	changelognew=debian/changelog.new
-	echo -e "$package (${version}+svn${svn_revision}) unstable; urgency=low\n" >$changelognew
+	echo -e "$package (${version}+svn${svn_revision}-1) unstable; urgency=low\n" >$changelognew
 	echo -e "  * Upstream development snapshot" >>$changelognew
 	echo -e "    Source tree last changed: ${svn_last_changed_source:-(no info)}\n" >>$changelognew
 	echo -e " -- ${DEBFULLNAME:-Nobody} <${DEBEMAIL:-nobody@invalid}>  $(date -R)\n" >>$changelognew
