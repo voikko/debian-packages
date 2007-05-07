@@ -205,7 +205,6 @@ pidof soffice.bin &>/dev/null && msg ooo_is_running
 TMP_HOME="$(mktemp -t -d $PACKAGE_NAME.XXXXXX)" || exit 1
 export HOME="$TMP_HOME"
 
-
 # First we remove all language components that might exist in the system. These
 # can be previous versions or some other way installed ones.
 
@@ -234,8 +233,8 @@ fi
 
 
 # Delete the temporary HOME directory
-rm -fr "$TMP_HOME"
-
-#DEBHELPER#
+rm -fr $TMP_HOME
 
 exit 0
+
+#DEBHELPER#

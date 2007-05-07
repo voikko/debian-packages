@@ -1,22 +1,22 @@
 Source: openoffice.org-voikko
 Section: text
 Priority: optional
-Maintainer: Teemu Likonen <tlikonen@iki.fi>
+Maintainer: Timo Jyrinki <timo.jyrinki@iki.fi>
 Build-Depends: debhelper (>= 4.0.0), openoffice.org-dev (>= 2.0.4), libvoikko-dev (>= 1.0), zip
 Standards-Version: 3.7.2
 
 Package: openoffice.org-voikko
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
+Recommends: openoffice.org (>= 2.0.4) | openoffice.org-writer (>= 2.0.4) | openoffice.org-calc (>= 2.0.4) | openoffice.org-impress (>= 2.0.4) | openoffice.org-draw (>= 2.0.4)
 Conflicts: ${misc:Conflicts}
 Enhances: openoffice.org
 Provides: openoffice.org-spellcheck-fi, openoffice.org-hyphenation-fi
-Recommends: openoffice.org (>= 2.0.4) | openoffice.org-writer (>= 2.0.4) | openoffice.org-calc (>= 2.0.4) | openoffice.org-impress (>= 2.0.4) | openoffice.org-draw (>= 2.0.4)
 Description: Finnish spell-checker and hyphenation for OpenOffice.org
  OpenOffice.org is a full-featured office productivity suite that provides
  a near drop-in replacement for Microsoft(R) Office.
  .
- This package contains a Finnish spell-checking and hyphenation component for
+ This package contains a Finnish spell-checking and hyphenation component for 
  OpenOffice.org. The actual spell-checking and hyphenation functionality is
  provided by the Voikko library.
  .

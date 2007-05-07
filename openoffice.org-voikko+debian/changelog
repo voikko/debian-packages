@@ -1,55 +1,59 @@
-openoffice.org-voikko (2.0-0hf1) unstable; urgency=low
+openoffice.org-voikko (2.0-1) unstable; urgency=low
 
   * New upstream release
+  * Update copyright to reflect that the whole package is now under GPL
+  * Update dependencies, update maintainer scripts
 
- -- Teemu Likonen <tlikonen@iki.fi>  Mon, 30 Apr 2007 22:00:28 +0300
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Sat, 05 May 2007 04:24:28 +0300
 
-openoffice.org-voikko (1.2-0hf1) unstable; urgency=low
+openoffice.org-voikko (1.2-1) unstable; urgency=low
 
-  * New upstream release
+  * New upstream version
+  * Remove workaround hack for the bug #387224 (not needed anymore)
+  * Add quotes in prerm and postinst in two places
+  * Change conflicts generation a bit
+  * Text changes because of component rename
+  * Fix wrong filename on Linux/SPARC (Closes: #403627)
+  * Update home page, watch file
 
- -- Teemu Likonen <tlikonen@iki.fi>  Mon,  6 Nov 2006 09:25:28 +0200
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Sat, 31 Mar 2007 18:18:03 +0300
 
-openoffice.org-voikko (1.1+svn613-0hf2) unstable; urgency=low
+openoffice.org-voikko (1.1-4) unstable; urgency=low
 
-  * Remove workaround hack for the bug #387224 since it has been fixed now.
+  * Change Linux_x86 to Linux_* in generate_dependencies.sh
+  * Remove stlport from Makefile (not needed anymore)
+  * Change dependencies as requested
+  * Add OOo components to Recommends
 
- -- Teemu Likonen <tlikonen@iki.fi>  Mon, 30 Oct 2006 08:22:30 +0200
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Sat,  7 Oct 2006 11:41:48 +0300
 
-openoffice.org-voikko (1.1+svn613-0hf1) unstable; urgency=low
+openoffice.org-voikko (1.1-3) unstable; urgency=low
 
-  * New SVN snapshot
-  * Add Recommends field
-  * Language component is now named openoffice.org-voikko in the upstream.
-    Adjust postinst, prerm and openoffice.org-voikko.install accordingly.
+  * Fix bashism (use of "source") in debian/rules
 
- -- Teemu Likonen <tlikonen@iki.fi>  Tue, 10 Oct 2006 13:03:08 +0300
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Sat, 30 Sep 2006 15:16:23 +0300
 
-openoffice.org-voikko (1.1-0hf8) unstable; urgency=low
+openoffice.org-voikko (1.1-2) unstable; urgency=low
 
-  * Source package renamed back to openoffice.org-voikko
+  * Add conflict with openoffice.org-soikko
+  * Update debian/copyright again
 
- -- Teemu Likonen <tlikonen@iki.fi>  Fri,  6 Oct 2006 21:01:31 +0300
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Tue, 26 Sep 2006 17:59:36 +0300
 
-oo2-voikko (1.1-0hf7) unstable; urgency=low
+openoffice.org-voikko (1.1-1) unstable; urgency=low
 
-  * Ignore prerelease versions (~) when generating the "Conflicts" field
-    against future upstream versions. Let us hope this is safe.
+  * Change package name to openoffice.org-voikko
+  * Complete ITP (Closes: #388803)
+  * Clean debian/watch
+  * Indent homepages in debian/control by two spaces
+  * Add COPYING from upstream SVN to clarify copyright issues
+  * Update debian/copyright
+  * Change CFLAGS to CC_FLAGS in debian/rules
+  * Add #DEBHELPER# tokens to prerm and postinst scripts.
+  * Update Standards-Version to 3.7.2
+  * Clean up debian/rules
 
- -- Teemu Likonen <tlikonen@iki.fi>  Sat, 30 Sep 2006 10:18:08 +0300
-
-oo2-voikko (1.1-0hf6) unstable; urgency=low
-
-  * Merge (mostly) with Debian package 1.1-2 by Timo Jyrinki
-  * Rebuild for Debian unstable
-
- -- Teemu Likonen <tlikonen@iki.fi>  Fri, 29 Sep 2006 09:47:06 +0300
-
-oo2-voikko (1.1-0hf5) unstable; urgency=low
-
-  * Fix sh compatibility issue in debian/rules
-
- -- Teemu Likonen <tlikonen@iki.fi>  Fri, 22 Sep 2006 10:47:00 +0300
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Mon, 25 Sep 2006 20:37:25 +0300
 
 oo2-voikko (1.1-0hf4) unstable; urgency=low
 

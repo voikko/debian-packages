@@ -1,10 +1,10 @@
 This package was debianized by Teemu Likonen <tlikonen@iki.fi> on
-Sat, 15 Apr 2006 21:56:52 +0300. Some modifications by
-Timo Jyrinki <timo.jyrinki@iki.fi> in September 2006.
+Sat, 15 Apr 2006 21:56:52 +0300. Continued by Timo Jyrinki
+<timo.jyrinki@iki.fi> in September, 2006.
 
 It was downloaded from
 
-  http://downloads.sourceforge.net/voikko/openoffice.org-voikko-2.0.tar.gz
+ http://downloads.sourceforge.net/voikko/openoffice.org-voikko-2.0.tar.gz
 
 Upstream author: Harri Pitkänen <hatapitk@iki.fi>
 
@@ -28,3 +28,4 @@ and Timo Jyrinki and is licensed under the GNU General Public License.
 
 On Debian systems, the complete text of the GNU General Public
 License, version 2, can be found in /usr/share/common-licenses/GPL-2.
+

@@ -143,7 +143,6 @@ fi
 TMP_HOME="$(mktemp -t -d $PACKAGE_NAME.XXXXXX)" || exit 1
 export HOME="$TMP_HOME"
 
-
 # We remove possible previously installed language component from the system.
 
 if $UNOPKG list --shared &>/dev/null
@@ -160,8 +159,8 @@ else msg component_list_failed
 fi
 
 # Delete the temporary HOME directory
-rm -fr "$TMP_HOME"
-
-#DEBHELPER#
+rm -fr $TMP_HOME
 
 exit 0
+
+#DEBHELPER#

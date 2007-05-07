@@ -10,3 +10,4 @@ conflicts=${depends%~*}.1
 
 LD_LIBRARY_PATH="/usr/lib/openoffice/program" dpkg-shlibdeps -O build/oxt/*.so >$substvars 2>/dev/null
 echo "misc:Conflicts=openoffice.org-core (>= $conflicts)" >>$substvars
+
