@@ -1,0 +1,15 @@
+#!/bin/sh -eu
+set -e
+
+FLAVOR="$1"
+elc_dir=/usr/share/${FLAVOR}/site-lisp
+
+echo remove/malaga-mode: Handling removal of emacsen flavor ${FLAVOR}
+
+if [ ${FLAVOR} != emacs ]
+then
+    echo emacsen-common: purging byte-compiled files for ${FLAVOR}
+    rm -f "${elc_dir}/malaga-mode.elc"
+fi
+exit 0
+

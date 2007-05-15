@@ -1,0 +1,3 @@
+debian/tmp/usr/share/emacs/*
+debian/tmp/usr/share/malaga/malaga-mode.el usr/share/emacs/site-lisp/
+debian/tmp/usr/lib/emacsen-common/packages/*

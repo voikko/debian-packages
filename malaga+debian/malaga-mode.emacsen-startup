@@ -1,0 +1,1 @@
+(require 'malaga "/usr/share/emacs/site-lisp/malaga-mode.el")

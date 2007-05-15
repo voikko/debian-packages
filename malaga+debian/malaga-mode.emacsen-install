@@ -1,0 +1,31 @@
+#!/bin/sh 
+set -e
+
+FLAVOR="$1"
+echo install/malaga-mode: Handling install of emacsen flavor ${FLAVOR}
+
+byte_compile_options="-batch -f batch-byte-compile"
+el_files="malaga-mode.el" 
+el_dir="/usr/share/emacs/site-lisp"
+elc_dir="/usr/share/${FLAVOR}/site-lisp"
+
+if [ ${FLAVOR} != emacs ]
+then
+    echo install/malaga-mode: byte-compiling for ${FLAVOR}
+
+    [ -d "${elc_dir}" ] || mkdir "${elc_dir}"
+
+    # Copy the temp .el files
+    cd "${el_dir}"
+    cp -f "${el_files}" "${elc_dir}"
+
+    # Byte compile them
+    cd "${elc_dir}"
+    ${FLAVOR} ${byte_compile_options} "${el_files}" 2> /dev/null
+
+    # remove the redundant .el files
+    cd "${elc_dir}"
+    rm -f "$el_files"
+fi
+exit 0
+

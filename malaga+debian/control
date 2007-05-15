@@ -2,7 +2,7 @@ Source: malaga
 Maintainer: Timo Jyrinki <timo.jyrinki@iki.fi>
 Section: misc
 Priority: optional
-Build-Depends: tetex-bin, libgtk2.0-dev, libglib2.0-dev, texinfo, tetex-extra, libreadline5-dev, dpkg-dev, debhelper ( >= 4.0.0 ), autotools-dev
+Build-Depends: libgtk2.0-dev, libglib2.0-dev, texinfo, texlive, libreadline5-dev, dpkg-dev ( >= 1.13.19 ), debhelper ( >= 4.0.0 ), autotools-dev
 Standards-Version: 3.7.2
 
 Package: malaga-bin
@@ -11,7 +11,7 @@ Section: misc
 Priority: optional
 Depends: ${shlibs:Depends}
 Recommends: malaga-doc, info | info-browser
-Suggests: emacsen
+Suggests: malaga-mode
 Description: A system for automatic language analysis
  Malaga is a system for implementing natural language analysers:
  both grammars and morphologies can be created.
@@ -23,8 +23,7 @@ Description: A system for automatic language analysis
  This package contains a set of standalone programs that can be
  used in developing and playing with grammars and morphologies.
  One of the programs uses a Tk/TCL module for displaying
- graphical analysis trees.  Malaga support for Emacs is also
- included.
+ graphical analysis trees.
 
 Package: libmalaga7
 Architecture: any
@@ -35,9 +34,6 @@ Conflicts: libmalaga1-dev, libmalaga2-dev
 Description: An automatic language analysis library
  Malaga is a system for implementing natural language analysers:
  both grammars and morphologies can be created.
- You do not need this package unless some other package depends
- on it - in which case the Debian installation tools will let
- you know.
  .
  This package contains the shared library supporting other
  programs that use the Malaga engine.  Malaga itself does
@@ -47,7 +43,7 @@ Package: libmalaga-dev
 Architecture: any
 Section: libdevel
 Priority: optional
-Depends: libmalaga7 (= ${Source-Version}), libglib2.0-dev
+Depends: libmalaga7 (=${binary:Version}), libglib2.0-dev
 Conflicts: libmalaga1-dev, libmalaga2-dev
 Suggests: malaga-bin
 Description: Developer's library for automatic language analysis
@@ -69,7 +65,6 @@ Suggests: malaga-bin, doc-base
 Description: Documentation for an automatic language analysis system
  Malaga is a system for implementing natural language analysers:
  both grammars and morphologies can be created.
- .
  You will not be needing this package if you do not intend
  to do research on computer linguistics or develop computer
  programs that need to do advanced processing of natural
@@ -77,5 +72,22 @@ Description: Documentation for an automatic language analysis system
  .
  This package contains the Malaga documentation in HTML and
  PostScript, DVI, and PDF.  To read it you will need appropriate
- viewers.  The malaga-bin package contains documentian in
+ viewers.  The malaga-bin package contains documentation in
  info format.
+
+Package: malaga-mode
+Section: editors
+Priority: optional
+Architecture: all
+Suggests: malaga-bin
+Depends: emacs21 | emacsen
+Description: A system for automatic language analysis - emacs mode
+ Malaga is a system for implementing natural language analysers:
+ both grammars and morphologies can be created.
+ You will not be needing this package if you do not intend
+ to do research on computer linguistics or develop computer
+ programs that need to do advanced processing of natural
+ languages.
+ .
+ This package contains the emacs malaga-mode.
+
