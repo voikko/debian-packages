@@ -67,8 +67,8 @@ uncompress_archive() { #{{{1
 update_changelog() { #{{{1
 	local svn_revision svn_last_changed_debian svn_last_changed_source source_package version changelog_new
 	svn_revision=$(svn info debian 2>/dev/null | awk '/^Revision:/ {print $2}')
-	svn_last_changed_source=$(svn info 2>/dev/null | awk '/^Last Changed Date:/ {printf "%s %s %s\n",$4,$5,$6}')
-	svn_last_changed_debian=$(svn info debian 2>/dev/null | awk '/^Last Changed Date:/ {printf "%s %s %s\n",$4,$5,$6}')
+	svn_last_changed_source=$(svn info 2>/dev/null | awk '/^Last Changed Date:/ {print $4,$5,$6}')
+	svn_last_changed_debian=$(svn info debian 2>/dev/null | awk '/^Last Changed Date:/ {print $4,$5,$6}')
 	source_package=$(dpkg-parsechangelog | awk '/^Source:/ {print $2}')
 	version=$(dpkg-parsechangelog | awk '/^Version:/ {print $2}')
 	version=${version%-*}
