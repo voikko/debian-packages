@@ -5,8 +5,8 @@
 #
 # This script is public domain.
 
-component=$1
-action=$2
+component="$1"
+action="$2"
 target="$3"
 svnroot="https://voikko.svn.sourceforge.net/svnroot/voikko"
 
@@ -28,18 +28,18 @@ check_package() { #{{{1
 get_svn() { #{{{1
 	local svn_dir="$1"
 	local base_dir="$2"
-	local svn_revision=$3
+	local svn_revision="$3"
 	svn co --revision ${svn_revision:-HEAD} "$svnroot/$svn_dir" "$base_dir" || exit 1
 	}
 
 get_url() { #{{{1 
 	local url="$1"
-	if [ ! $url ]; then echo "ERROR: URL is missing"; exit 1; fi
+	if [ ! "$url" ]; then echo "ERROR: URL is missing"; exit 1; fi
 	wget "$url" || exit 1
 	}
 
 uncompress_archive() { #{{{1
-	local component=$1
+	local component="$1"
 	local filename="$2"
 	if [ ! -f "$filename" ]; then
 		echo "ERROR: File not found: $filename"
@@ -93,11 +93,11 @@ suomimalaga() { #{{{1
 	local action="$1"
 	local target="$2"
 	local svn_revision=""
-	cd $component || exit 1
+	cd "$component" || exit 1
 	if [ $action = "svn" ]; then
 		svn_revision=$target
 	fi
-	get_svn trunk/debian/suomi-malaga+debian debian $svn_revision
+	get_svn trunk/debian/suomi-malaga+debian debian "$svn_revision"
 	update_changelog
 	build_deb
 	echo; dpkg-parsechangelog
@@ -109,13 +109,13 @@ tmispell() { #{{{1
 	local action="$1"
 	local target="$2"
 	local svn_revision=""
-	cd $component || exit 1
+	cd "$component" || exit 1
 	if [ $action = "svn" ]; then
 		svn_revision=$target
 		check_package libtool automake
 		sh autogen.sh
 	fi
-	get_svn trunk/debian/tmispell-voikko+debian debian $svn_revision
+	get_svn trunk/debian/tmispell-voikko+debian debian "$svn_revision"
 	update_changelog
 	build_deb
 	echo; dpkg-parsechangelog
@@ -127,11 +127,11 @@ ooovoikko() { #{{{1
 	local action="$1"
 	local target="$2"
 	local svn_revision=""
-	cd $component || exit 1
+	cd "$component" || exit 1
 	if [ $action = "svn" ]; then
 		svn_revision=$target
 	fi
-	get_svn trunk/debian/openoffice.org-voikko+debian debian $svn_revision
+	get_svn trunk/debian/openoffice.org-voikko+debian debian "$svn_revision"
 	update_changelog
 	build_deb
 	echo; dpkg-parsechangelog
@@ -143,13 +143,13 @@ libvoikko() { #{{{1
 	local action="$1"
 	local target="$2"
 	local svn_revision=""
-	cd $component || exit 1
+	cd "$component" || exit 1
 	if [ $action = "svn" ]; then
 		svn_revision=$target
 		check_package libtool automake
 		sh autogen.sh
 	fi
-	get_svn trunk/debian/libvoikko+debian debian $svn_revision
+	get_svn trunk/debian/libvoikko+debian debian "$svn_revision"
 	update_changelog
 	build_deb
 	echo; dpkg-parsechangelog
@@ -157,7 +157,7 @@ libvoikko() { #{{{1
 	}
 
 print_usage() { #{{{1
-	local name=$(basename $0)
+	local name=$(basename "$0")
 	cat <<EOF
 $name - Debian build tool for Voikko components
 
@@ -198,19 +198,20 @@ case $component in
 		case $action in
 			url)
 				get_url "$target"
-				uncompress_archive $component "$(basename $target)"
-				$component $action $target
+				target=$(basename "$target")
+				uncompress_archive $component "$target"
+				$component "$action"
 				;;
 			file)
 				uncompress_archive $component "$target"
-				$component $action $target
+				$component "$action"
 				;;
 			svn)
-				get_svn trunk/$component $component $target
-				$component $action $target
+				get_svn trunk/$component $component "$target"
+				$component "$action" "$target"
 				;;
 			*)
-				echo "ERROR: Incorrent source"
+				echo "ERROR: Incorrent source: $action $target"
 				print_usage
 				exit 1
 				;;

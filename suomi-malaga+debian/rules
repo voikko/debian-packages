@@ -20,7 +20,7 @@ else
 endif
 
 build: build-stamp
-build-stamp:
+build-stamp: 
 	dh_testdir
 	# Add here commands to compile the package.
 	$(MAKE) voikko
@@ -41,12 +41,12 @@ install: build
 	dh_installdirs
 	# Add here commands to install the package into debian/voikko-fi.
 	$(MAKE) voikko-install DESTDIR=$(CURDIR)/debian/voikko-fi/usr/lib/voikko
-
-# Build architecture-independent files here.
+	
+	# Build architecture-independent files here.
 binary-indep: build install
 	# We have nothing to do by default.
 	
-# Build architecture-dependent files here.
+	# Build architecture-dependent files here.
 binary-arch: build install
 	dh_testdir
 	dh_testroot
