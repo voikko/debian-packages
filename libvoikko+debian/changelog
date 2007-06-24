@@ -1,14 +1,14 @@
-libvoikko (1.4.1-0) unstable; urgency=low
+libvoikko (1.4.1-1) unstable; urgency=low
 
-  * New upstream release
+  * New upstream version
 
- -- Teemu Likonen <tlikonen@iki.fi>  Tue, 15 May 2007 16:39:53 +0300
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Tue, 15 May 2007 22:36:34 +0300
 
-libvoikko (1.4-0hf1) unstable; urgency=low
+libvoikko (1.4-1) unstable; urgency=low
 
-  * New upstream release
+  * New upstream version
 
- -- Teemu Likonen <tlikonen@iki.fi>  Mon, 30 Apr 2007 22:26:02 +0300
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Sat, 05 May 2007 04:43:47 +0300
 
 libvoikko (1.3.1-1) unstable; urgency=low
 

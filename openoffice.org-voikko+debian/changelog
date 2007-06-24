@@ -1,8 +1,12 @@
-openoffice.org-voikko (2.0.1-0) unstable; urgency=low
+openoffice.org-voikko (2.0.1-1) unstable; urgency=low
 
   * New upstream release
+  * Sync with upstream Debian packaging, ie:
+  * Remove openoffice.org-soikko conflict, not in Debian anymore
+  * Fix copyright file (missing line)
+  * Install the new Changelog
 
- -- Teemu Likonen <tlikonen@iki.fi>  Tue, 15 May 2007 16:38:27 +0300
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Wed, 16 May 2007 00:05:27 +0300
 
 openoffice.org-voikko (2.0-1) unstable; urgency=low
 

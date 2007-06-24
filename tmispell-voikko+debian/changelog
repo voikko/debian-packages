@@ -1,8 +1,9 @@
 tmispell-voikko (0.6.2-1) unstable; urgency=low
 
-  * New upstream release
+  * New upstream release, fixes enchant with KDE4 and gedit
+  * Update dependencies
 
- -- Teemu Likonen <tlikonen@iki.fi>  Thu, 24 May 2007 08:27:56 +0300
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Thu, 24 May 2007 22:56:17 +0300
 
 tmispell-voikko (0.6.1-2) unstable; urgency=low
 

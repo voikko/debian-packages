@@ -1,8 +1,11 @@
-suomi-malaga (0.7.5-0) unstable; urgency=low
+suomi-malaga (0.7.5-1) unstable; urgency=low
 
-  * New upstream release
+  * New upstream version
+  * Add python build-dep, sync with upstream Debian packaging
+  * Patch from upstream SVN to fix make -j5
+  * Patch from upstream SVN to fix words of type "saksalais-roomalainen"
 
- -- Teemu Likonen <tlikonen@iki.fi>  Tue, 15 May 2007 16:39:22 +0300
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Tue, 15 May 2007 23:26:19 +0300
 
 suomi-malaga (0.7.4-1) unstable; urgency=low
 
