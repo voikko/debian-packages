@@ -211,6 +211,15 @@ export HOME="$TMP_HOME"
 if $UNOPKG list --shared &>/dev/null
 then
 	COMPONENT_LIST=$($UNOPKG list --shared 2>/dev/null | sed -ne "s/^Name: \\(${COMPONENT_BASENAME}.*\\)/\\1/p")
+	# If not found, OOo 2.3 or newer is in use
+	if [ "$COMPONENT_LIST" = "" ]
+	then
+		COMPONENT_LIST=$($UNOPKG list --shared 2>/dev/null | sed -ne "s/^Identifier: \\(org\.openoffice\.legacy\.openoffice\.org-voikko-.*\.uno\.pkg\\)/\\1/p")
+	fi
+	if [ "$COMPONENT_LIST" = "" ]
+	then
+		COMPONENT_LIST=$($UNOPKG list --shared 2>/dev/null | sed -ne "s/^Identifier: \\(org\.puimula\.ooovoikko\\)/\\1/p")
+	fi
 	for COMPONENT in $COMPONENT_LIST
 	do
 		if $UNOPKG remove --shared $COMPONENT &>/dev/null
