@@ -52,7 +52,6 @@ binary-arch: build install
 	dh_testroot
 	dh_installchangelogs ChangeLog
 	dh_installdocs
-	cp -a $(CURDIR)/LUE.MINUT $(CURDIR)/debian/voikko-fi/usr/share/doc/voikko-fi/README.fi
 	dh_installexamples
 	dh_install
 	dh_installman
