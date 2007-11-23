@@ -1,7 +1,14 @@
 #!/bin/sh
-# Create files to indicate "suomi" language is available.
+# in English
+# Create hoax files so that a few programs would notice the Finnish 
+# spellchecking.
+#
+# in Finnish:
+# Jotta ohjelmat tajuaisivat suomen kielen oikoluvun olevan käytössä, luodaan
+# huijaustiedostot sitä varten.
 
 [ -d /usr/lib/ispell ] || mkdir -p /usr/lib/ispell
-touch /usr/lib/ispell/suomi.aff /usr/lib/ispell/suomi.hash
+touch /usr/lib/ispell/suomi.aff
+touch /usr/lib/ispell/suomi.hash
 
 #DEBHELPER#
