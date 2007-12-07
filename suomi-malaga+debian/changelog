@@ -1,8 +1,15 @@
+suomi-malaga (0.7.7-1) unstable; urgency=low
+
+  * New upstream version
+  * Fix Lintian warning debian-rules-ignores-make-clean-error
+
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Tue, 04 Dec 2007 19:54:43 +0200
+
 suomi-malaga (0.7.6-1) unstable; urgency=low
 
-  * New upstream release
+  * New upstream version
 
- -- Teemu Likonen <tlikonen@iki.fi>  Thu, 30 Aug 2007 11:05:06 +0300
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Sat, 01 Sep 2007 22:11:22 +0300
 
 suomi-malaga (0.7.5-1) unstable; urgency=low
 

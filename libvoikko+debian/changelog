@@ -1,3 +1,10 @@
+libvoikko (1.6-1) unstable; urgency=low
+
+  * New upstream version
+  * Fix Lintian warning debian-rules-ignores-make-clean-error
+
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Tue, 04 Dec 2007 20:02:37 +0200
+
 libvoikko (1.5-1) unstable; urgency=low
 
   * New upstream version
