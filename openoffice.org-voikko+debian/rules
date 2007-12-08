@@ -24,14 +24,14 @@ apply-hyphenation-patch: apply-hyphenation-patch-stamp
 apply-hyphenation-patch-stamp:
 	dh_testdir
 	@echo "Applying $(HYPHENATION_PATCH)"
-	@patch -p0 -stuN < "$(HYPHENATION_PATCH)" || exit 1
+	@patch -p0 -stuN < "$(HYPHENATION_PATCH)"
 	touch apply-hyphenation-patch-stamp
 
 deapply-hyphenation-patch:
 	dh_testdir
 	@if test -f apply-hyphenation-patch-stamp; then \
 		echo "Reverting $(HYPHENATION_PATCH)"; \
-		patch -p0 -suRf < "$(HYPHENATION_PATCH)" || exit 1; \
+		patch -p0 -suRf < "$(HYPHENATION_PATCH)"; \
 		rm -f apply-hyphenation-patch-stamp; \
 	fi
 
