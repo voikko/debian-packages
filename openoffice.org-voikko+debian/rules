@@ -2,12 +2,17 @@
 
 CC_FLAGS = -Wall -g
 HYPHENATION_PATCH = debian/HypMinWordLength.patch
-APPLY_HYPHENATION_PATCH = $(findstring separate-minlength,$(DEB_BUILD_OPTIONS))
 
 ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
 	CC_FLAGS += -O0
 else
 	CC_FLAGS += -O2
+endif
+
+ifneq (,$(findstring separate-minlength,$(DEB_BUILD_OPTIONS)))
+	APPLY_HYPHENATION_PATCH = patch-stamp
+else
+	APPLY_HYPHENATION_PATCH =
 endif
 
 configure: configure-stamp
@@ -18,11 +23,9 @@ configure-stamp:
 patch: patch-stamp
 patch-stamp:
 	dh_testdir
-	@if test "$(APPLY_HYPHENATION_PATCH)"; then \
-		echo "Applying $(HYPHENATION_PATCH)"; \
-		patch -p0 -stuN < "$(HYPHENATION_PATCH)" || exit 1; \
-		touch patch-stamp; \
-	fi
+	@echo "Applying $(HYPHENATION_PATCH)"
+	@patch -p0 -stuN < "$(HYPHENATION_PATCH)" || exit 1
+	touch patch-stamp
 
 unpatch:
 	dh_testdir
@@ -32,7 +35,7 @@ unpatch:
 		rm -f patch-stamp; \
 	fi
 
-build: patch-stamp build-stamp
+build: $(APPLY_HYPHENATION_PATCH) build-stamp
 build-stamp: configure-stamp 
 	dh_testdir
 	sh -c ". /usr/lib/openoffice/sdk/setsdkenv_unix.sh && $(MAKE)"
