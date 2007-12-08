@@ -1,0 +1,15 @@
+Index: src/PropertyManager.cxx
+===================================================================
+--- src/PropertyManager.cxx	(revision 1835)
++++ src/PropertyManager.cxx	(working copy)
+@@ -206,8 +206,8 @@
+ 	// Uncomment the following if you want to apply HypMinWordLength to the
+ 	// components of compound words, not just whole words.
+ 
+-	// voikko_set_int_option(voikko_handle, VOIKKO_MIN_HYPHENATED_WORD_LENGTH,
+-	//                       hyphMinWordLength);
++	voikko_set_int_option(voikko_handle, VOIKKO_MIN_HYPHENATED_WORD_LENGTH,
++	                      hyphMinWordLength);
+ }
+ 
+ void PropertyManager::sendLinguEvent(const linguistic2::LinguServiceEvent & event) {

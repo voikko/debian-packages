@@ -1,9 +1,15 @@
 openoffice.org-voikko (2.1-1) unstable; urgency=low
 
   * New upstream release
-  * Fix prerm/postinst to handle OOo 2.3 changes (Thanks to Timo Jyrinki)
+  * Update dependencies
 
- -- Teemu Likonen <tlikonen@iki.fi>  Sat, 25 Aug 2007 17:21:38 +0300
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Sun, 18 Nov 2007 00:55:16 +0200
+
+openoffice.org-voikko (2.0.1-2) unstable; urgency=low
+
+  * Fix prerm/postinst to handle OOo 2.3 changes
+
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Tue, 14 Aug 2007 15:26:05 +0300
 
 openoffice.org-voikko (2.0.1-1) unstable; urgency=low
 

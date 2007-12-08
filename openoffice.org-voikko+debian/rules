@@ -1,6 +1,8 @@
 #!/usr/bin/make -f
 
 CC_FLAGS = -Wall -g
+HYPHENATION_PATCH = debian/HypMinWordLength.patch
+APPLY_HYPHENATION_PATCH = $(findstring separate-minlength,$(DEB_BUILD_OPTIONS))
 
 ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
 	CC_FLAGS += -O0
@@ -13,14 +15,30 @@ configure-stamp:
 	dh_testdir
 	touch configure-stamp
 
-build: build-stamp
+patch: patch-stamp
+patch-stamp:
+	dh_testdir
+	@if test "$(APPLY_HYPHENATION_PATCH)"; then \
+		echo "Applying $(HYPHENATION_PATCH)"; \
+		patch -p0 -stuN < "$(HYPHENATION_PATCH)" || exit 1; \
+		touch patch-stamp; \
+	fi
 
+unpatch:
+	dh_testdir
+	@if test -f patch-stamp; then \
+		echo "Reverting $(HYPHENATION_PATCH)"; \
+		patch -p0 -suRf < "$(HYPHENATION_PATCH)" || exit 1; \
+		rm -f patch-stamp; \
+	fi
+
+build: patch-stamp build-stamp
 build-stamp: configure-stamp 
 	dh_testdir
 	sh -c ". /usr/lib/openoffice/sdk/setsdkenv_unix.sh && $(MAKE)"
 	touch build-stamp
 
-clean:
+clean: unpatch
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp configure-stamp
