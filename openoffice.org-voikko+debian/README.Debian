@@ -1,8 +1,8 @@
 IMPORTANT NOTES
 ---------------
 
-1) The functionality of openoffice.org-voikko language component depends 
-heavily on fairly static OpenOffice.org installation. If the structure 
+1) The functionality of openoffice.org-voikko language component depends
+heavily on fairly static OpenOffice.org installation. If the structure
 of your OpenOffice.org installation changes (due to software update for
 example), it is possible for the language component to get lost in the
 process. You may need to reinstall the language component with the
@@ -11,10 +11,10 @@ following command (executed as root):
   dpkg-reconfigure openoffice.org-voikko
 
 2) It is possible that in the future new versions of OpenOffice.org will
-become incompatible with current versions of openoffice.org-voikko. The 
+become incompatible with current versions of openoffice.org-voikko. The
 worst possible scenario is that this incompatibility will *break* the
-installation of both openoffice.org-voikko and OpenOffice.org. This is 
-really possible; I am not exaggerating here. OpenOffice.org has certain 
+installation of both openoffice.org-voikko and OpenOffice.org. This is
+really possible; I am not exaggerating here. OpenOffice.org has certain
 weak points in handling external components.
 
 To solve the problem, this openoffice.org-voikko binary package has been
@@ -29,30 +29,33 @@ version of openoffice.org-voikko.
 BUILD OPTION FOR HYPHENATION
 ----------------------------
 
-OpenOffice.org has user setting for defining the minimum length for words to be
-hyphenated. By default the word length is counted from the whole word - even
-for compound words. For example the word 'elokuvalippu' is 12 characters long.
-The word will be hyphenated like 'elo-ku-va-lip-pu' in all cases when the
-minimum word length is set to 12 or less. If the minimum length is set to 13 or
-more the word is not hyphenated at all.
+OpenOffice.org has user setting for defining the minimum length for
+words to be hyphenated. By default the word length is counted from the
+whole word - even for compound words. For example the word
+'elokuvalippu' is 12 characters long. The word will be hyphenated like
+'elo-ku-va-lip-pu' in all cases when the minimum word length is set to
+12 or less. If the minimum length is set to 13 or more the word is not
+hyphenated at all.
 
-With openoffice.org-voikko it is possible to change this behaviour so that when
-counting word lengths the parts of a compound word are counted separately. For
-example the compound word 'elokuvalippu' is actually handled as three different
-words: 'elo', 'kuva' and 'lippu'. If the minimum word length for hyphenation is
-5 characters then 'elokuvalippu' is hyphenated like 'elo-kuva-lip-pu'. The word
-'kuva' won't be hyphenated because it is shorter than 5 characters. If the
-minimum length is 6 (or more) characters the word is hyphenated like
-'elo-kuva-lippu' because all the words are shorter than 6 characters. This
-counting method has some benefits in Finnish because it is possible to prevent
-hyphenation of short words even if they are part of compounds. 'Eloku-
-valippu' is an example of non-ideal hyphenation situation that can be
-prevented.
+With openoffice.org-voikko it is possible to change this behaviour so
+that when counting word lengths the parts of a compound word are counted
+separately. For example the compound word 'elokuvalippu' is actually
+handled as three different words: 'elo', 'kuva' and 'lippu'. If the
+minimum word length for hyphenation is 5 characters then 'elokuvalippu'
+is hyphenated like 'elo-kuva-lip-pu'. The word 'kuva' won't be
+hyphenated because it is shorter than 5 characters. If the minimum
+length is 6 (or more) characters the word is hyphenated like
+'elo-kuva-lippu' because all the words are shorter than 6 characters.
+This counting method has some benefits in Finnish because it is possible
+to prevent hyphenation of short words even if they are part of
+compounds. 'Eloku- valippu' is an example of non-ideal hyphenation
+situation that can be prevented.
 
-The former method is currently openoffice.org-voikko's default because it seems
-to be pretty much the standard behaviour of contemporary Finnish hyphenators.
-If you wish to use the latter method you must set the following environment
-variable before building openoffice.org-voikko Debian source package:
+The former method is currently openoffice.org-voikko's default because
+it seems to be pretty much the standard behaviour of contemporary
+Finnish hyphenators. If you wish to use the latter method you must set
+the following environment variable before building openoffice.org-voikko
+Debian source package:
 
   DEB_BUILD_OPTIONS=separate-minlength
 
@@ -61,6 +64,6 @@ Complete command line example for building:
   apt-get build-dep openoffice.org-voikko
   DEB_BUILD_OPTIONS=separate-minlength apt-get --compile source openoffice.org-voikko
 
-We hope that in the future OpenOffice.org would allow to define settings like
-this from the office suite itself. For now the only option is to compile
-openoffice.org-voikko with preferred settings.
+We hope that in the future OpenOffice.org would allow to define settings
+like this from the office suite itself. For now the only option is to
+compile openoffice.org-voikko with preferred settings.
