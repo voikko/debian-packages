@@ -5,6 +5,8 @@ Maintainer: Timo Jyrinki <timo.jyrinki@iki.fi>
 Standards-Version: 3.7.3
 Build-Depends: debhelper (>= 4), libenchant-dev (>= 1.1.6), libncurses5-dev, autotools-dev, libvoikko-dev (>= 1.0), libmalaga-dev
 Homepage: http://voikko.sourceforge.net/
+Vcs-Svn: https://voikko.svn.sourceforge.net/svnroot/voikko/trunk/tmispell
+Vcs-Browser: https://voikko.svn.sourceforge.net/viewvc/voikko/trunk/tmispell
 
 Package: tmispell-voikko
 Section: text
