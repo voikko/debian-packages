@@ -4,6 +4,7 @@ Priority: optional
 Maintainer: Timo Jyrinki <timo.jyrinki@iki.fi>
 Build-Depends: debhelper (>= 4.0.0), openoffice.org-dev (>= 2.0.4), libvoikko-dev (>= 1.5), zip
 Standards-Version: 3.7.2
+Homepage: http://voikko.sourceforge.net/
 
 Package: openoffice.org-voikko
 Architecture: any
@@ -25,5 +26,3 @@ Description: Finnish spell-checker and hyphenation for OpenOffice.org
  settings in OpenOffice.org and activate Voikko components manually. See
  file /usr/share/doc/openoffice.org-voikko/README.Debian for more
  information about using this package.
- .
-  Homepage: http://voikko.sourceforge.net/

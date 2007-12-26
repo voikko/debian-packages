@@ -4,6 +4,7 @@ Priority: optional
 Maintainer: Timo Jyrinki <timo.jyrinki@iki.fi>
 Standards-Version: 3.7.2
 Build-Depends: debhelper (>= 4), libenchant-dev (>= 1.1.6), libncurses5-dev, autotools-dev, libvoikko-dev (>= 1.0), libmalaga-dev
+Homepage: http://voikko.sourceforge.net/
 
 Package: tmispell-voikko
 Section: text
@@ -23,8 +24,6 @@ Description: Ispell wrapper which uses Voikko for spell-checking
  This package will set up Tmispell so that the command "ispell" actually starts
  "tmispell". The real Ispell will be launched only if Tmispell does not support
  the selected language.
- .
-  Homepage: http://voikko.sourceforge.net/
 
 Package: libenchant-voikko
 Section: libs
@@ -37,5 +36,3 @@ Description: Voikko spell-checker libenchant plugin
  This package contains a libenchant provider plugin that allows using Voikko in
  any application that uses enchant library for spell-checking. For example
  Abiword is one of these applications.
- .
-  Homepage: http://voikko.sourceforge.net/

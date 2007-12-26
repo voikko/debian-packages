@@ -20,7 +20,7 @@ check_package() { #{{{1
 		fi
 	done
 	if [ "$not_installed" ]; then
-		echo "ERROR: You must have following packages installed:$not_installed"
+		echo "ERROR: You must have the following packages installed:$not_installed"
 		exit 1
 	fi
 	}
@@ -84,8 +84,7 @@ update_changelog() { #{{{1
 	}
 
 build_deb() { #{{{1
-	dpkg-checkbuilddeps || exit 1
-	dpkg-buildpackage -rfakeroot -b -uc
+	dpkg-buildpackage -rfakeroot -b -uc || exit 1
 	}
 
 suomimalaga() { #{{{1

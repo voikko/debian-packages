@@ -4,6 +4,7 @@ Priority: optional
 Maintainer: Timo Jyrinki <timo.jyrinki@iki.fi>
 Build-Depends: debhelper (>= 4.0.0), malaga-bin (>= 7.8), python
 Standards-Version: 3.7.2
+Homepage: http://voikko.sourceforge.net/
 
 Package: voikko-fi
 Section: text
@@ -15,5 +16,3 @@ Description: A description of Finnish morphology written in Malaga
  .
  This package contains a compiled version of Suomi-Malaga and basic Finnish
  vocabulary suitable for use in spell-checking and hyphenation system Voikko.
- .
-  Homepage: http://voikko.sourceforge.net/
