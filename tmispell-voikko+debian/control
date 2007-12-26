@@ -2,7 +2,7 @@ Source: tmispell-voikko
 Section: text
 Priority: optional
 Maintainer: Timo Jyrinki <timo.jyrinki@iki.fi>
-Standards-Version: 3.7.2
+Standards-Version: 3.7.3
 Build-Depends: debhelper (>= 4), libenchant-dev (>= 1.1.6), libncurses5-dev, autotools-dev, libvoikko-dev (>= 1.0), libmalaga-dev
 Homepage: http://voikko.sourceforge.net/
 
