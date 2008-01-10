@@ -84,7 +84,10 @@ update_changelog() { #{{{1
 	}
 
 build_deb() { #{{{1
-	dpkg-buildpackage -rfakeroot -b -uc || exit 1
+	dpkg-checkbuilddeps || exit 1
+	#dpkg-buildpackage -rfakeroot -b -uc || exit 1
+	fakeroot debian/rules clean || exit 1
+	fakeroot debian/rules binary || exit 1
 	}
 
 suomimalaga() { #{{{1
