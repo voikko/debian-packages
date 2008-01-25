@@ -16,7 +16,7 @@ else
 endif
 
 configure: configure-stamp
-configure-stamp:
+configure-stamp: $(APPLY_HYPHENATION_PATCH)
 	dh_testdir
 	touch configure-stamp
 
@@ -27,7 +27,7 @@ apply-hyphenation-patch-stamp:
 	@patch -p0 -stuN < "$(HYPHENATION_PATCH)"
 	touch apply-hyphenation-patch-stamp
 
-deapply-hyphenation-patch:
+unapply-hyphenation-patch:
 	dh_testdir
 	@if test -f apply-hyphenation-patch-stamp; then \
 		echo "Reverting $(HYPHENATION_PATCH)"; \
@@ -35,13 +35,13 @@ deapply-hyphenation-patch:
 		rm -f apply-hyphenation-patch-stamp; \
 	fi
 
-build: $(APPLY_HYPHENATION_PATCH) build-stamp
+build: build-stamp
 build-stamp: configure-stamp 
 	dh_testdir
 	sh -c ". /usr/lib/openoffice/sdk/setsdkenv_unix.sh && $(MAKE) oxt"
 	touch build-stamp
 
-clean: deapply-hyphenation-patch
+clean: unapply-hyphenation-patch
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp configure-stamp
@@ -77,4 +77,4 @@ binary-arch: build install
 	dh_builddeb
 
 binary: binary-indep binary-arch
-.PHONY: build clean binary-indep binary-arch binary install configure apply-hyphenation-patch deapply-hyphenation-patch
+.PHONY: build clean binary-indep binary-arch binary install configure apply-hyphenation-patch unapply-hyphenation-patch
