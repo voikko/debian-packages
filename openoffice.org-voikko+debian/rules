@@ -38,7 +38,7 @@ deapply-hyphenation-patch:
 build: $(APPLY_HYPHENATION_PATCH) build-stamp
 build-stamp: configure-stamp 
 	dh_testdir
-	sh -c ". /usr/lib/openoffice/sdk/setsdkenv_unix.sh && $(MAKE)"
+	sh -c ". /usr/lib/openoffice/sdk/setsdkenv_unix.sh && $(MAKE) oxt"
 	touch build-stamp
 
 clean: deapply-hyphenation-patch
