@@ -5,8 +5,6 @@ Maintainer: Timo Jyrinki <timo.jyrinki@iki.fi>
 Build-Depends: debhelper (>= 4.0.0), openoffice.org-dev (>= 2.0.4), libvoikko-dev (>= 1.5), zip
 Standards-Version: 3.7.3
 Homepage: http://voikko.sourceforge.net/
-Vcs-Svn: https://voikko.svn.sourceforge.net/svnroot/voikko/trunk/ooovoikko
-Vcs-Browser: https://voikko.svn.sourceforge.net/viewvc/voikko/trunk/ooovoikko
 
 Package: openoffice.org-voikko
 Architecture: any
