@@ -1,8 +1,8 @@
 Index: src/PropertyManager.cxx
 ===================================================================
---- src/PropertyManager.cxx	(revision 1835)
+--- src/PropertyManager.cxx	(revision 1971)
 +++ src/PropertyManager.cxx	(working copy)
-@@ -206,8 +206,8 @@
+@@ -210,8 +210,8 @@
  	// Uncomment the following if you want to apply HypMinWordLength to the
  	// components of compound words, not just whole words.
  
