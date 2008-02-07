@@ -242,7 +242,7 @@ fi
 
 
 # Delete the temporary HOME directory
-rm -fr $TMP_HOME
+rm -fr "$TMP_HOME"
 
 exit 0
 
