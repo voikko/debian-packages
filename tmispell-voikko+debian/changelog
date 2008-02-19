@@ -1,3 +1,13 @@
+tmispell-voikko (0.7-1) unstable; urgency=low
+
+  * New upstream release (drops a copy of glibmm among else)
+  * Update Standards-Version to 3.7.3 (no changes needed)
+  * Add Homepage field to control file
+  * Update rules as discussed with upstream
+  * Switch from ncurses to ncursesw, add libglibmm-2.4-dev dependency
+
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Mon, 18 Feb 2008 09:49:50 +0200
+
 tmispell-voikko (0.6.3-1) unstable; urgency=low
 
   * New upstream release (Closes: #441607)
