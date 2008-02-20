@@ -1,3 +1,12 @@
+openoffice.org-voikko (2.2-1) unstable; urgency=low
+
+  * New upstream release
+  * Update Standards-Version to 3.7.3 (no changes)
+  * Add Homepage field to control file
+  * Add hyphenation patch from upstream, and information about its usage
+
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Mon, 18 Feb 2008 10:20:08 +0200
+
 openoffice.org-voikko (2.1-1) unstable; urgency=low
 
   * New upstream release
