@@ -95,11 +95,12 @@ suomimalaga() { #{{{1
 	local action="$1"
 	local target="$2"
 	local svn_revision=""
-	cd "$component" || exit 1
 	if [ $action = "svn" ]; then
 		svn_revision=$target
+		get_svn trunk/$component $component "$svn_revision"
 	fi
-	get_svn trunk/debian/suomi-malaga+debian debian "$svn_revision"
+	get_svn trunk/debian/suomi-malaga+debian $component/debian "$svn_revision"
+	cd $component || exit 1
 	update_changelog
 	build_deb
 	echo; dpkg-parsechangelog
@@ -111,13 +112,14 @@ tmispell() { #{{{1
 	local action="$1"
 	local target="$2"
 	local svn_revision=""
-	cd "$component" || exit 1
 	if [ $action = "svn" ]; then
 		svn_revision=$target
 		check_package libtool automake
-		sh autogen.sh
+		get_svn trunk/$component $component "$svn_revision"
+		(cd $component && sh autogen.sh) || exit 1
 	fi
-	get_svn trunk/debian/tmispell-voikko+debian debian "$svn_revision"
+	get_svn trunk/debian/tmispell-voikko+debian $component/debian "$svn_revision"
+	cd $component || exit 1
 	update_changelog
 	build_deb
 	echo; dpkg-parsechangelog
@@ -129,11 +131,12 @@ ooovoikko() { #{{{1
 	local action="$1"
 	local target="$2"
 	local svn_revision=""
-	cd "$component" || exit 1
 	if [ $action = "svn" ]; then
 		svn_revision=$target
+		get_svn trunk/$component $component "$svn_revision"
 	fi
-	get_svn trunk/debian/openoffice.org-voikko+debian debian "$svn_revision"
+	get_svn trunk/debian/openoffice.org-voikko+debian $component/debian "$svn_revision"
+	cd $component || exit 1
 	update_changelog
 	build_deb
 	echo; dpkg-parsechangelog
@@ -145,13 +148,14 @@ libvoikko() { #{{{1
 	local action="$1"
 	local target="$2"
 	local svn_revision=""
-	cd "$component" || exit 1
 	if [ $action = "svn" ]; then
 		svn_revision=$target
 		check_package libtool automake
-		sh autogen.sh
+		get_svn trunk/$component $component "$svn_revision"
+		(cd $component && sh autogen.sh) || exit 1
 	fi
-	get_svn trunk/debian/libvoikko+debian debian "$svn_revision"
+	get_svn trunk/debian/libvoikko+debian $component/debian "$svn_revision"
+	cd $component || exit 1
 	update_changelog
 	build_deb
 	echo; dpkg-parsechangelog
@@ -209,7 +213,6 @@ case $component in
 				$component "$action"
 				;;
 			svn)
-				get_svn trunk/$component $component "$target"
 				$component "$action" "$target"
 				;;
 			*)
