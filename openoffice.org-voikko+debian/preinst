@@ -21,8 +21,9 @@ remove_extension() {
 }
 
 case "$1" in
-	remove)
-		remove_extension org.puimula.ooovoikko
+	upgrade)
+		id=`/usr/lib/openoffice/program/unopkg list --shared | egrep '^(Name|Identifier):.*voikko' | cut -d":" -f2`
+		remove_extension $id
 	;;
 esac
 

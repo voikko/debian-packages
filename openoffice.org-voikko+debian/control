@@ -2,14 +2,14 @@ Source: openoffice.org-voikko
 Section: text
 Priority: optional
 Maintainer: Timo Jyrinki <timo.jyrinki@iki.fi>
-Build-Depends: debhelper (>= 4.0.0), openoffice.org-dev (>= 2.0.4), libvoikko-dev (>= 1.5), zip
+Build-Depends: debhelper (>= 4.0.0), openoffice.org-dev (>= 1:2.4.0~), libvoikko-dev (>= 1.5), zip
 Standards-Version: 3.7.3
 Homepage: http://voikko.sourceforge.net/
 
 Package: openoffice.org-voikko
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Recommends: openoffice.org (>= 2.0.4) | openoffice.org-writer (>= 2.0.4) | openoffice.org-calc (>= 2.0.4) | openoffice.org-impress (>= 2.0.4) | openoffice.org-draw (>= 2.0.4)
+Recommends: openoffice.org (>= 1:2.4.0~) | openoffice.org-writer (>= 1:2.4.0~) | openoffice.org-calc (>= 1:2.4.0~) | openoffice.org-impress (>= 1:2.4.0~) | openoffice.org-draw (>= 1:2.4.0~)
 Conflicts: ${misc:Conflicts}
 Enhances: openoffice.org
 Provides: openoffice.org-spellcheck-fi, openoffice.org-hyphenation-fi
