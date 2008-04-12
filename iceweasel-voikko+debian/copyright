@@ -1,0 +1,19 @@
+This package was debianized by Teemu Likonen <tlikonen@iki.fi> on
+Sat, 12 Apr 2008 07:14:41 +0000.
+
+It was downloaded from <url://example.com>
+
+Upstream Author(s): 
+
+    Andris Pavenis <andris.pavenis@iki.fi>
+
+Copyright: 
+
+    Copyright (C) 2007-2008 Andris Pavenis
+
+License:
+
+    General Public License, version 2 or later
+
+The Debian packaging is (C) 2008, Teemu Likonen <tlikonen@iki.fi> and
+is licensed under the GPL, see `/usr/share/common-licenses/GPL'.

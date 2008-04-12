@@ -1,0 +1,14 @@
+Source: iceweasel-voikko
+Section: web
+Priority: optional
+Maintainer: Teemu Likonen <tlikonen@iki.fi>
+Build-Depends: debhelper (>= 5), xulrunner-dev, xulrunner-dev-static, zip
+Standards-Version: 3.7.2
+
+Package: iceweasel-voikko
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, iceweasel (>= 3.0~), libvoikko1 (>= 1.5)
+Description: Finnish spell-checking extension for Iceweasel web browser
+ This extension adds a Finnish spell-checker for Iceweasel web browser. It can
+ be used to automatically spell-check text fields in web sites while typing.
+ The spell-checking functionality is provided by the Voikko library.
