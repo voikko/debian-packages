@@ -179,6 +179,23 @@ libvoikko() { #{{{1
 	echo; svn revert debian/changelog
 	}
 
+mozvoikko() { #{{{1
+	local component=mozvoikko
+	local action="$1"
+	local target="$2"
+	local svn_revision=""
+	if [ $action = "svn" ]; then
+		svn_revision=$target
+		get_svn branches/hatp-080403 $component "$svn_revision"
+	fi
+	get_svn trunk/debian/iceweasel-voikko+debian $component/debian "$svn_revision"
+	cd $component || exit 1
+	update_changelog
+	build_deb
+	echo; dpkg-parsechangelog
+	echo; svn revert debian/changelog
+	}
+
 print_usage() { #{{{1
 	local name=$(basename "$0")
 	cat <<EOF
@@ -190,7 +207,9 @@ as building directory is created under the current directory.
 
 Usage: $name <component> <source>
 
-  <component> = suomimalaga | libvoikko | ooovoikko | ooovoikko-2.2 | tmispell
+  <component> = suomimalaga | libvoikko | ooovoikko | ooovoikko-2.2 |
+                tmispell | mozvoikko
+                
   <source>    = svn [revision] | file <filename> | url <URL>
 
 Examples:
@@ -216,7 +235,7 @@ EOF
 
 #{{{1 Parse command line
 case $component in
-	libvoikko|ooovoikko|ooovoikko-2.2|tmispell|suomimalaga)
+	libvoikko|ooovoikko|ooovoikko-2.2|tmispell|suomimalaga|mozvoikko)
 		check_package build-essential fakeroot subversion
 		case $action in
 			url)
