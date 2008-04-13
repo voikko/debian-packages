@@ -10,7 +10,8 @@
 #export DH_VERBOSE=1
 
 
-
+ID := $(shell sed -rn -e '/<Description about="urn:mozilla:install-manifest">/,+3s+^\s*<em:id>(.*)</em:id>\s*$$+\1+p' src/install.rdf)
+INSTALL_DIR := debian/iceweasel-voikko/usr/lib/iceweasel/extensions/$(ID)
 
 configure: configure-stamp
 configure-stamp:
@@ -47,6 +48,10 @@ install: build
 	dh_installdirs
 
 	# Add here commands to install the package
+	install --mode=755 --directory $(INSTALL_DIR)/components
+	install --mode=644 src/components/libmozvoikko.so $(INSTALL_DIR)/components
+	install --mode=644 src/install.rdf $(INSTALL_DIR)
+	touch $(INSTALL_DIR)/chrome.manifest
 
 
 # Build architecture-independent files here.
@@ -61,7 +66,6 @@ binary-arch: build install
 	dh_installdocs
 	dh_installexamples
 	dh_install
-	touch "debian/iceweasel-voikko/usr/lib/iceweasel/extensions/{b676e3ff-cda7-4e0c-b2b8-74e4bb40a67a}/chrome.manifest"
 #	dh_installmenu
 #	dh_installdebconf	
 #	dh_installlogrotate
