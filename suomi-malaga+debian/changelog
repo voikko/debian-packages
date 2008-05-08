@@ -1,3 +1,10 @@
+suomi-malaga (1.1-1) unstable; urgency=low
+
+  * New upstream release
+  * Update debian/copyright to fix lintian warning and more
+
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Tue, 29 Apr 2008 22:39:14 +0300
+
 suomi-malaga (1.0-1) unstable; urgency=low
 
   * New upstream version

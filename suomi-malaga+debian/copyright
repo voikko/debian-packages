@@ -6,8 +6,45 @@ The current Debian maintainer is Timo Jyrinki <timo.jyrinki@iki.fi>.
 
 It was downloaded from http://downloads.sourceforge.net/voikko/
 
-Upstream authors: Hannu Väisänen <hannu.vaisanen@joensuu.fi>, Harri Pitkänen 
-<hatapitk@iki.fi>
+Upstream authors:
+Copyright (C) 2005-2008: Hannu Väisänen <hannu.vaisanen@joensuu.fi>, 
+Harri Pitkänen <hatapitk@iki.fi> and:
+
+The following people have directly contributed material to the vocabulary:
+
+- Harri Järvi
+- Tero Kuparinen
+- Kalle Lampila
+- Teemu Likonen
+- Harri Pitkänen
+- Reijo Tomperi
+- Hannu Väisänen
+
+Additionally, the following sources have been used during the development
+of the vocabulary:
+
+- Hunspell-fi vocabulary
+  Authors: Jarno Kiuttu, Reijo Tomperi, Harri Pitkänen
+  License: GPL
+  Year of publication: 2005
+
+- Finnish ispell vocabulary
+  Authors: Martin Vermeer, Pauli Virtanen
+  License: GPL
+  Year of publication: 2000
+  URL: http://ispell-fi.sourceforge.net/index.html
+
+- Finnish myspell vocabulary
+  Authors: Jukka Nikulainen
+  License: GPL
+  Year of publication: 2005
+  URL: http://www.mv.helsinki.fi/home/jnikulai/projects/index.html
+
+- The list of words in modern Finnish, version 1
+  Authors: Research Institute for the Languages of Finland
+  License: LGPL
+  Year of publication: 2006
+  URL: http://kaino.kotus.fi/sanat/nykysuomi/
 
 License: The GNU General Public License (see /usr/share/common-licenses/GPL-2)
 
@@ -30,3 +67,4 @@ located in the file /usr/share/common-licenses/GPL-2.
 
 The Debian packaging is (C) 2006, Teemu Likonen <tlikonen@iki.fi> and Timo 
 Jyrinki <timo.jyrinki@iki.fi> and is licensed under the GPL, see above.
+
