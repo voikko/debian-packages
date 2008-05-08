@@ -252,7 +252,7 @@ case $component in
 				$component "$action" "$target"
 				;;
 			*)
-				echo "ERROR: Incorrent source: $action $target"
+				echo "ERROR: Incorrect source: $action $target"
 				print_usage
 				exit 1
 				;;
