@@ -72,9 +72,9 @@ update_changelog() { #{{{1
 	source_package=$(dpkg-parsechangelog | awk '/^Source:/ {print $2}')
 	version=$(dpkg-parsechangelog | awk '/^Version:/ {print $2}')
 	version=${version%-*}
-	version=${version%+svn*}
+	version=${version%~svn*}
 	changelog_new=debian/changelog.new
-	echo -e "$source_package (${version}+svn${svn_revision}-0custom) unstable; urgency=low\n" >$changelog_new
+	echo -e "$source_package (${version}~svn${svn_revision}-0custom) unstable; urgency=low\n" >$changelog_new
 	echo -e "  * Upstream development snapshot. Last changes:" >>$changelog_new
 	echo -e "    Source tree: ${svn_last_changed_source:-(no info)}" >>$changelog_new
 	echo -e "    Debian data: ${svn_last_changed_debian:-(no info)}\n" >>$changelog_new
