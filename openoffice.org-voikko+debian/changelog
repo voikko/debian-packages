@@ -1,3 +1,20 @@
+openoffice.org-voikko (2.2-3) unstable; urgency=low
+
+  * Add Pre-Depends for etch -> lenny upgrades (Closes: #476573)
+  * Modify preinst to remove also multiple previous voikko extensions
+  * Fix lintian warning about debian/copyright phrasing
+
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Mon, 21 Apr 2008 00:26:02 +0300
+
+openoffice.org-voikko (2.2-2) unstable; urgency=low
+
+  * Synchronize with upstream packaging:
+    - Update README.Debian instructions
+    - Update premrm, postinst, control, and add preinst for OOo 2.4 era
+    - Install .oxt to new directory (Closes: #474383)
+
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Tue, 15 Apr 2008 16:58:04 +0300
+
 openoffice.org-voikko (2.2-1) unstable; urgency=low
 
   * New upstream release

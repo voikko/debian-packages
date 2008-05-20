@@ -21,9 +21,13 @@ remove_extension() {
 }
 
 case "$1" in
-	upgrade)
-		id=`/usr/lib/openoffice/program/unopkg list --shared | egrep '^(Name|Identifier):.*voikko' | cut -d":" -f2`
-		remove_extension $id
+	upgrade|install)
+	        echo Removing old voikko extensions.
+		id=" "
+		while [ "$id" != ""  ]; do
+			id=`/usr/lib/openoffice/program/unopkg list --shared | egrep '^(Name|Identifier):.*voikko' | cut -d":" -f2 | head -n 1`
+			if [ "$id" != "" ]; then remove_extension $id; fi
+		done
 	;;
 esac
 

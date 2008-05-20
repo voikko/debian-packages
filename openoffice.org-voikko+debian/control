@@ -8,6 +8,7 @@ Homepage: http://voikko.sourceforge.net/
 
 Package: openoffice.org-voikko
 Architecture: any
+Pre-Depends: openoffice.org-common (>= 1:2.3.0~oog680m1-1), openoffice.org-core (>= 1:2.3.0~oog680m1-1)
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Recommends: openoffice.org (>= 1:2.4.0~) | openoffice.org-writer (>= 1:2.4.0~) | openoffice.org-calc (>= 1:2.4.0~) | openoffice.org-impress (>= 1:2.4.0~) | openoffice.org-draw (>= 1:2.4.0~)
 Conflicts: ${misc:Conflicts}
