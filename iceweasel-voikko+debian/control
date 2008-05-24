@@ -2,7 +2,7 @@ Source: iceweasel-voikko
 Section: web
 Priority: optional
 Maintainer: Teemu Likonen <tlikonen@iki.fi>
-Build-Depends: debhelper (>= 5), xulrunner-dev, xulrunner-dev-static, libvoikko-dev (>= 1.0)
+Build-Depends: debhelper (>= 5), xulrunner-dev, libvoikko-dev (>= 1.0)
 Standards-Version: 3.7.2
 
 Package: iceweasel-voikko
