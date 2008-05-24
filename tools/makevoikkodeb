@@ -186,7 +186,7 @@ mozvoikko() { #{{{1
 	local svn_revision=""
 	if [ $action = "svn" ]; then
 		svn_revision=$target
-		get_svn branches/mozvoikko/hatp-080403 $component "$svn_revision"
+		get_svn trunk/$component $component "$svn_revision"
 	fi
 	get_svn trunk/debian/iceweasel-voikko+debian $component/debian "$svn_revision"
 	cd $component || exit 1

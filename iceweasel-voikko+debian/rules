@@ -10,8 +10,7 @@
 #export DH_VERBOSE=1
 
 
-ID := $(shell sed -rn -e '/<Description about="urn:mozilla:install-manifest">/,+3s+^\s*<em:id>(.*)</em:id>\s*$$+\1+p' src/install.rdf)
-INSTALL_DIR := debian/iceweasel-voikko/usr/lib/iceweasel/extensions/$(ID)
+INSTALL_DIR := $(CURDIR)/debian/iceweasel-voikko/usr/lib/iceweasel/extensions
 
 configure: configure-stamp
 configure-stamp:
@@ -27,7 +26,7 @@ build-stamp: configure-stamp
 	dh_testdir
 
 	# Add here commands to compile the package.
-	$(MAKE) -C src -f Makefile.xulrunner XULRUNNER_SDK=/usr/lib/xulrunner-devel-1.9
+	$(MAKE) -f Makefile.xulrunner extension-files XULRUNNER_SDK=/usr/lib/xulrunner-devel-1.9
 
 	touch $@
 
@@ -37,7 +36,7 @@ clean:
 	rm -f build-stamp configure-stamp
 
 	# Add here commands to clean up after the build process.
-	$(MAKE) -C src -f Makefile.xulrunner clean
+	$(MAKE) -f Makefile.xulrunner clean
 
 	dh_clean 
 
@@ -48,10 +47,7 @@ install: build
 	dh_installdirs
 
 	# Add here commands to install the package
-	install --mode=755 --directory $(INSTALL_DIR)/components
-	install --mode=644 src/components/libmozvoikko.so $(INSTALL_DIR)/components
-	install --mode=644 src/install.rdf $(INSTALL_DIR)
-	touch $(INSTALL_DIR)/chrome.manifest
+	$(MAKE) -f Makefile.xulrunner install-unpacked DESTDIR=$(INSTALL_DIR)
 
 
 # Build architecture-independent files here.
