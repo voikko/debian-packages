@@ -26,7 +26,7 @@ build-stamp: configure-stamp
 	dh_testdir
 
 	# Add here commands to compile the package.
-	$(MAKE) -f Makefile.xulrunner extension-files XULRUNNER_SDK=/usr/lib/xulrunner-devel-1.9
+	$(MAKE) -f Makefile.xulrunner extension-files
 
 	touch $@
 
