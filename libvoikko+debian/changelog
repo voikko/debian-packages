@@ -1,3 +1,9 @@
+libvoikko (1.8-1) unstable; urgency=low
+
+  * Dummy changelog entry to bump local version number.
+
+ -- Harri Pitkänen <hatapitk@iki.fi>  Wed, 04 Jun 2008 21:34:00 +0200
+
 libvoikko (1.6-1) unstable; urgency=low
 
   * New upstream version
