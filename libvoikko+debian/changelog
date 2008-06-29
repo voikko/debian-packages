@@ -4,6 +4,14 @@ libvoikko (1.8-1) unstable; urgency=low
 
  -- Harri Pitkänen <hatapitk@iki.fi>  Wed, 04 Jun 2008 21:34:00 +0200
 
+libvoikko (1.7-1) unstable; urgency=low
+
+  * New upstream release
+  * Standards-Version 3.8.0 (no changes needed)
+  * Add ${shlibs:Depends} to libvoikko-dev since it include binaries
+
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Tue, 17 Jun 2008 10:05:07 +0300
+
 libvoikko (1.6-1) unstable; urgency=low
 
   * New upstream version
