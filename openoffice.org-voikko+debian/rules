@@ -1,7 +1,6 @@
 #!/usr/bin/make -f
 
 CC_FLAGS = -Wall -g
-HYPHENATION_PATCH = debian/HypMinWordLength.patch
 
 ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
 	CC_FLAGS += -O0
@@ -9,42 +8,17 @@ else
 	CC_FLAGS += -O2
 endif
 
-ifneq (,$(findstring separate-minlength,$(DEB_BUILD_OPTIONS)))
-	APPLY_HYPHENATION_PATCH = apply-hyphenation-patch-stamp
-else
-	APPLY_HYPHENATION_PATCH =
-endif
-
-configure: configure-stamp
-configure-stamp: $(APPLY_HYPHENATION_PATCH)
-	dh_testdir
-	touch configure-stamp
-
-apply-hyphenation-patch: apply-hyphenation-patch-stamp
-apply-hyphenation-patch-stamp:
-	dh_testdir
-	@echo "Applying $(HYPHENATION_PATCH)"
-	@patch -p0 -stuN < "$(HYPHENATION_PATCH)"
-	touch apply-hyphenation-patch-stamp
-
-unapply-hyphenation-patch:
-	dh_testdir
-	@if test -f apply-hyphenation-patch-stamp; then \
-		echo "Reverting $(HYPHENATION_PATCH)"; \
-		patch -p0 -suRf < "$(HYPHENATION_PATCH)"; \
-		rm -f apply-hyphenation-patch-stamp; \
-	fi
 
 build: build-stamp
-build-stamp: configure-stamp 
+build-stamp:
 	dh_testdir
-	sh -c ". /usr/lib/openoffice/sdk/setsdkenv_unix.sh && $(MAKE) oxt"
+	sh -c ". /usr/lib/openoffice/basis-link/sdk/setsdkenv_unix.sh && $(MAKE) ENABLE_GRAMMAR_CHECKER=1 oxt"
 	touch build-stamp
 
-clean: unapply-hyphenation-patch
+clean:
 	dh_testdir
 	dh_testroot
-	rm -f build-stamp configure-stamp
+	rm -f build-stamp
 	-rm -rf build
 	dh_clean 
 
@@ -77,4 +51,4 @@ binary-arch: build install
 	dh_builddeb
 
 binary: binary-indep binary-arch
-.PHONY: build clean binary-indep binary-arch binary install configure apply-hyphenation-patch unapply-hyphenation-patch
+.PHONY: build clean binary-indep binary-arch binary install configure
