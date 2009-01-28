@@ -1,0 +1,12 @@
+mozvoikko (0.9.6-1) unstable; urgency=low
+
+  * Dummy changelog entry to bump local version number.
+
+ -- Harri Pitkänen <hatapitk@iki.fi>  Wed, 28 Jan 2009 19:00:00 +0200
+
+mozvoikko (0.9.5-1) unstable; urgency=low
+
+  * Initial release. Closes: #486949
+
+ -- Heikki Mäntysaari <heikki.mantysaari@linux.fi>  Fri, 28 Aug 2008 20:26:55 +0300
+

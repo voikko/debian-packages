@@ -1,5 +1,4 @@
 #!/usr/bin/make -f
-# -*- makefile -*-
 # Sample debian/rules that uses debhelper.
 # This file was originally written by Joey Hess and Craig Small.
 # As a special exception, when this file is copied by dh-make into a
@@ -9,8 +8,11 @@
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
+# ID from src/Makefile.xulrunner
+ICEWEASEL_ID={ec8030f7-c20a-464f-9b0e-13a3a9e97384}
 
-INSTALL_DIR := $(CURDIR)/debian/iceweasel-voikko/usr/lib/iceweasel/extensions
+EXT_ID={b676e3ff-cda7-4e0c-b2b8-74e4bb40a67a}
+EXTENSION_DIR=/usr/share/mozilla/extensions/$(ICEWEASEL_ID)/$(EXT_ID)
 
 configure: configure-stamp
 configure-stamp:
@@ -37,7 +39,7 @@ clean:
 
 	# Add here commands to clean up after the build process.
 	$(MAKE) -f Makefile.xulrunner clean
-
+	rm -f chrome.manifest
 	dh_clean 
 
 install: build
@@ -47,7 +49,12 @@ install: build
 	dh_installdirs
 
 	# Add here commands to install the package
-	$(MAKE) -f Makefile.xulrunner install-unpacked DESTDIR=$(INSTALL_DIR)
+	echo "# Empty chrome manifest" > chrome.manifest
+	install -m 644 src/components/libmozvoikko.so debian/mozvoikko/usr/lib/mozvoikko/
+	mkdir -p debian/mozvoikko/$(EXTENSION_DIR)
+	install -m 644 src/install.rdf debian/mozvoikko/$(EXTENSION_DIR)/
+	install -m 644 chrome.manifest debian/mozvoikko/$(EXTENSION_DIR)/
+	dh_link usr/lib/mozvoikko $(EXTENSION_DIR)/components
 
 
 # Build architecture-independent files here.
@@ -62,27 +69,13 @@ binary-arch: build install
 	dh_installdocs
 	dh_installexamples
 	dh_install
-#	dh_installmenu
-#	dh_installdebconf	
-#	dh_installlogrotate
-#	dh_installemacsen
-#	dh_installpam
-#	dh_installmime
-#	dh_python
-#	dh_installinit
-#	dh_installcron
-#	dh_installinfo
 	dh_installman
 	dh_link
 	dh_strip
 	dh_compress
 	dh_fixperms
-#	dh_perl
-#	dh_makeshlibs
 	dh_installdeb
-	#dh_shlibdeps
-	LD_LIBRARY_PATH=/usr/lib/iceweasel dpkg-shlibdeps -O src/components/libmozvoikko.so \
-		2>/dev/null >debian/iceweasel-voikko.substvars
+	LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):$(shell pkg-config --variable=sdkdir libxul)/sdk/lib/ dh_shlibdeps
 	dh_gencontrol
 	dh_md5sums
 	dh_builddeb
