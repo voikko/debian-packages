@@ -188,7 +188,7 @@ mozvoikko() { #{{{1
 		svn_revision=$target
 		get_svn trunk/$component $component "$svn_revision"
 	fi
-	get_svn trunk/debian/iceweasel-voikko+debian $component/debian "$svn_revision"
+	get_svn trunk/debian/mozvoikko+debian $component/debian "$svn_revision"
 	cd $component || exit 1
 	update_changelog
 	build_deb
