@@ -79,7 +79,7 @@ binary-arch: build install
 	dh_install --sourcedir=debian/tmp
 	dh_installman
 	dh_link
-	dh_strip
+	#dh_strip Test packages don't need to be stripped
 	dh_compress
 	dh_fixperms
 	dh_makeshlibs -V "libvoikko1 (>= 2.1~svn0)"
