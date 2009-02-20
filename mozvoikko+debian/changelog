@@ -1,8 +1,18 @@
-mozvoikko (0.9.6-1) unstable; urgency=low
+mozvoikko (0.9.7-1) unstable; urgency=low
 
   * Dummy changelog entry to bump local version number.
 
- -- Harri Pitkänen <hatapitk@iki.fi>  Wed, 28 Jan 2009 19:00:00 +0200
+ -- Harri Pitkänen <hatapitk@iki.fi>  Fri, 20 Feb 2009 18:00:00 +0200
+
+mozvoikko (0.9.6-1) unstable; urgency=low
+
+  * New upstream release. Closes: #515505
+  * debian/control:  
+    - Improve description (thanks to Teemu Likonen)
+    - Add conflict to iceweasel (>= 3.2)
+  * debian/rules: Remove useless LDFLAGS setting (thanks to Harri Pitkänen) 
+
+ -- Heikki Mäntysaari <heikki.mantysaari@linux.fi>  Wed, 18 Feb 2009 21:12:20 +0200
 
 mozvoikko (0.9.5-1) unstable; urgency=low
 

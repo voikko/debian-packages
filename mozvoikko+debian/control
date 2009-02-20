@@ -10,6 +10,6 @@ Architecture: any
 Depends: ${shlibs:Depends}, libvoikko1 (>= 1.7), voikko-fi, iceweasel (>= 3) 
 Description: Finnish spell-checker extension for Iceweasel  
  Finnish spell-checker extension for Iceweasel 3. Spell-checking 
- functionality is provided by Voikko - a free spellchecker 
+ functionality is provided by Voikko - a free spelling checker 
  for Finnish language.
 
