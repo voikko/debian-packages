@@ -1,9 +1,9 @@
 Source: suomi-malaga
 Section: text
 Priority: optional
-Maintainer: Timo Jyrinki <timo.jyrinki@iki.fi>
+Maintainer: Timo Jyrinki <timo@debian.org>
 Build-Depends: debhelper (>= 4.0.0), malaga-bin (>= 7.8), python
-Standards-Version: 3.7.3
+Standards-Version: 3.8.0
 Homepage: http://voikko.sourceforge.net/
 Vcs-Svn: https://voikko.svn.sourceforge.net/svnroot/voikko/trunk/suomimalaga
 Vcs-Browser: https://voikko.svn.sourceforge.net/viewvc/voikko/trunk/suomimalaga
@@ -12,7 +12,7 @@ Package: voikko-fi
 Section: text
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Conflicts: libvoikko1 (<= 1.0-0hf2)
+Conflicts: libvoikko1 (<= 3.1~)
 Description: A description of Finnish morphology written in Malaga
  Suomi-Malaga is a description of Finnish morphology written in Malaga.
  .
