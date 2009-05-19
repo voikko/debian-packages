@@ -1,8 +1,51 @@
-openoffice.org-voikko (3.1-1) unstable; urgency=low
+openoffice.org-voikko (3.2-1) unstable; urgency=low
 
   * Dummy changelog entry to bump local version number.
 
- -- Harri Pitkänen <hatapitk@iki.fi>  Sun, 12 Oct 2008 11:00:00 +0200
+ -- Harri Pitkänen <hatapitk@iki.fi>  Tue, 19 May 2009 19:00:00 +0200
+
+openoffice.org-voikko (3.1-1) unstable; urgency=low
+
+  * New upstream release (Closes: #528283)
+  - Grammar checking enabled by default
+  * Depend on libvoikko 2.1 (grammar features)
+  * Update description to describe grammar checking as well (Closes: #512517)
+  * Update Standards-Version (no changes)
+  * One more place to change GPL 2 -> 3 in copyright file 
+  * Debhelper compat 4 -> 5 and likewise for the related dependency
+  * Add back Pre-Depends
+  - Ubuntu folks found it is still needed, LP: #364654
+  - Only pre-depend on ooo-common this time
+
+ -- Timo Jyrinki <timo@debian.org>  Wed, 13 May 2009 13:25:15 +0300
+
+openoffice.org-voikko (3.0.1-2) unstable; urgency=low
+
+  * Upload to unstable
+  * Update copyright (GPL3 like it should be)
+  * Disable grammar checking which is not yet mature (wait for 3.1)
+  * Remove Pre-Depends which is not anymore needed and is best avoided
+
+ -- Timo Jyrinki <timo@debian.org>  Fri, 20 Feb 2009 10:00:24 +0200
+
+openoffice.org-voikko (3.0.1-1) experimental; urgency=low
+
+  * New upstream release
+  * Update maintainer address
+  * Update dependencies to openoffice.org 3.0.1 and libvoikko 2.0
+  * Sync with upstream debian packaging:
+  - Drop HypMinWordLength.patch 
+  - Update description
+
+ -- Timo Jyrinki <timo@debian.org>  Tue, 13 Jan 2009 15:42:09 +0200
+
+openoffice.org-voikko (2.2-4) unstable; urgency=low
+
+  * Add voikko-fi to Depends since not dep from libvoikko anymore
+  - Could be Recommends, but ooo-voikko does not cope well without
+  * Update Standards-Version to 3.8.0, no changes
+
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Fri, 18 Jul 2008 15:59:39 +0300
 
 openoffice.org-voikko (2.2-3) unstable; urgency=low
 

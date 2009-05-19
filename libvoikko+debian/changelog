@@ -4,6 +4,52 @@ libvoikko (2.2-1) unstable; urgency=low
 
  -- Harri Pitkänen <hatapitk@iki.fi>  Sat, 16 May 2009 10:00:00 +0300
 
+libvoikko (2.1-3) unstable; urgency=low
+
+  * Add Breaks to voikko-fi <= 1.3-1 (Closes: #527091)
+
+ -- Timo Jyrinki <timo@debian.org>  Tue, 05 May 2009 20:46:34 +0300
+
+libvoikko (2.1-2) unstable; urgency=low
+
+  * Fix FTBFS by build-depending on python (Closes: #526433)
+
+ -- Timo Jyrinki <timo@debian.org>  Sat, 02 May 2009 17:31:56 +0300
+
+libvoikko (2.1-1) unstable; urgency=low
+
+  * New upstream release
+  * Update man page locations
+  * Update Standards-Version (no changes) 
+  * Bump debhelper dependency to 5
+
+ -- Timo Jyrinki <timo@debian.org>  Wed, 29 Apr 2009 10:57:09 +0300
+
+libvoikko (2.0-2) unstable; urgency=low
+
+  * Upload to unstable
+
+ -- Timo Jyrinki <timo@debian.org>  Mon, 16 Feb 2009 17:01:32 +0200
+
+libvoikko (2.0-1) experimental; urgency=low
+
+  * New upstream release
+  * Update maintainer address
+  * Change voikko-fi Suggests to >= 1.0
+  * Update description
+  * Add voikkogc.1 man page
+
+ -- Timo Jyrinki <timo@debian.org>  Tue, 13 Jan 2009 15:32:46 +0200
+
+libvoikko (1.7-2) unstable; urgency=low
+
+  * Change voikko-fi dependency into a suggestion
+    - Enchant now depends on libvoikko
+    - We don't want voikko-fi in every desktop installation
+    - Tasksel will be updated to include voikko-fi in the finnish task
+
+ -- Timo Jyrinki <timo.jyrinki@iki.fi>  Tue, 08 Jul 2008 15:14:37 +0300
+
 libvoikko (1.7-1) unstable; urgency=low
 
   * New upstream release

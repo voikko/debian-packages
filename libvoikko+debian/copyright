@@ -2,10 +2,10 @@ This package was first debianized by Harri Pitkänen <hatapitk@iki.fi> on
 Fri, 14 Apr 2006 17:28:24 +0300. The work was continued by Timo Jyrinki
 <timo.jyrinki@iki.fi> on Mon, 25 Apr 2006 18:50:23 +0300.
 
-The current Debian maintainer is Timo Jyrinki <timo.jyrinki@iki.fi>
+The current Debian maintainer is Timo Jyrinki <timo@debian.org>
 
 It was downloaded from
- http://downloads.sourceforge.net/voikko/libvoikko-1.6.tar.gz
+ http://downloads.sourceforge.net/voikko/
 
 Upstream author: Harri Pitkänen <hatapitk@iki.fi>
 

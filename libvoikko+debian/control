@@ -1,8 +1,8 @@
 Source: libvoikko
 Priority: optional
-Maintainer: Timo Jyrinki <timo.jyrinki@iki.fi>
-Build-Depends: debhelper (>= 4.0.0), libmalaga-dev (>= 7.8), dpkg-dev (>= 1.13.19), autotools-dev, python
-Standards-Version: 3.8.0
+Maintainer: Timo Jyrinki <timo@debian.org>
+Build-Depends: debhelper (>= 5.0.0), libmalaga-dev (>= 7.8), dpkg-dev (>= 1.13.19), autotools-dev, python
+Standards-Version: 3.8.1
 Section: libs
 Homepage: http://voikko.sourceforge.net/
 
@@ -19,7 +19,7 @@ Description: Development files for libvoikko
 Package: libvoikko1
 Section: libs
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, voikko-fi (>= 1.0)
+Depends: ${shlibs:Depends}, ${misc:Depends}, voikko-fi (>= 1.3-2)
 Description: Library of Finnish language tools
  Voikko is a library of Finnish language tools (spell-checker,
  grammar checker and hyphenator) based on

@@ -8,14 +8,13 @@ else
 	CC_FLAGS += -O2
 endif
 
-
 build: build-stamp
-build-stamp:
+build-stamp: 
 	dh_testdir
 	sh -c ". /usr/lib/openoffice/basis-link/sdk/setsdkenv_unix.sh && $(MAKE) ENABLE_GRAMMAR_CHECKER=1 oxt"
 	touch build-stamp
 
-clean:
+clean: 
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp
