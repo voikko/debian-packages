@@ -40,7 +40,7 @@ install: build
 	dh_clean -k 
 	dh_installdirs
 	# Add here commands to install the package into debian/voikko-fi.
-	$(MAKE) voikko-install DESTDIR=$(CURDIR)/debian/voikko-fi/usr/lib/voikko/1/mor-standard
+	$(MAKE) voikko-install DESTDIR=$(CURDIR)/debian/voikko-fi/usr/lib/voikko
 	
 	# Build architecture-independent files here.
 binary-indep: build install
