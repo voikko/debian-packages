@@ -64,11 +64,12 @@ install: build
 
 	# Add here commands to install the package into debian/tmp
 	$(MAKE) install DESTDIR=$(CURDIR)/debian/tmp
+	install -D python/libvoikko.py debian/python-libvoikko/usr/share/python-support/python-libvoikko/libvoikko.py
 
 
 # Build architecture-independent files here.
 binary-indep: build install
-# We have nothing to do by default.
+	dh_pysupport
 
 # Build architecture-dependent files here.
 binary-arch: build install
