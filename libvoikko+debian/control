@@ -2,7 +2,7 @@ Source: libvoikko
 Priority: optional
 Maintainer: Timo Jyrinki <timo@debian.org>
 Build-Depends: debhelper (>= 5.0.0), libglib2.0-dev, dpkg-dev (>= 1.13.19), autotools-dev, python, python-support (>= 0.5.3)
-Standards-Version: 3.8.1
+Standards-Version: 3.8.3
 Section: libs
 Homepage: http://voikko.sourceforge.net/
 
@@ -19,7 +19,7 @@ Description: Development files for libvoikko
 Package: libvoikko1
 Section: libs
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, voikko-fi (>= 1.3-2)
+Depends: ${shlibs:Depends}, ${misc:Depends}, voikko-fi (>= 1.4)
 Description: Library of Finnish language tools
  Voikko is a library of Finnish language tools (spell-checker,
  grammar checker and hyphenator) based on
@@ -30,7 +30,7 @@ Package: python-libvoikko
 Section: python
 Architecture: all
 XB-Python-Version: ${python:Versions}
-Depends: libvoikko1 (= ${binary:Version}), ${python:Depends}
+Depends: libvoikko1 (>= ${source:Version}), ${python:Depends}
 Description: Python bindings for libvoikko
  Voikko is a library of Finnish language tools (spell-checker,
  grammar checker and hyphenator) based on

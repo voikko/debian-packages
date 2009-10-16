@@ -26,6 +26,13 @@ endif
 
 config.status: configure
 	dh_testdir
+ifneq "$(wildcard /usr/share/misc/config.sub)" ""
+	cp -f /usr/share/misc/config.sub config.sub
+endif
+ifneq "$(wildcard /usr/share/misc/config.guess)" ""
+	cp -f /usr/share/misc/config.guess config.guess
+endif
+
 	# Add here commands to configure the package.
 	./configure --host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE) --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info --with-dictionary-path=/usr/lib/voikko
 
@@ -46,13 +53,8 @@ clean:
 
 	# Add here commands to clean up after the build process.
 	[ ! -f Makefile ] || $(MAKE) distclean
-ifneq "$(wildcard /usr/share/misc/config.sub)" ""
-	cp -f /usr/share/misc/config.sub config.sub
-endif
-ifneq "$(wildcard /usr/share/misc/config.guess)" ""
-	cp -f /usr/share/misc/config.guess config.guess
-endif
 
+	rm -f config.sub config.guess
 
 	dh_clean 
 
@@ -64,7 +66,7 @@ install: build
 
 	# Add here commands to install the package into debian/tmp
 	$(MAKE) install DESTDIR=$(CURDIR)/debian/tmp
-	install -D python/libvoikko.py debian/python-libvoikko/usr/share/python-support/python-libvoikko/libvoikko.py
+	install -m 0644 -D python/libvoikko.py debian/python-libvoikko/usr/share/python-support/python-libvoikko/libvoikko.py
 
 
 # Build architecture-independent files here.

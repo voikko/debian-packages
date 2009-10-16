@@ -1,10 +1,35 @@
-suomi-malaga (1.4-1) unstable; urgency=low
+suomi-malaga (1.5-1) unstable; urgency=low
 
   * Bump local version number.
-  * Install to /usr/lib/voikko/1/mor-standard
-  * Conflict with libvoikko <= 2.1~svn2596 due to changed installation path.
+  * Intentional differences to official Debian packages:
+    - linux-distributions.lex is not included because testing is done
+      with vendor neutral vocabulary.
 
- -- Harri Pitkänen <hatapitk@iki.fi>  Sat, 25 Apr 2009 14:00:00 +0200
+ -- Harri Pitkänen <hatapitk@iki.fi>  Fri, 16 Oct 2009 14:00:00 +0200
+
+suomi-malaga (1.4-1) unstable; urgency=low
+
+  * New upstream release
+  * Last part of installation directory no longer needs to be specified 
+  * Breaks libvoikko < 2.2 
+  * Update Standards-Version to 3.8.3 
+
+ -- Timo Jyrinki <timo@debian.org>  Wed, 14 Oct 2009 17:18:20 +0300
+
+suomi-malaga (1.3-3) unstable; urgency=low
+
+  * Add FLOSS brand names (Closes: #527097)
+
+ -- Timo Jyrinki <timo@debian.org>  Sun, 24 May 2009 11:58:08 +0300
+
+suomi-malaga (1.3-2) unstable; urgency=low
+
+  * Change installation path to work with libvoikko 2.1
+  * Add Breaks to earlier libvoikko versions 
+  * Update Standards-Version (no changes)
+  * Bump debhelper to version 5 
+
+ -- Timo Jyrinki <timo@debian.org>  Tue, 05 May 2009 20:26:29 +0300
 
 suomi-malaga (1.3-1) unstable; urgency=low
 
