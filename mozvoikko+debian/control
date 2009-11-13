@@ -2,7 +2,7 @@ Source: mozvoikko
 Section: web
 Priority: optional
 Maintainer: Heikki Mäntysaari <heikki.mantysaari@linux.fi>
-Build-Depends: debhelper (>= 5), xulrunner-dev (>= 1.9~rc2), libvoikko-dev
+Build-Depends: debhelper (>= 5), xulrunner-dev (>= 1.9~rc2), libvoikko-dev, pkg-config
 Standards-Version: 3.8.1
 
 Package: mozvoikko

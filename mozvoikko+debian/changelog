@@ -1,6 +1,8 @@
 mozvoikko (1.1-1) unstable; urgency=low
 
   * Dummy changelog entry to bump local version number.
+  * Intentional differences to official Debian packages:
+    - Build-depend on pkg-config (Debian bug #551225)
 
  -- Harri Pitkänen <hatapitk@iki.fi>  Fri, 13 Nov 2009 18:00:00 +0200
 
