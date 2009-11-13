@@ -1,8 +1,16 @@
-mozvoikko (0.9.7-1) unstable; urgency=low
+mozvoikko (1.1-1) unstable; urgency=low
 
   * Dummy changelog entry to bump local version number.
 
- -- Harri Pitkänen <hatapitk@iki.fi>  Fri, 20 Feb 2009 18:00:00 +0200
+ -- Harri Pitkänen <hatapitk@iki.fi>  Fri, 13 Nov 2009 18:00:00 +0200
+
+mozvoikko (1.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * Change conflict to iceweasel (>= 3.6). 
+  * Change Standards-Version to 3.8.1
+
+ -- Heikki Mäntysaari <heikki.mantysaari@linux.fi>  Mon, 11 May 2009 18:45:48 +0300
 
 mozvoikko (0.9.6-1) unstable; urgency=low
 
