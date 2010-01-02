@@ -6,6 +6,7 @@ libvoikko (2.3-1) unstable; urgency=low
       because excecuting it is not useful.
     - voikko-fi is in dependencies, not in suggests and breaks.
     - Binary packages are not stripped to make debugging easier.
+    - Dependency on libglib has been dropped.
 
  -- Harri Pitkänen <hatapitk@iki.fi>  Fri, 16 Oct 2009 10:00:00 +0300
 
