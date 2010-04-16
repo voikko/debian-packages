@@ -3,6 +3,8 @@ mozvoikko (1.1-1) unstable; urgency=low
   * Dummy changelog entry to bump local version number.
   * Intentional differences to official Debian packages:
     - Do not use patch system, necessary fixes are in upstream SVN
+    - Build with -std=gnu++0x because that is how Xulrunner seems to be built
+      on Debian, see Debian Bug#577886.
 
  -- Harri Pitkänen <hatapitk@iki.fi>  Fri, 16 Apr 2010 18:00:00 +0200
 
