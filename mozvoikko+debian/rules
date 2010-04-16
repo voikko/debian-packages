@@ -17,7 +17,6 @@ EXTENSION_DIR=/usr/share/mozilla/extensions/$(ICEWEASEL_ID)/$(EXT_ID)
 configure: configure-stamp
 configure-stamp:
 	dh_testdir
-	# Add here commands to configure the package.
 
 	touch configure-stamp
 

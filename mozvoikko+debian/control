@@ -3,12 +3,12 @@ Section: web
 Priority: optional
 Maintainer: Heikki Mäntysaari <heikki.mantysaari@linux.fi>
 Build-Depends: debhelper (>= 5), xulrunner-dev (>= 1.9~rc2), libvoikko-dev, pkg-config
-Standards-Version: 3.8.1
+Standards-Version: 3.8.3
 
 Package: mozvoikko
 Architecture: any 
 Depends: ${shlibs:Depends}, libvoikko1, voikko-fi, iceweasel (>= 3) 
-Conflicts: iceweasel (>= 3.6)
+Conflicts: iceweasel (>= 3.7)
 Description: Finnish spell-checker extension for Iceweasel  
  Finnish spell-checker extension for Iceweasel 3. Spell-checking 
  functionality is provided by Voikko - a free spelling checker 

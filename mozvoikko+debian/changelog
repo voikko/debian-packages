@@ -2,9 +2,30 @@ mozvoikko (1.1-1) unstable; urgency=low
 
   * Dummy changelog entry to bump local version number.
   * Intentional differences to official Debian packages:
-    - Build-depend on pkg-config (Debian bug #551225)
+    - Do not use patch system, necessary fixes are in upstream SVN
 
- -- Harri Pitkänen <hatapitk@iki.fi>  Fri, 13 Nov 2009 18:00:00 +0200
+ -- Harri Pitkänen <hatapitk@iki.fi>  Fri, 16 Apr 2010 18:00:00 +0200
+
+mozvoikko (1.0-4) unstable; urgency=low
+
+  * Change conflict to iceweasel (>= 3.7)
+
+ -- Heikki Mäntysaari <heikki.mantysaari@linux.fi>  Wed, 27 Jan 2010 18:09:25 +0200
+
+mozvoikko (1.0-3) unstable; urgency=low
+
+  * Add quilt patch system
+  * Add patches/fix_freebsd_ftbfs.patch via quilt to fix FTBFS bug on 
+    GNU/kFreeBSD. Thanks to Cyril Brulebois. Closes: #558337
+
+ -- Heikki Mäntysaari <heikki.mantysaari@linux.fi>  Mon, 30 Nov 2009 17:25:04 +0200
+
+mozvoikko (1.0-2) unstable; urgency=low
+
+  * Add pkg-config to Build-Depends. Closes: #551225 
+  * Change Standards-Version to 3.8.3
+
+ -- Heikki Mäntysaari <heikki.mantysaari@linux.fi>  Fri, 13 Nov 2009 21:57:56 +0200
 
 mozvoikko (1.0-1) unstable; urgency=low
 
