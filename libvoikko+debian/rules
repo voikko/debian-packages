@@ -43,6 +43,7 @@ build-stamp:  config.status
 
 	# Add here commands to compile the package.
 	$(MAKE)
+	dh_auto_test
 
 	touch build-stamp
 

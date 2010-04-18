@@ -1,14 +1,24 @@
-libvoikko (2.3-1) unstable; urgency=low
+libvoikko (3.1-1) unstable; urgency=low
 
   * Dummy changelog entry to bump local version number.
   * Intentional differences to official Debian packages:
     - libvoikko.py is not patched. It is installed as non-executable
       because excecuting it is not useful.
+    - no patches -> no patch system
     - voikko-fi is in dependencies, not in suggests and breaks.
     - Binary packages are not stripped to make debugging easier.
     - Dependency on libglib has been dropped.
+    - Call dh_auto_test to run test suite after build.
 
- -- Harri Pitkänen <hatapitk@iki.fi>  Fri, 16 Oct 2009 10:00:00 +0300
+ -- Harri Pitkänen <hatapitk@iki.fi>  Sun, 18 Apr 2010 10:00:00 +0200
+
+libvoikko (2.2.2-1) unstable; urgency=low
+
+  * New upstream release
+  * Fix lintian warnings: relation symbol, add misc:Depends
+  * Link specifically to GPL2, mention Bjoern in debian/copyright 
+
+ -- Timo Jyrinki <timo@debian.org>  Wed, 27 Jan 2010 17:27:23 +0200
 
 libvoikko (2.2.1-1) unstable; urgency=low
 

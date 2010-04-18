@@ -9,7 +9,7 @@ Homepage: http://voikko.sourceforge.net/
 Package: libvoikko-dev
 Section: libdevel
 Architecture: any
-Depends: ${shlibs:Depends}, libvoikko1 (= ${binary:Version})
+Depends: ${shlibs:Depends}, libvoikko1 (= ${binary:Version}), ${misc:Depends}
 Description: Development files for libvoikko
  Voikko is a library of Finnish language tools (spell-checker,
  grammar checker and hyphenator) based on
@@ -30,7 +30,7 @@ Package: python-libvoikko
 Section: python
 Architecture: all
 XB-Python-Version: ${python:Versions}
-Depends: libvoikko1 (>= ${source:Version}), ${python:Depends}
+Depends: libvoikko1 (>= ${source:Version}), ${python:Depends}, ${misc:Depends}
 Description: Python bindings for libvoikko
  Voikko is a library of Finnish language tools (spell-checker,
  grammar checker and hyphenator) based on
