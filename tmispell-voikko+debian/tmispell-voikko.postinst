@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 # in English
 # Create hoax files so that a few programs would notice the Finnish 
 # spellchecking.
