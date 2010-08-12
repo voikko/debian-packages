@@ -3,7 +3,7 @@ Section: text
 Priority: optional
 Maintainer: Timo Jyrinki <timo.jyrinki@iki.fi>
 Standards-Version: 3.7.3
-Build-Depends: debhelper (>= 4), libenchant-dev (>= 1.1.6), libncursesw5-dev, autotools-dev, libvoikko-dev (>= 1.0), libmalaga-dev, libglibmm-2.4-dev
+Build-Depends: debhelper (>= 4), libenchant-dev (>= 1.1.6), libncursesw5-dev, autotools-dev, libvoikko-dev (>= 1.0), libglibmm-2.4-dev
 Homepage: http://voikko.sourceforge.net/
 
 Package: tmispell-voikko
