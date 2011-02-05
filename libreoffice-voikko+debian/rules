@@ -11,7 +11,7 @@ endif
 build: build-stamp
 build-stamp: 
 	dh_testdir
-	sh -c ". /usr/lib/openoffice/basis-link/sdk/setsdkenv_unix.sh && $(MAKE) ENABLE_GRAMMAR_CHECKER=1 oxt"
+	sh -c ". /usr/lib/libreoffice/basis-link/sdk/setsdkenv_unix.sh && $(MAKE) oxt"
 	touch build-stamp
 
 clean: 
@@ -24,8 +24,10 @@ clean:
 install: build
 	dh_testdir
 	dh_testroot
-	dh_clean -k 
+	dh_prep
 	dh_installdirs
+	mkdir -p debian/tmp/usr/lib/libreoffice/share/extensions/voikko
+	unzip -d debian/tmp/usr/lib/libreoffice/share/extensions/voikko/ build/voikko.oxt
 
 # Build architecture-independent files here.
 binary-indep: build install
@@ -44,7 +46,7 @@ binary-arch: build install
 	dh_compress
 	dh_fixperms
 	dh_installdeb
-	sh debian/generate_dependencies.sh
+	dh_shlibdeps
 	dh_gencontrol
 	dh_md5sums
 	dh_builddeb

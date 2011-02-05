@@ -1,8 +1,33 @@
-openoffice.org-voikko (3.2-1) unstable; urgency=low
+libreoffice-voikko (3.2-1) unstable; urgency=low
 
   * Dummy changelog entry to bump local version number.
+  * Rename source package.
 
- -- Harri Pitkänen <hatapitk@iki.fi>  Tue, 19 May 2009 19:00:00 +0200
+ -- Harri Pitkänen <hatapitk@iki.fi>  Sat, 05 Feb 2011 16:00:00 +0200
+
+openoffice.org-voikko (3.1.2-1) experimental; urgency=low
+
+  * New upstream release
+  * Change the binary package to libreoffice-voikko
+  * Change installation to LO 3.3 style
+  * Update Standards-Version to 3.9.1
+  * Increast debhelper dependency to 7
+
+ -- Timo Jyrinki <timo@debian.org>  Fri, 04 Feb 2011 19:15:53 +0200
+
+openoffice.org-voikko (3.1.1-1) unstable; urgency=low
+
+  * New upstream release
+  * Update Standards-Version to 3.8.4
+  * Change to 3.0 (quilt) source format
+
+ -- Timo Jyrinki <timo@debian.org>  Wed, 26 May 2010 21:54:25 +0300
+
+openoffice.org-voikko (3.1-2) unstable; urgency=low
+
+  * Don't provide ooo-thesaurus-fi, wrong and not used (Closes: #529490)
+
+ -- Timo Jyrinki <timo@debian.org>  Tue, 09 Jun 2009 22:10:57 +0300
 
 openoffice.org-voikko (3.1-1) unstable; urgency=low
 
