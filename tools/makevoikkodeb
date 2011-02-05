@@ -135,7 +135,7 @@ ooovoikko() { #{{{1
 		svn_revision=$target
 		get_svn trunk/$component $component "$svn_revision"
 	fi
-	get_svn trunk/debian/openoffice.org-voikko+debian $component/debian "$svn_revision"
+	get_svn trunk/debian/libreoffice-voikko+debian $component/debian "$svn_revision"
 	cd $component || exit 1
 	update_changelog
 	build_deb
@@ -153,6 +153,23 @@ ooovoikko-2.2() { #{{{1
 		get_svn branches/ooovoikko/2.2 $component "$svn_revision"
 	fi
 	get_svn branches/debian/openoffice.org-voikko-2.2+debian $component/debian "$svn_revision"
+	cd $component || exit 1
+	update_changelog
+	build_deb
+	echo; dpkg-parsechangelog
+	echo; svn revert debian/changelog
+	}
+
+ooovoikko-ooo321() { #{{{1
+	local component=ooovoikko
+	local action="$1"
+	local target="$2"
+	local svn_revision=""
+	if [ $action = "svn" ]; then
+		svn_revision=$target
+		get_svn trunk/$component $component "$svn_revision"
+	fi
+	get_svn branches/debian/openoffice.org-voikko-ooo321+debian $component/debian "$svn_revision"
 	cd $component || exit 1
 	update_changelog
 	build_deb
@@ -208,7 +225,7 @@ as building directory is created under the current directory.
 Usage: $name <component> <source>
 
   <component> = suomimalaga | libvoikko | ooovoikko | ooovoikko-2.2 |
-                tmispell | mozvoikko
+                ooovoikko-ooo321 | tmispell | mozvoikko
                 
   <source>    = svn [revision] | file <filename> | url <URL>
 
@@ -235,7 +252,7 @@ EOF
 
 #{{{1 Parse command line
 case $component in
-	libvoikko|ooovoikko|ooovoikko-2.2|tmispell|suomimalaga|mozvoikko)
+	libvoikko|ooovoikko|ooovoikko-2.2|ooovoikko-ooo321|tmispell|suomimalaga|mozvoikko)
 		check_package build-essential fakeroot subversion
 		case $action in
 			url)
