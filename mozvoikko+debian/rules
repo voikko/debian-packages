@@ -48,11 +48,11 @@ install: build
 	dh_installdirs
 
 	# Add here commands to install the package
-	echo "# Empty chrome manifest" > chrome.manifest
+	echo "binary-component components/libmozvoikko.so" > chrome.manifest
 	install -m 644 src/components/libmozvoikko.so debian/mozvoikko/usr/lib/mozvoikko/
 	mkdir -p debian/mozvoikko/$(EXTENSION_DIR)
 	install -m 644 src/install.rdf debian/mozvoikko/$(EXTENSION_DIR)/
-	install -m 644 chrome.manifest debian/mozvoikko/$(EXTENSION_DIR)/
+	install -m 644 src/chrome.manifest.xulrunner debian/mozvoikko/$(EXTENSION_DIR)/chrome.manifest
 	dh_link usr/lib/mozvoikko $(EXTENSION_DIR)/components
 
 

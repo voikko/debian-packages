@@ -7,8 +7,8 @@ Standards-Version: 3.8.3
 
 Package: mozvoikko
 Architecture: any 
-Depends: ${shlibs:Depends}, libvoikko1, voikko-fi, iceweasel (>= 3) 
-Conflicts: iceweasel (>= 3.7)
+Depends: ${shlibs:Depends}, libvoikko1, voikko-fi, iceweasel (>= 3.6.9) 
+Conflicts: iceweasel (>= 4.1)
 Description: Finnish spell-checker extension for Iceweasel  
  Finnish spell-checker extension for Iceweasel 3. Spell-checking 
  functionality is provided by Voikko - a free spelling checker 
