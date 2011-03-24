@@ -62,12 +62,12 @@ clean:
 install: build
 	dh_testdir
 	dh_testroot
-	dh_clean -k 
+	dh_clean
 	dh_installdirs
 
 	# Add here commands to install the package into debian/tmp
 	$(MAKE) install DESTDIR=$(CURDIR)/debian/tmp
-	install -m 0644 -D python/libvoikko.py debian/python-libvoikko/usr/share/python-support/python-libvoikko/libvoikko.py
+	install -m 644 -D python/libvoikko.py debian/python-libvoikko/usr/share/python-support/python-libvoikko/libvoikko.py
 
 
 # Build architecture-independent files here.
