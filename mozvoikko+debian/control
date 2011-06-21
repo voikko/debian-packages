@@ -2,13 +2,13 @@ Source: mozvoikko
 Section: web
 Priority: optional
 Maintainer: Heikki Mäntysaari <heikki.mantysaari@linux.fi>
-Build-Depends: debhelper (>= 5), xulrunner-dev (>= 1.9~rc2), libvoikko-dev, pkg-config
+Build-Depends: debhelper (>= 5), xulrunner-dev (>= 5.0~b7), libvoikko-dev, pkg-config
 Standards-Version: 3.8.3
 
 Package: mozvoikko
 Architecture: any 
-Depends: ${shlibs:Depends}, libvoikko1, voikko-fi, iceweasel (>= 3.6.9) 
-Conflicts: iceweasel (>= 4.1)
+Depends: ${shlibs:Depends}, libvoikko1, voikko-fi, iceweasel (>= 5.0~b7) 
+Conflicts: iceweasel (>= 5.1)
 Description: Finnish spell-checker extension for Iceweasel  
  Finnish spell-checker extension for Iceweasel 3. Spell-checking 
  functionality is provided by Voikko - a free spelling checker 
