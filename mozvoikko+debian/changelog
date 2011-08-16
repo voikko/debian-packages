@@ -3,6 +3,7 @@ mozvoikko (1.11-1) unstable; urgency=low
   * Dummy changelog entry to bump local version number.
   * Intentional differences to official Debian packages:
     - Use chrome.manifest.xulrunner for now, maybe this is not needed anymore?
+    - Allow installation for Firefox 6.
 
  -- Harri Pitkänen <hatapitk@iki.fi>  Tue, 16 Aug 2011 18:00:00 +0300
 
