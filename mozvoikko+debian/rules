@@ -17,6 +17,7 @@ EXTENSION_DIR=/usr/share/mozilla/extensions/$(ICEWEASEL_ID)/$(EXT_ID)
 configure: configure-stamp
 configure-stamp:
 	dh_testdir
+	dh_quilt_patch
 
 	touch configure-stamp
 
@@ -34,6 +35,7 @@ build-stamp: configure-stamp
 clean:
 	dh_testdir
 	dh_testroot
+	dh_quilt_unpatch
 	rm -f build-stamp configure-stamp
 
 	# Add here commands to clean up after the build process.

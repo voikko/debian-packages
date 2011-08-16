@@ -1,0 +1,15 @@
+Index: mozvoikko-1.10.0rc1/src/Makefile.xulrunner
+===================================================================
+--- mozvoikko-1.10.0rc1.orig/src/Makefile.xulrunner	2011-06-23 22:48:58.000000000 +0300
++++ mozvoikko-1.10.0rc1/src/Makefile.xulrunner	2011-06-23 22:49:22.000000000 +0300
+@@ -19,8 +19,8 @@
+ CC_LINK=g++ -shared -Wl,--no-undefined
+ include ../mozvoikko.config
+ 
+-XULRUNNER_INCLUDES=$(shell pkg-config --cflags libxul-unstable)
+-XULRUNNER_LIBS=$(shell pkg-config --libs libxul-unstable)
++XULRUNNER_INCLUDES=$(shell pkg-config --cflags libxul)
++XULRUNNER_LIBS=$(shell pkg-config --libs libxul) -lmozalloc
+ 
+ HEADERS=mozVoikko.hxx mozVoikkoSpell.hxx mozVoikkoUtils.hxx
+ OBJECTS=mozVoikko mozVoikkoSpell mozVoikkoUtils mozVoikkoSpellFactory

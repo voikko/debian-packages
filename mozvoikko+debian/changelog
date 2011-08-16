@@ -1,12 +1,26 @@
-mozvoikko (1.1-1) unstable; urgency=low
+mozvoikko (1.11-1) unstable; urgency=low
 
   * Dummy changelog entry to bump local version number.
   * Intentional differences to official Debian packages:
-    - Do not use patch system, necessary fixes are in upstream SVN
-    - Build with -std=gnu++0x because that is how Xulrunner seems to be built
-      on Debian, see Debian Bug#577886.
+    - Use chrome.manifest.xulrunner for now, maybe this is not needed anymore?
 
- -- Harri Pitkänen <hatapitk@iki.fi>  Fri, 16 Apr 2010 18:00:00 +0200
+ -- Harri Pitkänen <hatapitk@iki.fi>  Tue, 16 Aug 2011 18:00:00 +0300
+
+mozvoikko (1.10.0-1) unstable; urgency=low
+
+  * New upstream release, works with Iceweasel 5.0. Closes: #631041.
+  * Remove patches/fix_freebsd_ftbfs.patch as it is merged in upstream. 
+  * Add patches/fix_makefile.patch to make the program compile in Debian.
+
+ -- Heikki Mäntysaari <heikki.mantysaari@linux.fi>  Mon, 27 Jun 2011 19:19:23 +0300
+
+mozvoikko (1.0-5) unstable; urgency=low
+
+  * Add cflag -std=gnu++0x. Closes: #577886. Thanks to Harri Pitkänen.
+  * Add $(misc:Depends} dependency. 
+  * Switch to dpkg-source 3.0 (quilt) format
+
+ -- Heikki Mäntysaari <heikki.mantysaari@linux.fi>  Sun, 20 Jun 2010 20:29:26 +0300
 
 mozvoikko (1.0-4) unstable; urgency=low
 
