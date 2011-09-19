@@ -17,30 +17,16 @@ EXTENSION_DIR=/usr/share/mozilla/extensions/$(ICEWEASEL_ID)/$(EXT_ID)
 configure: configure-stamp
 configure-stamp:
 	dh_testdir
-	dh_quilt_patch
-
 	touch configure-stamp
 
 
-build: build-stamp
-
-build-stamp: configure-stamp 
+build:
 	dh_testdir
-
-	# Add here commands to compile the package.
-	CFLAGS=-std=gnu++0x $(MAKE) -f Makefile.xulrunner extension-files
-
-	touch $@
 
 clean:
 	dh_testdir
 	dh_testroot
-	dh_quilt_unpatch
-	rm -f build-stamp configure-stamp
-
-	# Add here commands to clean up after the build process.
-	$(MAKE) -f Makefile.xulrunner clean
-	rm -f chrome.manifest
+	rm -f configure-stamp
 	dh_clean 
 
 install: build
@@ -50,20 +36,17 @@ install: build
 	dh_installdirs
 
 	# Add here commands to install the package
-	echo "binary-component components/libmozvoikko.so" > chrome.manifest
-	install -m 644 src/components/libmozvoikko.so debian/mozvoikko/usr/lib/mozvoikko/
-	mkdir -p debian/mozvoikko/$(EXTENSION_DIR)
-	install -m 644 src/install.rdf debian/mozvoikko/$(EXTENSION_DIR)/
-	install -m 644 src/chrome.manifest.xulrunner debian/mozvoikko/$(EXTENSION_DIR)/chrome.manifest
-	dh_link usr/lib/mozvoikko $(EXTENSION_DIR)/components
+	mkdir -p debian/mozvoikko/$(EXTENSION_DIR)/components
+	install -m 644 install.rdf debian/mozvoikko/$(EXTENSION_DIR)/
+	install -m 644 chrome.manifest debian/mozvoikko/$(EXTENSION_DIR)/
+	install -m 644 components/MozVoikko2.js debian/mozvoikko/$(EXTENSION_DIR)/components/
 
-
-# Build architecture-independent files here.
-binary-indep: build install
-# We have nothing to do by default.
 
 # Build architecture-dependent files here.
 binary-arch: build install
+
+# Build architecture-independent files here.
+binary-indep: build install
 	dh_testdir
 	dh_testroot
 	dh_installchangelogs ChangeLog
@@ -71,12 +54,9 @@ binary-arch: build install
 	dh_installexamples
 	dh_install
 	dh_installman
-	dh_link
-	dh_strip
 	dh_compress
 	dh_fixperms
 	dh_installdeb
-	LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):$(shell pkg-config --variable=sdkdir libxul)/sdk/lib/ dh_shlibdeps
 	dh_gencontrol
 	dh_md5sums
 	dh_builddeb
