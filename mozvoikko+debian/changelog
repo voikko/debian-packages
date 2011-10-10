@@ -3,8 +3,10 @@ mozvoikko (2.0-1) unstable; urgency=low
   * Dummy changelog entry to bump local version number.
   * Intentional differences to official Debian packages:
     - Adapted for Mozvoikko 2.0 (now produces architecture indepenent binary package)
+    - Relax (essentially disable) conflict with future Iceweasel versions in order
+      to make testing easier (most likely it will just work).
 
- -- Harri Pitkänen <hatapitk@iki.fi>  Mon, 19 Sep 2011 18:00:00 +0300
+ -- Harri Pitkänen <hatapitk@iki.fi>  Mon, 10 Oct 2011 18:00:00 +0300
 
 mozvoikko (1.10.0-1) unstable; urgency=low
 
