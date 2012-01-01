@@ -1,12 +1,25 @@
-mozvoikko (2.0-1) unstable; urgency=low
+mozvoikko (2.99-1) unstable; urgency=low
 
   * Dummy changelog entry to bump local version number.
   * Intentional differences to official Debian packages:
-    - Adapted for Mozvoikko 2.0 (now produces architecture indepenent binary package)
-    - Relax (essentially disable) conflict with future Iceweasel versions in order
-      to make testing easier (most likely it will just work).
+    - remove maxVersion lines from install.rdf
 
- -- Harri Pitkänen <hatapitk@iki.fi>  Mon, 10 Oct 2011 18:00:00 +0300
+ -- Harri Pitkänen <hatapitk@iki.fi>  Sun, 01 Jan 2012 16:00:00 +0200
+
+mozvoikko (2.0-1) unstable; urgency=low
+
+  * New upstream release. Closes: #645066
+  * Package the JavaScript versin of the extension.
+  * Remove conflict with future Iceweasel versions. Closes: #649642
+
+ -- Heikki Mäntysaari <heikki.mantysaari@linux.fi>  Tue, 29 Nov 2011 21:10:14 +0200
+
+mozvoikko (1.10.0-2) unstable; urgency=low
+
+  * Add patches/fix_min_version.patch to support Iceweasel 6 and 7
+  * Change conflict to iceweasel (>=7.1). Closes: #641980.
+
+ -- Heikki Mäntysaari <heikki.mantysaari@linux.fi>  Thu, 22 Sep 2011 22:42:10 +0300
 
 mozvoikko (1.10.0-1) unstable; urgency=low
 
