@@ -35,7 +35,7 @@ install:
 
 	# Add here commands to install the package
 	mkdir -p debian/mozvoikko/$(EXTENSION_DIR)/components
-	sed -e '/maxVersion/ d' < install.rdf > install.rdf.unrestricted
+	sed -e 's/<em:maxVersion>.*</<em:maxVersion>9999</' < install.rdf > install.rdf.unrestricted
 	install -m 644 install.rdf.unrestricted debian/mozvoikko/$(EXTENSION_DIR)/install.rdf
 	install -m 644 chrome.manifest debian/mozvoikko/$(EXTENSION_DIR)/
 	install -m 644 components/MozVoikko2.js debian/mozvoikko/$(EXTENSION_DIR)/components/
