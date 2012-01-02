@@ -1,4 +1,4 @@
 version=3
 
-http://sf.net/voikko/openoffice.org-voikko-(.*)\.tar\.gz
+http://sf.net/voikko/libreoffice-voikko-(.*)\.tar\.gz
 

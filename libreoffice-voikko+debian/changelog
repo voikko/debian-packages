@@ -1,19 +1,59 @@
-libreoffice-voikko (3.2-1) unstable; urgency=low
+libreoffice-voikko (99-1) unstable; urgency=low
 
   * Dummy changelog entry to bump local version number.
-  * Rename source package.
+  * SDK path changed for LO 3.5.
 
- -- Harri Pitkänen <hatapitk@iki.fi>  Sat, 05 Feb 2011 16:00:00 +0200
+ -- Harri Pitkänen <hatapitk@iki.fi>  Mon, 02 Jan 2012 17:00:00 +0200
 
-openoffice.org-voikko (3.1.2-1) experimental; urgency=low
+libreoffice-voikko (3.2-3) unstable; urgency=low
 
-  * New upstream release
-  * Change the binary package to libreoffice-voikko
+  * Fix debian-rules-missing-recommended-target
+  * Fix debug build, thanks for patch to Timo Lindfors (Closes: #652297)
+  * Update Standards-Version to 3.9.2
+
+ -- Timo Jyrinki <timo@debian.org>  Sat, 17 Dec 2011 11:34:07 +0200
+
+libreoffice-voikko (3.2-2) unstable; urgency=low
+
+  * Remove the transitional package, already provided by OOo
+
+ -- Timo Jyrinki <timo@debian.org>  Wed, 06 Apr 2011 13:10:51 +0300
+
+libreoffice-voikko (3.2-1) unstable; urgency=low
+
+  * Upstream 3.2rc2 released as 3.2 without changes
+  * Add transitional package openoffice.org-voikko (Closes: #613084)
+
+ -- Timo Jyrinki <timo@debian.org>  Tue, 05 Apr 2011 17:37:35 +0300
+
+libreoffice-voikko (3.2~rc2-1) unstable; urgency=low
+
+  * New upstream release candidate.
+
+ -- Timo Jyrinki <timo@debian.org>  Thu, 17 Feb 2011 16:46:56 +0200
+
+libreoffice-voikko (3.2~rc1-1) unstable; urgency=low
+
+  * New upstream release candidate.
+
+ -- Timo Jyrinki <timo@debian.org>  Mon, 14 Feb 2011 19:22:29 +0200
+
+libreoffice-voikko (3.1.2+svn20110205-1) unstable; urgency=low
+
+  * Fix off-by-one in version number and ITP bug number
+  * Upload to unstable, since libreoffice was also uploaded
+
+ -- Timo Jyrinki <timo@debian.org>  Tue, 08 Feb 2011 08:28:13 +0200
+
+libreoffice-voikko (3.1.2+svn20100205-1) experimental; urgency=low
+
+  * New upstream snapshot (Closes: #612078)
+  * Switch from openoffice.org-voikko to libreoffice-voikko
   * Change installation to LO 3.3 style
   * Update Standards-Version to 3.9.1
   * Increast debhelper dependency to 7
 
- -- Timo Jyrinki <timo@debian.org>  Fri, 04 Feb 2011 19:15:53 +0200
+ -- Timo Jyrinki <timo@debian.org>  Sun, 06 Feb 2011 15:00:46 +0200
 
 openoffice.org-voikko (3.1.1-1) unstable; urgency=low
 

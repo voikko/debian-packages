@@ -3,7 +3,7 @@ Section: text
 Priority: optional
 Maintainer: Timo Jyrinki <timo@debian.org>
 Build-Depends: debhelper (>= 7.0.0), libreoffice-dev, libvoikko-dev (>= 2.1), zip, unzip
-Standards-Version: 3.9.1
+Standards-Version: 3.9.2
 Homepage: http://voikko.sourceforge.net/
 
 Package: libreoffice-voikko
@@ -24,3 +24,4 @@ Description: Finnish language tools for LibreOffice
  automatically activated after installing this package. If this is not the
  case, go to "Writing Aids" settings in LibreOffice and activate Voikko
  components manually.
+

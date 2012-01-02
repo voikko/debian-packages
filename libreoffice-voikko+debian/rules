@@ -3,15 +3,17 @@
 CC_FLAGS = -Wall -g
 
 ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
-	CC_FLAGS += -O0
+	VOIKKO_DEBUG = FULL
 else
-	CC_FLAGS += -O2
+	VOIKKO_DEBUG = NO
 endif
 
-build: build-stamp
+build: build-arch build-indep
+build-arch: build-stamp
+build-indep: build-stamp
 build-stamp: 
 	dh_testdir
-	sh -c ". /usr/lib/libreoffice/basis-link/sdk/setsdkenv_unix.sh && $(MAKE) oxt"
+	sh -c ". /usr/lib/libreoffice/sdk/setsdkenv_unix.sh && $(MAKE) VOIKKO_DEBUG=$(VOIKKO_DEBUG) oxt"
 	touch build-stamp
 
 clean: 

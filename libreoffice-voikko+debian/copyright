@@ -1,17 +1,17 @@
-This package was debianized by Teemu Likonen <tlikonen@iki.fi> on
-Sat, 15 Apr 2006 21:56:52 +0300. Continued by Timo Jyrinki
-<timo.jyrinki@iki.fi> in September, 2006.
+This package was debianized originally by Teemu Likonen <tlikonen@iki.fi> 
+as openoffice-org-voikko on Sat, 15 Apr 2006 21:56:52 +0300. 
+Continued by Timo Jyrinki <timo.jyrinki@iki.fi> in September, 2006.
 
 It was downloaded from
 
- http://downloads.sourceforge.net/voikko/
+ http://sourceforge.net/scm/?type=svn&group_id=156731
 
 Upstream author: Harri Pitkänen <hatapitk@iki.fi>
 
 The Debian packaging is (C) 2006, Harri Pitkänen, Teemu Likonen 
 and Timo Jyrinki and is licensed under the GNU General Public License.
 
-Copyright (C) 2005-2008 Harri Pitkänen (hatapitk@iki.fi)
+Copyright (C) 2005-2011 Harri Pitkänen (hatapitk@iki.fi)
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
