@@ -1,8 +1,8 @@
 Source: libvoikko
 Priority: optional
 Maintainer: Timo Jyrinki <timo@debian.org>
-Build-Depends: debhelper (>= 7.0.0), dpkg-dev (>= 1.13.19), autotools-dev, python, python-support (>= 0.5.3)
-Standards-Version: 3.9.1
+Build-Depends: debhelper (>= 7.0.0), dpkg-dev (>= 1.13.19), autotools-dev, python (>= 2.6.6-3~)
+Standards-Version: 3.9.2
 Section: libs
 Homepage: http://voikko.sourceforge.net/
 
@@ -17,7 +17,6 @@ Description: Development files for libvoikko
  needed to build or develop applications that use Voikko.
 
 Package: libvoikko1
-Section: libs
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, voikko-fi (>= 1.4)
 Description: Library of Finnish language tools
@@ -29,7 +28,6 @@ Description: Library of Finnish language tools
 Package: python-libvoikko
 Section: python
 Architecture: all
-XB-Python-Version: ${python:Versions}
 Depends: libvoikko1 (>= ${source:Version}), ${python:Depends}, ${misc:Depends}
 Description: Python bindings for libvoikko
  Voikko is a library of Finnish language tools (spell-checker,

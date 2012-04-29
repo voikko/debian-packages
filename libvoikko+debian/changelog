@@ -5,8 +5,62 @@ libvoikko (99devtest-1) unstable; urgency=low
     - voikko-fi is in dependencies, not in suggests and breaks.
     - Binary packages are not stripped to make debugging easier.
     - Call dh_auto_test to run test suite after build.
+    - enable experimental VFST backend
 
- -- Harri Pitkänen <hatapitk@iki.fi>  Thu, 24 Mar 2011 07:00:00 +0200
+ -- Harri Pitkänen <hatapitk@iki.fi>  Sun, 29 Apr 2012 15:00:00 +0300
+
+libvoikko (3.4.1-1) unstable; urgency=low
+
+  * New upstream release
+  * Fix indep/arch binary targets
+
+ -- Timo Jyrinki <timo@debian.org>  Sat, 04 Feb 2012 12:56:04 +0200
+
+libvoikko (3.4-2) unstable; urgency=low
+
+  [ Timo Jyrinki ]
+  * Merge with Ubuntu 3.3-3ubuntu1 packaging
+
+  [ Matthias Klose ]
+  * Build using dh_python2
+
+ -- Timo Jyrinki <timo@debian.org>  Mon, 19 Dec 2011 09:44:10 +0200
+
+libvoikko (3.4-1) unstable; urgency=low
+
+  * New upstream release
+  * Fix debian-rules-missing-recommended-target
+  * Drop patches, issues fixed in this upstream release
+
+ -- Timo Jyrinki <timo@debian.org>  Sat, 17 Dec 2011 11:23:28 +0200
+
+libvoikko (3.3-3) unstable; urgency=low
+
+  * Add patch from upstream to increase heap size
+  - See http://sourceforge.net/apps/trac/voikko/changeset/4051
+
+ -- Timo Jyrinki <timo@debian.org>  Mon, 14 Nov 2011 16:05:02 +0200
+
+libvoikko (3.3-2) unstable; urgency=low
+
+  * Add patch from upstream to fix a mozvoikko crasher (Closes: #642525)
+  - See http://lists.puimula.org/pipermail/voikko/2011-September/001624.html
+
+ -- Timo Jyrinki <timo@debian.org>  Fri, 23 Sep 2011 18:00:41 +0300
+
+libvoikko (3.3-1) unstable; urgency=low
+
+  * New upstream release
+  * Update Standards-Version
+  * Remove duplicate Section from control file
+
+ -- Timo Jyrinki <timo@debian.org>  Fri, 23 Sep 2011 09:20:21 +0300
+
+libvoikko (3.2-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Timo Jyrinki <timo@debian.org>  Tue, 05 Apr 2011 17:13:56 +0300
 
 libvoikko (3.1-1) unstable; urgency=low
 
