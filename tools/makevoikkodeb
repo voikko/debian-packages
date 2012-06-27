@@ -1,282 +1,238 @@
 #!/bin/bash
-# vim600: foldmethod=marker
-# 
-# Debian build tool for Voikko components by Teemu Likonen <tlikonen@iki.fi>
 #
-# This script is public domain.
+# Skripti Debian-pakettien tekemiseen Voikon komponenteista
+#
+# Tehnyt: Teemu Likonen <tlikonen@iki.fi>
+#
+# Tämä skripti on yleistä omaisuutta (public domain).
 
 component="$1"
-action="$2"
-target="$3"
-svnroot="https://voikko.svn.sourceforge.net/svnroot/voikko"
+commit="$2"
 
-check_package() { #{{{1
-	local all_packages=$*
-	local package not_installed=""
-	for package in $all_packages
-	do
-		if ! dpkg --list $package 2>/dev/null | grep ^ii >/dev/null; then
-			not_installed="$not_installed $package"
+check_git() {
+	if ! which git &>/dev/null; then
+		echo "VIRHE: Ei löydy git-ohjelmaa."
+		exit 1
+	fi
+
+	export GIT_DIR="$VOIKKO_GIT_DIR"
+
+	if ! git rev-parse --git-dir &>/dev/null; then
+		printf '%s\n' "" \
+			"VIRHE: Voikon Git-repositorya ei löydy." \
+			"Aseta ympäristömuuttuja VOIKKO_GIT_DIR oikein," \
+			"esimerkiksi:" "" \
+			"    export VOIKKO_GIT_DIR=$HOME/voikko/.git" ""
+		exit 1
+	fi
+}
+
+check_package() {
+	local package not_installed
+	local i=0
+	for package in "$@"; do
+		if ! dpkg --list "$package" 2>/dev/null | grep -q ^ii; then
+			not_installed[i++]=$package
 		fi
 	done
 	if [ "$not_installed" ]; then
-		echo "ERROR: You must have the following packages installed:$not_installed"
+		echo "VIRHE: Seuraavat paketit täytyy asentaa:"
+		printf '  %s\n' "${not_installed[@]}"
 		exit 1
 	fi
-	}
+}
 
-get_svn() { #{{{1
-	local svn_dir="$1"
-	local base_dir="$2"
-	local svn_revision="$3"
-	svn co --revision ${svn_revision:-HEAD} "$svnroot/$svn_dir" "$base_dir" || exit 1
-	}
+get_git() {
+	local git_dir="$1"
+	local dest_dir="$2"
+	local git_ref="$3"
+	local tree
+	tree=$(git rev-parse --verify --symbolic "$git_ref:$git_dir") || exit 1
+	echo "Copying $tree -> $dest_dir"
+	git archive --format=tar --prefix="$dest_dir/" "$tree" | \
+		tar --extract || exit 1
+}
 
-get_url() { #{{{1 
-	local url="$1"
-	if [ ! "$url" ]; then echo "ERROR: URL is missing"; exit 1; fi
-	wget "$url" || exit 1
-	}
-
-uncompress_archive() { #{{{1
+update_changelog() {
 	local component="$1"
-	local filename="$2"
-	if [ ! -f "$filename" ]; then
-		echo "ERROR: File not found: $filename"
-		exit 1
-	fi
-	case $(file "$filename") in
-		*gzip\ compressed\ data*)
-			tar --extract --verbose --gzip --file "$filename" --show-transformed --transform=s,^[^/]*,$component, || exit 1
-			;;
-		*bzip2\ compressed\ data*)
-			check_package bzip2
-			tar --extract --verbose --bzip2 --file "$filename" --show-transformed --transform=s,^[^/]*,$component, || exit 1
-			;;
-		*tar\ archive*)
-			tar --extract --verbose --file "$filename" --show-transformed --transform=s,^[^/]*,$component, || exit 1
-			;;
-		*)
-			echo "ERROR: Unknown archive format (gzip and bzip2 compressed tar archives are supported)"
-			file "$filename"
-			exit 1
-			;;
-	esac
-	}
-
-update_changelog() { #{{{1
-	local svn_revision svn_last_changed_debian svn_last_changed_source source_package version changelog_new
-	svn_revision=$(svn info debian 2>/dev/null | awk '/^Revision:/ {print $2}')
-	svn_last_changed_source=$(svn info 2>/dev/null | awk '/^Last Changed Date:/ {print $4,$5,$6}')
-	svn_last_changed_debian=$(svn info debian 2>/dev/null | awk '/^Last Changed Date:/ {print $4,$5,$6}')
+	local debian_dir="$2"
+	local git_ref="$3"
+	local tag_prefix="$4"
+	local tag_prefix_re
+	local git_commit_id git_commit_date
+	local git_commit_id_source git_commit_id_debian
+	local git_commit_date_source git_commit_date_debian
+	local source_package version changelog_new
+	git_commit_id_source=$(git rev-list -1 "$git_ref" -- "$component")
+	git_commit_id_debian=$(git rev-list -1 "$git_ref" -- "$debian_dir")
+	git_commit_date=$(git log -1 --pretty=format:%ai "$git_ref")
+	git_commit_date_source=$(git log -1 --pretty=format:%ai \
+		"$git_ref" -- "$component")
+	git_commit_date_debian=$(git log -1 --pretty=format:%ai \
+		"$git_ref" -- "$debian_dir")
 	source_package=$(dpkg-parsechangelog | awk '/^Source:/ {print $2}')
-	version=$(dpkg-parsechangelog | awk '/^Version:/ {print $2}')
-	version=${version%-*}
-	version=${version%~svn*}
-	changelog_new=debian/changelog.new
-	echo -e "$source_package (${version}~svn${svn_revision}-0custom) unstable; urgency=low\n" >$changelog_new
-	echo -e "  * Upstream development snapshot. Last changes:" >>$changelog_new
-	echo -e "    Source tree: ${svn_last_changed_source:-(no info)}" >>$changelog_new
-	echo -e "    Debian data: ${svn_last_changed_debian:-(no info)}\n" >>$changelog_new
-	echo -e " -- ${DEBFULLNAME:-Nobody} <${DEBEMAIL:-nobody@invalid}>  $(date -R)\n" >>$changelog_new
-	cat debian/changelog >>$changelog_new
-	mv $changelog_new debian/changelog
-	}
 
-build_deb() { #{{{1
+	if [ "$tag_prefix" ]; then
+		tag_prefix_re=$(printf "%s\n" "$tag_prefix" | \
+			sed -e 's,[][\^$./*],\\&,g')
+		version=$(git describe --tags --long --match \
+			"${tag_prefix}*" "$git_ref" | \
+			sed -e "s/$tag_prefix_re//;s/-/+git/;s/-g/./") \
+			|| exit 1
+	else
+		version=0.0+git$(date --utc --date="$git_commit_date" \
+			+%Y%m%dT%H%M%SZ)
+	fi
+
+	changelog_new=$(mktemp) || exit 1
+	printf "%s (%s-1) unstable; urgency=low\n\n" \
+		"$source_package" "$version" > "$changelog_new"
+	printf "  * A development snapshot. Last changes:\n\n" >> \
+		"$changelog_new"
+	printf "    Source tree:\n" >> "$changelog_new"
+	printf "      Commit: %s\n" "$git_commit_id_source" >> "$changelog_new"
+	printf "      Date:   %s\n" "$git_commit_date_source" >> \
+		"$changelog_new"
+	printf "    Debian data:\n" >> "$changelog_new"
+	printf "      Commit: %s\n" "$git_commit_id_debian" >> "$changelog_new"
+	printf "      Date:   %s\n\n" "$git_commit_date_debian" >> \
+		"$changelog_new"
+	printf " -- %s <%s>  %s\n\n" \
+		"${DEBFULLNAME:-Nobody}" "${DEBEMAIL:-nobody@invalid}" \
+		"$(date -R)" >> "$changelog_new"
+	cat debian/changelog >> "$changelog_new"
+	mv -- "$changelog_new" debian/changelog
+}
+
+build_deb() {
 	dpkg-checkbuilddeps || exit 1
-	#dpkg-buildpackage -rfakeroot -b -uc || exit 1
 	fakeroot debian/rules clean || exit 1
 	fakeroot debian/rules binary || exit 1
-	}
+}
 
-suomimalaga() { #{{{1
-	local component=suomimalaga
-	local action="$1"
-	local target="$2"
-	local svn_revision=""
-	if [ $action = "svn" ]; then
-		svn_revision=$target
-		get_svn trunk/$component $component "$svn_revision"
-	fi
-	get_svn trunk/debian/suomi-malaga+debian $component/debian "$svn_revision"
-	cd $component || exit 1
-	update_changelog
-	build_deb
-	echo; dpkg-parsechangelog
-	echo; svn revert debian/changelog
-	}
-
-tmispell() { #{{{1
-	local component=tmispell
-	local action="$1"
-	local target="$2"
-	local svn_revision=""
-	if [ $action = "svn" ]; then
-		svn_revision=$target
-		check_package libtool automake
-		get_svn trunk/$component $component "$svn_revision"
-		(cd $component && sh autogen.sh) || exit 1
-	fi
-	get_svn trunk/debian/tmispell-voikko+debian $component/debian "$svn_revision"
-	cd $component || exit 1
-	update_changelog
-	build_deb
-	echo; dpkg-parsechangelog
-	echo; svn revert debian/changelog
-	}
-
-ooovoikko() { #{{{1
-	local component=ooovoikko
-	local action="$1"
-	local target="$2"
-	local svn_revision=""
-	if [ $action = "svn" ]; then
-		svn_revision=$target
-		get_svn trunk/$component $component "$svn_revision"
-	fi
-	get_svn trunk/debian/libreoffice-voikko+debian $component/debian "$svn_revision"
-	cd $component || exit 1
-	update_changelog
-	build_deb
-	echo; dpkg-parsechangelog
-	echo; svn revert debian/changelog
-	}
-
-ooovoikko-2.2() { #{{{1
-	local component=ooovoikko-2.2
-	local action="$1"
-	local target="$2"
-	local svn_revision=""
-	if [ $action = "svn" ]; then
-		svn_revision=$target
-		get_svn branches/ooovoikko/2.2 $component "$svn_revision"
-	fi
-	get_svn branches/debian/openoffice.org-voikko-2.2+debian $component/debian "$svn_revision"
-	cd $component || exit 1
-	update_changelog
-	build_deb
-	echo; dpkg-parsechangelog
-	echo; svn revert debian/changelog
-	}
-
-ooovoikko-ooo321() { #{{{1
-	local component=ooovoikko
-	local action="$1"
-	local target="$2"
-	local svn_revision=""
-	if [ $action = "svn" ]; then
-		svn_revision=$target
-		get_svn trunk/$component $component "$svn_revision"
-	fi
-	get_svn branches/debian/openoffice.org-voikko-ooo321+debian $component/debian "$svn_revision"
-	cd $component || exit 1
-	update_changelog
-	build_deb
-	echo; dpkg-parsechangelog
-	echo; svn revert debian/changelog
-	}
-
-libvoikko() { #{{{1
+libvoikko() {
 	local component=libvoikko
-	local action="$1"
-	local target="$2"
-	local svn_revision=""
-	if [ $action = "svn" ]; then
-		svn_revision=$target
-		check_package libtool automake
-		get_svn trunk/$component $component "$svn_revision"
-		(cd $component && sh autogen.sh) || exit 1
-	fi
-	get_svn trunk/debian/libvoikko+debian $component/debian "$svn_revision"
-	cd $component || exit 1
-	update_changelog
+	local debian_dir=debian/libvoikko+debian
+	local commit="$1"
+	local git_ref="${commit:-HEAD}"
+	check_package libtool automake
+	get_git "$component" "$component" "$git_ref"
+	get_git "$debian_dir" "$component/debian" "$git_ref"
+	cd "$component" || exit 1
+	sh autogen.sh || exit 1
+	update_changelog "$component" "$debian_dir" "$git_ref" "libvoikko-"
 	build_deb
-	echo; dpkg-parsechangelog
-	echo; svn revert debian/changelog
-	}
+	echo
+	dpkg-parsechangelog
+}
 
-mozvoikko() { #{{{1
+mozvoikko() {
 	local component=mozvoikko
-	local action="$1"
-	local target="$2"
-	local svn_revision=""
-	if [ $action = "svn" ]; then
-		svn_revision=$target
-		get_svn trunk/$component $component "$svn_revision"
-	fi
-	get_svn trunk/debian/mozvoikko+debian $component/debian "$svn_revision"
-	cd $component || exit 1
-	update_changelog
+	local debian_dir=debian/mozvoikko+debian
+	local commit="$1"
+	local git_ref="${commit:-HEAD}"
+	get_git "$component" "$component" "$git_ref"
+	get_git "$debian_dir" "$component/debian" "$git_ref"
+	cd "$component" || exit 1
+	update_changelog "$component" "$debian_dir" "$git_ref" "mozvoikko-"
 	build_deb
-	echo; dpkg-parsechangelog
-	echo; svn revert debian/changelog
-	}
+	echo
+	dpkg-parsechangelog
+}
 
-print_usage() { #{{{1
-	local name=$(basename "$0")
+suomimalaga() {
+	local component=suomimalaga
+	local debian_dir=debian/suomi-malaga+debian
+	local commit="$1"
+	local git_ref="${commit:-HEAD}"
+	check_package libtool automake
+	get_git "$component" "$component" "$git_ref"
+	get_git "$debian_dir" "$component/debian" "$git_ref"
+	cd "$component" || exit 1
+	update_changelog "$component" "$debian_dir" "$git_ref" "suomi-malaga-"
+	build_deb
+	echo
+	dpkg-parsechangelog
+}
+
+tmispell() {
+	local component=tmispell
+	local debian_dir=debian/tmispell-voikko+debian
+	local commit="$1"
+	local git_ref="${commit:-HEAD}"
+	check_package libtool automake
+	get_git "$component" "$component" "$git_ref"
+	get_git "$debian_dir" "$component/debian" "$git_ref"
+	cd "$component" || exit 1
+	sh autogen.sh || exit 1
+	update_changelog "$component" "$debian_dir" "$git_ref" \
+		"tmispell-voikko-"
+	build_deb
+	echo
+	dpkg-parsechangelog
+}
+
+ooovoikko() {
+	local component=ooovoikko
+	local debian_dir=debian/openoffice.org-voikko+debian
+	local commit="$1"
+	local git_ref="${commit:-HEAD}"
+	check_package libtool automake
+	get_git "$component" "$component" "$git_ref"
+	get_git "$debian_dir" "$component/debian" "$git_ref"
+	cd "$component" || exit 1
+	update_changelog "$component" "$debian_dir" "$git_ref" \
+		"openoffice.org-voikko-"
+	build_deb
+	echo
+	dpkg-parsechangelog
+}
+
+print_usage() {
+	local name=$(basename -- "$0")
 	cat <<EOF
-$name - Debian build tool for Voikko components
+$name - Luo Voikon komponenteista Debian-paketin
 
-Description: This tool obtains Voikko's source code from user defined location
-and creates a ready-to-install .deb package from it. The .deb package as well
-as building directory is created under the current directory.
+Kuvaus: Tämä työkalu kopioi lähdekoodin Voikon Git-repositorysta,
+kääntää sen ja paketoi Debian-paketiksi. Kääntämishakemisto sekä valmis
+Debian-paketti luodaan nykyisen hakemiston alle.
 
-Usage: $name <component> <source>
+Käyttö: $name <komponentti> [versio]
 
-  <component> = suomimalaga | libvoikko | ooovoikko | ooovoikko-2.2 |
-                ooovoikko-ooo321 | tmispell | mozvoikko
-                
-  <source>    = svn [revision] | file <filename> | url <URL>
+  <komponentti> = suomimalaga | libvoikko | ooovoikko | tmispell | mozvoikko
 
-Examples:
+  Vapaaehtoinen parametri [versio] voi olla mikä tahansa Gitin ymmärtämä
+  viittaus versioon. Oletuksena se on HEAD eli nykyisen haaran viimeisin
+  commit.
 
-  Download and build current SVN revision of suomi-malaga (voikko-fi):
-  $ $name suomimalaga svn
+Esimerkkejä:
 
-  Download and build libvoikko's SVN revision 1372:
-  $ $name libvoikko svn 1372
+  Rakenna suomi-malaga (voikko-fi) nykyisestä HEAD-versiosta:
+  $ $name suomimalaga
 
-  Download and build libvoikko's SVN revision at given date and time:
-  $ $name libvoikko svn {20070430T1830}
+  Rakenna suomi-malaga (voikko-fi) annetusta tagista (tai haarasta):
+  $ $name suomimalaga suomi-malaga-1.1
 
-  Build openoffice.org-voikko from given .tar.gz archive (gzip or bzip2
-  compressed tar archives are supported):
-  $ $name ooovoikko file openoffice.org-voikko-2.0.tar.gz
+  Rakenna tmispell-voikko versiosta 5414badf:
+  $ $name tmispell 5414badf
 
-  Download and build tmispell-voikko from given URL:
-  $ $name tmispell url http://downloads.sourceforge.net/voikko/tmispell-voikko-0.6.1.tar.gz
+  Rakenna libvoikko versiosta master~3:
+  $ $name libvoikko master~3
+
+  Rakenna openoffice.org-voikko master-haarasta tiettynä ajankohtana:
+  $ $name ooovoikko master@{2.days.ago}
 
 EOF
-	}
+}
 
-#{{{1 Parse command line
-case $component in
-	libvoikko|ooovoikko|ooovoikko-2.2|ooovoikko-ooo321|tmispell|suomimalaga|mozvoikko)
-		check_package build-essential fakeroot subversion
-		case $action in
-			url)
-				get_url "$target"
-				target=$(basename "$target")
-				uncompress_archive $component "$target"
-				$component "$action"
-				;;
-			file)
-				uncompress_archive $component "$target"
-				$component "$action"
-				;;
-			svn)
-				$component "$action" "$target"
-				;;
-			*)
-				echo "ERROR: Incorrect source: $action $target"
-				print_usage
-				exit 1
-				;;
-		esac
-		;;
-	*)
-		print_usage
-		exit 1
-		;;
+case "$component" in
+libvoikko|ooovoikko|tmispell|suomimalaga|mozvoikko)
+	check_git
+	check_package build-essential fakeroot
+	"$component" "$commit"
+	;;
+*)
+	print_usage
+	exit 2
+	;;
 esac
