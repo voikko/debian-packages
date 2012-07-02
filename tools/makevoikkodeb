@@ -1,33 +1,22 @@
 #!/bin/bash
 #
-# Skripti Debian-pakettien tekemiseen Voikon komponenteista
+# A script to build Debian packages from Voikko's Git repository.
 #
-# Tehnyt: Teemu Likonen <tlikonen@iki.fi>
+# Author: Teemu Likonen <tlikonen@iki.fi>
 #
-# Tämä skripti on yleistä omaisuutta (public domain).
+# This script is placed in the public domain.
 
-component="$1"
-commit="$2"
+component=$1
+ref_src=${2:-HEAD}
+ref_deb=${3:-HEAD}
 
-check_git() {
-	if ! which git &>/dev/null; then
-		echo "VIRHE: Ei löydy git-ohjelmaa."
-		exit 1
-	fi
-
-	export GIT_DIR="$VOIKKO_GIT_DIR"
-
-	if ! git rev-parse --git-dir &>/dev/null; then
-		printf '%s\n' "" \
-			"VIRHE: Voikon Git-repositorya ei löydy." \
-			"Aseta ympäristömuuttuja VOIKKO_GIT_DIR oikein," \
-			"esimerkiksi:" "" \
-			"    export VOIKKO_GIT_DIR=$HOME/voikko/.git" ""
-		exit 1
-	fi
+make_url() {
+	local component=$1
+	local ref=$2
+	printf 'https://github.com/voikko/%s/tarball/%s' "$component" "$ref"
 }
 
-check_package() {
+debs() {
 	local package not_installed
 	local i=0
 	for package in "$@"; do
@@ -36,72 +25,57 @@ check_package() {
 		fi
 	done
 	if [ "$not_installed" ]; then
-		echo "VIRHE: Seuraavat paketit täytyy asentaa:"
+		echo "ERROR: The following packages are required:"
 		printf '  %s\n' "${not_installed[@]}"
 		exit 1
 	fi
 }
 
-get_git() {
-	local git_dir="$1"
-	local dest_dir="$2"
-	local git_ref="$3"
-	local tree
-	tree=$(git rev-parse --verify --symbolic "$git_ref:$git_dir") || exit 1
-	echo "Copying $tree -> $dest_dir"
-	git archive --format=tar --prefix="$dest_dir/" "$tree" | \
-		tar --extract || exit 1
+quote_basic_re () {
+	printf '%s\n' "$1" | sed -e 's,[][\^$.*],\\&,g'
+}
+
+quote_replace () {
+	printf '%s\n' "$1" | sed -e 's,[\&],\\&,g'
+}
+	
+quote_sh () {
+	printf '%s\n' "$1" | sed -e 's,[][\*?],\\&,g'
+}
+
+get_remote() {
+	# $1 = repository in Github
+	# $2 = component's directory in the repository (if any)
+	#      _with_ trailing slash
+	# $3 = destination directory for extracting
+	# $4 = The Git ref to download (branch, tag, commit reference...)
+	local repo=$1
+	local git_dir_re=$(quote_basic_re "$2")
+	local git_dir_sh=$(quote_sh "$2")
+	local dest_dir=$(quote_replace "$3")
+	local ref=$4
+	local url=$(make_url "$repo" "$ref")
+	wget -O - -- "$url" | \
+		tar --extract --gzip --wildcards \
+		--no-wildcards-match-slash \
+		--transform="s,[^/]*/${git_dir_re},$dest_dir/," \
+		"*/${git_dir_sh}*"
 }
 
 update_changelog() {
-	local component="$1"
-	local debian_dir="$2"
-	local git_ref="$3"
-	local tag_prefix="$4"
-	local tag_prefix_re
-	local git_commit_id git_commit_date
-	local git_commit_id_source git_commit_id_debian
-	local git_commit_date_source git_commit_date_debian
-	local source_package version changelog_new
-	git_commit_id_source=$(git rev-list -1 "$git_ref" -- "$component")
-	git_commit_id_debian=$(git rev-list -1 "$git_ref" -- "$debian_dir")
-	git_commit_date=$(git log -1 --pretty=format:%ai "$git_ref")
-	git_commit_date_source=$(git log -1 --pretty=format:%ai \
-		"$git_ref" -- "$component")
-	git_commit_date_debian=$(git log -1 --pretty=format:%ai \
-		"$git_ref" -- "$debian_dir")
-	source_package=$(dpkg-parsechangelog | awk '/^Source:/ {print $2}')
+	local source=$(dpkg-parsechangelog | awk '/^Source:/ {print $2}')
+	local version=99dev+$(date --utc +%Y%m%dT%H%M%SZ)
+	local changelog_new=$(mktemp) || exit 1
 
-	if [ "$tag_prefix" ]; then
-		tag_prefix_re=$(printf "%s\n" "$tag_prefix" | \
-			sed -e 's,[][\^$./*],\\&,g')
-		version=$(git describe --tags --long --match \
-			"${tag_prefix}*" "$git_ref" | \
-			sed -e "s/$tag_prefix_re//;s/-/+git/;s/-g/./") \
-			|| exit 1
-	else
-		version=0.0+git$(date --utc --date="$git_commit_date" \
-			+%Y%m%dT%H%M%SZ)
-	fi
-
-	changelog_new=$(mktemp) || exit 1
 	printf "%s (%s-1) unstable; urgency=low\n\n" \
-		"$source_package" "$version" > "$changelog_new"
-	printf "  * A development snapshot. Last changes:\n\n" >> \
-		"$changelog_new"
-	printf "    Source tree:\n" >> "$changelog_new"
-	printf "      Commit: %s\n" "$git_commit_id_source" >> "$changelog_new"
-	printf "      Date:   %s\n" "$git_commit_date_source" >> \
-		"$changelog_new"
-	printf "    Debian data:\n" >> "$changelog_new"
-	printf "      Commit: %s\n" "$git_commit_id_debian" >> "$changelog_new"
-	printf "      Date:   %s\n\n" "$git_commit_date_debian" >> \
+		"$source" "$version" > "$changelog_new"
+	printf "  * A development snapshot.\n\n" >> \
 		"$changelog_new"
 	printf " -- %s <%s>  %s\n\n" \
 		"${DEBFULLNAME:-Nobody}" "${DEBEMAIL:-nobody@invalid}" \
 		"$(date -R)" >> "$changelog_new"
 	cat debian/changelog >> "$changelog_new"
-	mv -- "$changelog_new" debian/changelog
+	mv -f -- "$changelog_new" debian/changelog
 }
 
 build_deb() {
@@ -111,78 +85,52 @@ build_deb() {
 }
 
 libvoikko() {
-	local component=libvoikko
-	local debian_dir=debian/libvoikko+debian
-	local commit="$1"
-	local git_ref="${commit:-HEAD}"
-	check_package libtool automake
-	get_git "$component" "$component" "$git_ref"
-	get_git "$debian_dir" "$component/debian" "$git_ref"
-	cd "$component" || exit 1
-	sh autogen.sh || exit 1
-	update_changelog "$component" "$debian_dir" "$git_ref" "libvoikko-"
+	local ref_src=${1:-HEAD}
+	local ref_deb=${2:-HEAD}
+	debs libtool automake
+	get_remote corevoikko libvoikko/ libvoikko "$ref_src"
+	get_remote debian-packages libvoikko+debian/ libvoikko/debian "$ref_deb"
+	cd libvoikko || exit 1
+	./autogen.sh || exit 1
+	update_changelog
 	build_deb
 	echo
 	dpkg-parsechangelog
 }
 
 mozvoikko() {
-	local component=mozvoikko
-	local debian_dir=debian/mozvoikko+debian
-	local commit="$1"
-	local git_ref="${commit:-HEAD}"
-	get_git "$component" "$component" "$git_ref"
-	get_git "$debian_dir" "$component/debian" "$git_ref"
-	cd "$component" || exit 1
-	update_changelog "$component" "$debian_dir" "$git_ref" "mozvoikko-"
+	local ref_src=${1:-HEAD}
+	local ref_deb=${2:-HEAD}
+	get_remote mozvoikko "" mozvoikko "$ref_src"
+	get_remote debian-packages mozvoikko+debian/ mozvoikko/debian "$ref_deb"
+	cd mozvoikko || exit 1
+	update_changelog
 	build_deb
 	echo
 	dpkg-parsechangelog
 }
 
 suomimalaga() {
-	local component=suomimalaga
-	local debian_dir=debian/suomi-malaga+debian
-	local commit="$1"
-	local git_ref="${commit:-HEAD}"
-	check_package libtool automake
-	get_git "$component" "$component" "$git_ref"
-	get_git "$debian_dir" "$component/debian" "$git_ref"
-	cd "$component" || exit 1
-	update_changelog "$component" "$debian_dir" "$git_ref" "suomi-malaga-"
+	local ref_src=${1:-HEAD}
+	local ref_deb=${2:-HEAD}
+	get_remote corevoikko suomimalaga/ suomimalaga "$ref_src"
+	get_remote debian-packages suomi-malaga+debian/ suomimalaga/debian \
+		"$ref_deb"
+	cd suomimalaga || exit 1
+	update_changelog
 	build_deb
 	echo
 	dpkg-parsechangelog
 }
 
-tmispell() {
-	local component=tmispell
-	local debian_dir=debian/tmispell-voikko+debian
-	local commit="$1"
-	local git_ref="${commit:-HEAD}"
-	check_package libtool automake
-	get_git "$component" "$component" "$git_ref"
-	get_git "$debian_dir" "$component/debian" "$git_ref"
-	cd "$component" || exit 1
-	sh autogen.sh || exit 1
-	update_changelog "$component" "$debian_dir" "$git_ref" \
-		"tmispell-voikko-"
-	build_deb
-	echo
-	dpkg-parsechangelog
-}
-
-ooovoikko() {
-	local component=ooovoikko
-	local debian_dir=debian/openoffice.org-voikko+debian
-	local commit="$1"
-	local git_ref="${commit:-HEAD}"
-	check_package libtool automake
-	get_git "$component" "$component" "$git_ref"
-	get_git "$debian_dir" "$component/debian" "$git_ref"
-	cd "$component" || exit 1
-	update_changelog "$component" "$debian_dir" "$git_ref" \
-		"openoffice.org-voikko-"
+libreoffice-voikko () {
+	local ref_src=${1:-HEAD}
+	local ref_deb=${2:-HEAD}
+	get_remote libreoffice-voikko "" libreoffice-voikko "$ref_src"
+	get_remote debian-packages libreoffice-voikko+debian/ \
+		libreoffice-voikko/debian "$ref_deb"
+	cd libreoffice-voikko || exit 1
+	update_changelog
 	build_deb
 	echo
 	dpkg-parsechangelog
@@ -191,45 +139,32 @@ ooovoikko() {
 print_usage() {
 	local name=$(basename -- "$0")
 	cat <<EOF
-$name - Luo Voikon komponenteista Debian-paketin
+$name - Debian build tool for Voikko components
 
-Kuvaus: Tämä työkalu kopioi lähdekoodin Voikon Git-repositorysta,
-kääntää sen ja paketoi Debian-paketiksi. Kääntämishakemisto sekä valmis
-Debian-paketti luodaan nykyisen hakemiston alle.
+Description: This tool obtains Voikko's source code from pre-defined
+remote location and creates a ready-to-install .deb package from it. The
+.deb package as well as the building directory is created under the
+current directory.
 
-Käyttö: $name <komponentti> [versio]
+Usage: $name <component> [source ref] [debian ref]
 
-  <komponentti> = suomimalaga | libvoikko | ooovoikko | tmispell | mozvoikko
+  <component>  = suomimalaga | libvoikko | libreoffice-voikko | mozvoikko
 
-  Vapaaehtoinen parametri [versio] voi olla mikä tahansa Gitin ymmärtämä
-  viittaus versioon. Oletuksena se on HEAD eli nykyisen haaran viimeisin
-  commit.
+  [source ref] = A reference to the commit of the source code to be
+                 downloaded. It must be a valid Git commit reference
+                 (examples: branch, tag, 5af3d232, HEAD~4). The
+                 default is HEAD.
 
-Esimerkkejä:
-
-  Rakenna suomi-malaga (voikko-fi) nykyisestä HEAD-versiosta:
-  $ $name suomimalaga
-
-  Rakenna suomi-malaga (voikko-fi) annetusta tagista (tai haarasta):
-  $ $name suomimalaga suomi-malaga-1.1
-
-  Rakenna tmispell-voikko versiosta 5414badf:
-  $ $name tmispell 5414badf
-
-  Rakenna libvoikko versiosta master~3:
-  $ $name libvoikko master~3
-
-  Rakenna openoffice.org-voikko master-haarasta tiettynä ajankohtana:
-  $ $name ooovoikko master@{2.days.ago}
+  [debian ref] = Like above but a reference to the debian-packages
+                 repository. The default is HEAD.
 
 EOF
 }
 
 case "$component" in
-libvoikko|ooovoikko|tmispell|suomimalaga|mozvoikko)
-	check_git
-	check_package build-essential fakeroot
-	"$component" "$commit"
+libvoikko|libreoffice-voikko|suomimalaga|mozvoikko)
+	debs build-essential fakeroot wget
+	"$component" "$ref_src" "$ref_deb"
 	;;
 *)
 	print_usage
