@@ -31,35 +31,25 @@ debs() {
 	fi
 }
 
-quote_basic_re () {
-	printf '%s\n' "$1" | sed -e 's,[][\^$.*],\\&,g'
-}
-
-quote_replace () {
-	printf '%s\n' "$1" | sed -e 's,[\&],\\&,g'
-}
-	
-quote_sh () {
-	printf '%s\n' "$1" | sed -e 's,[][\*?],\\&,g'
-}
-
 get_remote() {
-	# $1 = repository in Github
-	# $2 = component's directory in the repository (if any)
-	#      _with_ trailing slash
-	# $3 = destination directory for extracting
-	# $4 = The Git ref to download (branch, tag, commit reference...)
+	# $1 = Repository in Github.
+	# $2 = The Git ref to download.
+	# $3 = File pattern for extracting the needed files from tar archive.
+	# $4 = Number of leading directory compotents to strip from tar'ed
+	#      files.
+	# $5 = Destination directory for extracting.
 	local repo=$1
-	local git_dir_re=$(quote_basic_re "$2")
-	local git_dir_sh=$(quote_sh "$2")
-	local dest_dir=$(quote_replace "$3")
-	local ref=$4
+	local ref=$2
+	local pattern=$3
+	local strip=$4
+	local dest_dir=$5
 	local url=$(make_url "$repo" "$ref")
-	wget -O - -- "$url" | \
+	mkdir -p -- "$dest_dir"
+	(cd "$dest_dir" && \
+		wget -O - -- "$url" | \
 		tar --extract --gzip --wildcards \
-		--no-wildcards-match-slash \
-		--transform="s,[^/]*/${git_dir_re},$dest_dir/," \
-		"*/${git_dir_sh}*"
+		--strip="$strip" "$pattern"
+	)
 }
 
 update_changelog() {
@@ -85,11 +75,12 @@ build_deb() {
 }
 
 libvoikko() {
-	local ref_src=${1:-HEAD}
-	local ref_deb=${2:-HEAD}
+	local ref_src=$1
+	local ref_deb=$2
 	debs libtool automake
-	get_remote corevoikko libvoikko/ libvoikko "$ref_src"
-	get_remote debian-packages libvoikko+debian/ libvoikko/debian "$ref_deb"
+	get_remote corevoikko "$ref_src" "*/libvoikko/*" 2 libvoikko
+	get_remote debian-packages "$ref_deb" \
+		"*/libvoikko+debian/*" 2 libvoikko/debian
 	cd libvoikko || exit 1
 	./autogen.sh || exit 1
 	update_changelog
@@ -99,10 +90,11 @@ libvoikko() {
 }
 
 mozvoikko() {
-	local ref_src=${1:-HEAD}
-	local ref_deb=${2:-HEAD}
-	get_remote mozvoikko "" mozvoikko "$ref_src"
-	get_remote debian-packages mozvoikko+debian/ mozvoikko/debian "$ref_deb"
+	local ref_src=$1
+	local ref_deb=$2
+	get_remote mozvoikko "$ref_src" "*" 1 mozvoikko
+	get_remote debian-packages "$ref_deb" \
+		"*/mozvoikko+debian/*" 2 mozvoikko/debian
 	cd mozvoikko || exit 1
 	update_changelog
 	build_deb
@@ -111,11 +103,11 @@ mozvoikko() {
 }
 
 suomimalaga() {
-	local ref_src=${1:-HEAD}
-	local ref_deb=${2:-HEAD}
-	get_remote corevoikko suomimalaga/ suomimalaga "$ref_src"
-	get_remote debian-packages suomi-malaga+debian/ suomimalaga/debian \
-		"$ref_deb"
+	local ref_src=$1
+	local ref_deb=$2
+	get_remote corevoikko "$ref_src" "*/suomimalaga/*" 2 suomimalaga
+	get_remote debian-packages "$ref_deb" \
+		"*/suomi-malaga+debian/*" 2 suomimalaga/debian
 	cd suomimalaga || exit 1
 	update_changelog
 	build_deb
@@ -124,11 +116,11 @@ suomimalaga() {
 }
 
 libreoffice-voikko () {
-	local ref_src=${1:-HEAD}
-	local ref_deb=${2:-HEAD}
-	get_remote libreoffice-voikko "" libreoffice-voikko "$ref_src"
-	get_remote debian-packages libreoffice-voikko+debian/ \
-		libreoffice-voikko/debian "$ref_deb"
+	local ref_src=$1
+	local ref_deb=$2
+	get_remote libreoffice-voikko "$ref_src" "*" 1 libreoffice-voikko
+	get_remote debian-packages "$ref_deb" \
+		"*/libreoffice-voikko+debian/*" 2 libreoffice-voikko/debian
 	cd libreoffice-voikko || exit 1
 	update_changelog
 	build_deb
