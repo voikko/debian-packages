@@ -45,11 +45,12 @@ get_remote() {
 	local dest_dir=$5
 	local url=$(make_url "$repo" "$ref")
 	mkdir -p -- "$dest_dir"
-	(cd "$dest_dir" && \
-		wget -O - -- "$url" | \
+	cd "$dest_dir" || exit 1
+	wget -O - -- "$url" | \
 		tar --extract --gzip --wildcards \
-		--strip="$strip" "$pattern"
-	)
+		--no-wildcards-match-slash \
+		--strip="$strip" -- "$pattern"
+	cd - >/dev/null
 }
 
 update_changelog() {
