@@ -64,7 +64,7 @@ get_remote() {
 
 update_changelog() {
 	local source=$(dpkg-parsechangelog | awk '/^Source:/ {print $2}')
-	local version=99dev+$(date --utc +%Y%m%dT%H%M%SZ)
+	local version=99.dev.$(date --utc +%Y%m%dT%H%M%SZ)
 	local changelog_new=$(mktemp) || exit 1
 
 	printf "%s (%s-1) unstable; urgency=low\n\n" \
