@@ -69,9 +69,12 @@ update_changelog() {
 }
 
 build_deb() {
+	update_changelog
 	dpkg-checkbuilddeps || exit 1
 	fakeroot debian/rules clean || exit 1
 	fakeroot debian/rules binary || exit 1
+	echo
+	dpkg-parsechangelog
 }
 
 libvoikko() {
@@ -81,12 +84,7 @@ libvoikko() {
 	get_remote corevoikko "$ref_src" "*/libvoikko/*" 2 libvoikko
 	get_remote debian-packages "$ref_deb" \
 		"*/libvoikko+debian/*" 2 libvoikko/debian
-	cd libvoikko || exit 1
-	./autogen.sh || exit 1
-	update_changelog
-	build_deb
-	echo
-	dpkg-parsechangelog
+	cd libvoikko && ./autogen.sh && build_deb
 }
 
 mozvoikko() {
@@ -95,11 +93,7 @@ mozvoikko() {
 	get_remote mozvoikko "$ref_src" "*" 1 mozvoikko
 	get_remote debian-packages "$ref_deb" \
 		"*/mozvoikko+debian/*" 2 mozvoikko/debian
-	cd mozvoikko || exit 1
-	update_changelog
-	build_deb
-	echo
-	dpkg-parsechangelog
+	cd mozvoikko && build_deb
 }
 
 suomimalaga() {
@@ -108,11 +102,7 @@ suomimalaga() {
 	get_remote corevoikko "$ref_src" "*/suomimalaga/*" 2 suomimalaga
 	get_remote debian-packages "$ref_deb" \
 		"*/suomi-malaga+debian/*" 2 suomimalaga/debian
-	cd suomimalaga || exit 1
-	update_changelog
-	build_deb
-	echo
-	dpkg-parsechangelog
+	cd suomimalaga && build_deb
 }
 
 libreoffice-voikko () {
@@ -121,11 +111,7 @@ libreoffice-voikko () {
 	get_remote libreoffice-voikko "$ref_src" "*" 1 libreoffice-voikko
 	get_remote debian-packages "$ref_deb" \
 		"*/libreoffice-voikko+debian/*" 2 libreoffice-voikko/debian
-	cd libreoffice-voikko || exit 1
-	update_changelog
-	build_deb
-	echo
-	dpkg-parsechangelog
+	cd libreoffice-voikko && build_deb
 }
 
 print_usage() {
