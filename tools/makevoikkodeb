@@ -10,6 +10,8 @@ component=$1
 ref_src=${2:-HEAD}
 ref_deb=${3:-HEAD}
 
+cmd_line="$(basename -- "$0") $*"
+
 make_url() {
 	local component=$1
 	local ref=$2
@@ -60,8 +62,9 @@ update_changelog() {
 
 	printf "%s (%s-1) unstable; urgency=low\n\n" \
 		"$source" "$version" > "$changelog_new"
-	printf "  * A development snapshot.\n\n" >> \
-		"$changelog_new"
+	printf "  * A development snapshot. Built with command line\n" \
+		>> "$changelog_new"
+	printf "    \"%s\".\n\n" "$cmd_line" >> "$changelog_new"
 	printf " -- %s <%s>  %s\n\n" \
 		"${DEBFULLNAME:-Nobody}" "${DEBEMAIL:-nobody@invalid}" \
 		"$(date -R)" >> "$changelog_new"
