@@ -57,7 +57,8 @@ get_remote() {
 
 update_changelog() {
 	local source=$(dpkg-parsechangelog | awk '/^Source:/ {print $2}')
-	local version=99.dev.$(date --utc +%Y%m%dT%H%M%SZ)
+	local stamp=$(date +%s)
+	local version=99.dev.$(date --utc --date="@$stamp" +%Y%m%dT%H%M%SZ)
 	local changelog_new=$(mktemp) || exit 1
 
 	printf "%s (%s-1) unstable; urgency=low\n\n" \
@@ -67,7 +68,7 @@ update_changelog() {
 	printf "    \"%s\".\n\n" "$cmd_line" >> "$changelog_new"
 	printf " -- %s <%s>  %s\n\n" \
 		"${DEBFULLNAME:-Nobody}" "${DEBEMAIL:-nobody@invalid}" \
-		"$(date -R)" >> "$changelog_new"
+		"$(date -R --date="@$stamp")" >> "$changelog_new"
 	cat debian/changelog >> "$changelog_new"
 	mv -f -- "$changelog_new" debian/changelog
 }
