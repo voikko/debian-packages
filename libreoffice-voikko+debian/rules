@@ -13,7 +13,10 @@ build-arch: build-stamp
 build-indep: build-stamp
 build-stamp: 
 	dh_testdir
-	sh -c ". /usr/lib/libreoffice/sdk/setsdkenv_unix.sh && $(MAKE) VOIKKO_DEBUG=$(VOIKKO_DEBUG) oxt"
+	sh -c 'for sdk in /usr/lib/libreoffice/sdk/setsdkenv_unix.sh \
+			/usr/lib/libreoffice/basis-link/sdk/setsdkenv_unix.sh; \
+		do [ -r "$$sdk" ] && . "$$sdk"; done; \
+		$(MAKE) VOIKKO_DEBUG=$(VOIKKO_DEBUG) oxt'
 	touch build-stamp
 
 clean: 
