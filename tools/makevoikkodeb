@@ -15,7 +15,7 @@ cmd_line="$(basename -- "$0") $*"
 make_url() {
 	local component=$1
 	local ref=$2
-	printf 'https://github.com/voikko/%s/tarball/%s' "$component" "$ref"
+	printf 'https://github.com/voikko/%s/archive/%s.tar.gz' "$component" "$ref"
 }
 
 debs() {
