@@ -2,12 +2,45 @@ libvoikko (99devtest-1) unstable; urgency=low
 
   * Dummy changelog entry to bump local version number.
   * Intentional differences to official Debian packages:
-    - voikko-fi is in dependencies, not in suggests and breaks.
     - Binary packages are not stripped to make debugging easier.
     - Call dh_auto_test to run test suite after build.
     - enable experimental VFST backend
 
- -- Harri Pitkänen <hatapitk@iki.fi>  Sun, 29 Apr 2012 15:00:00 +0300
+ -- Harri Pitkänen <hatapitk@iki.fi>  Mon, 19 Aug 2013 15:00:00 +0300
+
+libvoikko (3.6-2) unstable; urgency=low
+
+  * Add 0001-Disable-voikkovfstc-by-default-since-VFST-is-still-e.patch
+    - Disable building experimental voikkovfstc reported by 
+      Mayhem (Closes: #716445).
+    - Add also autoreconf.patch for autoreconf run changes
+
+ -- Timo Jyrinki <timo@debian.org>  Sun, 14 Jul 2013 21:43:27 +0300
+
+libvoikko (3.6-1) unstable; urgency=low
+
+  * New upstream release
+  * Update debian/compat to 9
+  * Update Standards-Version
+  * Add hardening compile flags via hardening-wrapper build dep
+  * Migrate to multi-arch
+
+ -- Timo Jyrinki <timo@debian.org>  Mon, 13 May 2013 17:40:59 +0300
+
+libvoikko (3.5-1.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * debian/copyright:
+    - Add copyright information for UTF8-CPP library (Closes: #690392).
+
+ -- Luca Falavigna <dktrkranz@debian.org>  Sun, 21 Oct 2012 15:46:18 +0200
+
+libvoikko (3.5-1) unstable; urgency=low
+
+  * New upstream release
+  * Update Standards-Version
+
+ -- Timo Jyrinki <timo@debian.org>  Mon, 25 Jun 2012 22:36:42 +0300
 
 libvoikko (3.4.1-1) unstable; urgency=low
 
