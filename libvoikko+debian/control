@@ -1,7 +1,7 @@
 Source: libvoikko
 Priority: optional
 Maintainer: Timo Jyrinki <timo@debian.org>
-Build-Depends: debhelper (>= 9.0.0), dpkg-dev (>= 1.13.19), autotools-dev, python (>= 2.6.6-3~), hardening-wrapper
+Build-Depends: debhelper (>= 9.0.0), dpkg-dev (>= 1.13.19), autotools-dev, python (>= 2.6.6-3~)
 Standards-Version: 3.9.4
 Section: libs
 Homepage: http://voikko.sourceforge.net/
