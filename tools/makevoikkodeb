@@ -93,12 +93,13 @@ libvoikko() {
 }
 
 foma() {
+	local ref_src=$1
 	local ref_deb=$2
-	debs libreadline-gplv2-dev
-	# TODO download sources for Foma
+	debs libreadline-gplv2-dev libtool automake
+	svn co --revision $ref_src http://foma.googlecode.com/svn/branches/foma-autotools-branch foma || exit 1
 	get_remote debian-packages "$ref_deb" \
 		"*/foma+debian/*" 2 foma/debian
-	cd foma && build_deb
+	cd foma && ./autogen.sh && build_deb
 }
 
 mozvoikko() {
