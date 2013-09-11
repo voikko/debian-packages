@@ -1,0 +1,18 @@
+Source: foma
+Section: devel
+Priority: extra
+Maintainer: Harri Pitkänen <hatapitk@iki.fi>
+Build-Depends: debhelper (>= 8.0.0), autotools-dev
+Standards-Version: 3.9.4
+Homepage: http://code.google.com/p/foma/
+
+Package: foma
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Xerox-compatible finite-state compiler
+ Foma is a compiler, programming language, and C library for constructing
+ finite-state automata and transducers for various uses. It has specific
+ support for many natural language processing applications such as producing
+ morphological analyzers. Although NLP applications are probably the main use
+ of foma, it is sufficiently generic to use for a large number of purposes.
+

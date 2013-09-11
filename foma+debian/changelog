@@ -1,0 +1,5 @@
+foma (0.9.17+autotools-1) unstable; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Harri Pitkänen <hatapitk@iki.fi>  Wed, 11 Sep 2013 16:45:15 +0300
