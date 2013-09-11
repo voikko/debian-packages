@@ -95,7 +95,7 @@ libvoikko() {
 foma() {
 	local ref_src=$1
 	local ref_deb=$2
-	debs libreadline-gplv2-dev libtool automake bison
+	debs libreadline-gplv2-dev libtool automake bison flex
 	svn co --revision $ref_src http://foma.googlecode.com/svn/branches/foma-autotools-branch foma || exit 1
 	get_remote debian-packages "$ref_deb" \
 		"*/foma+debian/*" 2 foma/debian
