@@ -92,6 +92,15 @@ libvoikko() {
 	cd libvoikko && ./autogen.sh && build_deb
 }
 
+foma() {
+	local ref_deb=$2
+	debs libreadline-gplv2-dev
+	# TODO download sources for Foma
+	get_remote debian-packages "$ref_deb" \
+		"*/foma+debian/*" 2 foma/debian
+	cd foma && build_deb
+}
+
 mozvoikko() {
 	local ref_src=$1
 	local ref_deb=$2
@@ -145,7 +154,7 @@ EOF
 }
 
 case "$component" in
-libvoikko|libreoffice-voikko|suomimalaga|mozvoikko)
+libvoikko|foma|libreoffice-voikko|suomimalaga|mozvoikko)
 	debs build-essential fakeroot wget
 	"$component" "$ref_src" "$ref_deb"
 	;;
