@@ -1,0 +1,5 @@
+hfstospell (0.2.4-1) unstable; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Harri Pitkänen <hatapitk@iki.fi>  Fri, 13 Sep 2013 16:59:25 +0300

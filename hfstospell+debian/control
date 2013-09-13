@@ -1,0 +1,21 @@
+Source: hfstospell
+Priority: optional
+Maintainer: Harri Pitkänen <hatapitk@iki.fi>
+Build-Depends: debhelper (>= 8.0.0), autotools-dev, libxml++2-dev, libarchive-dev
+Standards-Version: 3.9.4
+Section: libs
+Homepage: http://hfst.sourceforge.net/
+
+Package: libhfstospell-dev
+Section: libdevel
+Architecture: any
+Depends: libhfstospell1 (= ${binary:Version})
+Description: Development files for libhfstospell
+ <insert long description, indented with spaces>
+
+Package: libhfstospell1
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: HFST optimized lookup format based spell checker library
+ <insert long description, indented with spaces>
