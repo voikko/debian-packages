@@ -102,6 +102,16 @@ foma() {
 	cd foma && ./autogen.sh && build_deb
 }
 
+hfstospell() {
+	local ref_src=$1
+	local ref_deb=$2
+	debs libtool automake libxml++2.6-dev libarchive-dev
+	svn co --revision $ref_src svn://svn.code.sf.net/p/hfst/code/trunk/hfst-ospell hfstospell || exit 1
+	get_remote debian-packages "$ref_deb" \
+		"*/hfstospell+debian/*" 2 hfstospell/debian
+	cd hfstospell && ./autogen.sh && build_deb
+}
+
 mozvoikko() {
 	local ref_src=$1
 	local ref_deb=$2
@@ -155,7 +165,7 @@ EOF
 }
 
 case "$component" in
-libvoikko|foma|libreoffice-voikko|suomimalaga|mozvoikko)
+libvoikko|foma|hfstospell|libreoffice-voikko|suomimalaga|mozvoikko)
 	debs build-essential fakeroot wget
 	"$component" "$ref_src" "$ref_deb"
 	;;
