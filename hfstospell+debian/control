@@ -1,7 +1,7 @@
 Source: hfstospell
 Priority: optional
 Maintainer: Harri Pitkänen <hatapitk@iki.fi>
-Build-Depends: debhelper (>= 8.0.0), autotools-dev, libxml++2-dev, libarchive-dev
+Build-Depends: debhelper (>= 8.0.0), autotools-dev, libxml++2.6-dev, libarchive-dev
 Standards-Version: 3.9.4
 Section: libs
 Homepage: http://hfst.sourceforge.net/
