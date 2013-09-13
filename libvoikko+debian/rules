@@ -34,7 +34,7 @@ ifneq "$(wildcard /usr/share/misc/config.guess)" ""
 endif
 
 	# Add here commands to configure the package.
-	./configure --host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE) --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info --with-dictionary-path=/usr/lib/voikko --libdir=/usr/lib/$(DEB_HOST_MULTIARCH) --enable-vfst
+	./configure --host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE) --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info --with-dictionary-path=/usr/lib/voikko --libdir=/usr/lib/$(DEB_HOST_MULTIARCH) --enable-vfst --enable-buildtools --enable-hfst
 
 
 build: build-arch build-indep
