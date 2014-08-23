@@ -2,9 +2,17 @@ mozvoikko (2.99-1) unstable; urgency=low
 
   * Dummy changelog entry to bump local version number.
   * Intentional differences to official Debian packages:
-    - remove maxVersion lines from install.rdf
+    - do not build transitional mozvoikko package
 
- -- Harri Pitkänen <hatapitk@iki.fi>  Sun, 01 Jan 2012 16:00:00 +0200
+ -- Harri Pitkänen <hatapitk@iki.fi>  Sat, 23 Aug 2014 10:00:00 +0200
+
+mozvoikko (2.0.1-1) unstable; urgency=low
+
+  * New upstream release 
+  * Change package name to xul-ext-mozvoikko and provide a transitional package
+  * Remove old "(c)" notation from debian/copyrigt
+
+ -- Heikki Mäntysaari <heikki.mantysaari@linux.fi>  Mon, 09 Jan 2012 22:06:18 +0200
 
 mozvoikko (2.0-1) unstable; urgency=low
 

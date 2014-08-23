@@ -3,7 +3,7 @@ on Wed, 09 Apr 2008 19:20:12 +0300.
 
 It was downloaded from http://voikko.sourceforge.net 
 
-Copyright (C) 2008:
+Copyright 2008-2012:
     
     Andris Pavenis <andris.pavenis@iki.fi> 
     Harri Pitkänen <hatapitk@iki.fi>
@@ -27,6 +27,6 @@ License:
 On Debian systems, the complete text of the GNU General
 Public License can be found in `/usr/share/common-licenses/GPL'.
 
-The Debian packaging is (C) 2008, Heikki Mäntysaari 
+The Debian packaging is Copyright 2008-2012, Heikki Mäntysaari 
 <heikki.mantysaari@linux.fi> and is licensed under the GPL, either
 version 2 of the License, or (at your option), any later version, see above.

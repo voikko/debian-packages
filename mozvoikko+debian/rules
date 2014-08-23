@@ -1,59 +1,8 @@
 #!/usr/bin/make -f
-# Sample debian/rules that uses debhelper.
-# This file was originally written by Joey Hess and Craig Small.
-# As a special exception, when this file is copied by dh-make into a
-# dh-make output file, you may use that output file without restriction.
-# This special exception was added by Craig Small in version 0.37 of dh-make.
 
-# Uncomment this to turn on verbose mode.
-#export DH_VERBOSE=1
+%:
+	dh $@ --with xul-ext
 
-# ID from src/Makefile.xulrunner
-ICEWEASEL_ID={ec8030f7-c20a-464f-9b0e-13a3a9e97384}
+override_dh_auto_install:
+	install-xpi mozvoikko2.xpi
 
-EXT_ID={b676e3ff-cda7-4e0c-b2b8-74e4bb40a67a}
-EXTENSION_DIR=/usr/share/mozilla/extensions/$(ICEWEASEL_ID)/$(EXT_ID)
-
-configure: configure-stamp
-configure-stamp:
-	dh_testdir
-
-	touch configure-stamp
-
-
-clean:
-	dh_testdir
-	dh_testroot
-	rm -f configure-stamp install.rdf.unrestricted
-	dh_clean 
-
-install: 
-	dh_testdir
-	dh_testroot
-	dh_clean -k 
-	dh_installdirs
-
-	# Add here commands to install the package
-	mkdir -p debian/mozvoikko/$(EXTENSION_DIR)/components
-	sed -e 's/<em:maxVersion>.*</<em:maxVersion>9999</' < install.rdf > install.rdf.unrestricted
-	install -m 644 install.rdf.unrestricted debian/mozvoikko/$(EXTENSION_DIR)/install.rdf
-	install -m 644 chrome.manifest debian/mozvoikko/$(EXTENSION_DIR)/
-	install -m 644 components/MozVoikko2.js debian/mozvoikko/$(EXTENSION_DIR)/components/
-# Build architecture-independent files here.
-binary-indep: build install
-	dh_testdir
-	dh_testroot
-	dh_installchangelogs ChangeLog
-	dh_installdocs
-	dh_installexamples
-	dh_install
-	dh_installman
-	dh_compress
-	dh_fixperms
-	dh_installdeb
-	dh_gencontrol
-	dh_md5sums
-	dh_builddeb
-
-binary: binary-indep binary-arch
-.PHONY: build clean binary-indep binary-arch binary install configure
