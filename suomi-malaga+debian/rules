@@ -23,7 +23,7 @@ build: build-stamp
 build-stamp: 
 	dh_testdir
 	# Add here commands to compile the package.
-	$(MAKE) voikko
+	$(MAKE) voikko SM_BUILDDATE="$(shell dpkg-parsechangelog | sed -n -e 's/^Date: //p')"
 	touch build-stamp
 
 clean:
