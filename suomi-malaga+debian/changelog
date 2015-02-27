@@ -1,11 +1,106 @@
-suomi-malaga (1.5-1) unstable; urgency=low
+suomi-malaga (99devtest-1) unstable; urgency=low
 
   * Bump local version number.
   * Intentional differences to official Debian packages:
     - linux-distributions.lex is not included because testing is done
       with vendor neutral vocabulary.
+    - use timestamp from changelog
 
- -- Harri Pitkänen <hatapitk@iki.fi>  Fri, 16 Oct 2009 14:00:00 +0200
+ -- Harri Pitkänen <hatapitk@iki.fi>  Fri, 27 Feb 2015 14:00:00 +0200
+
+suomi-malaga (1.18-1) experimental; urgency=medium
+
+  * Imported Upstream version 1.18
+
+ -- Timo Jyrinki <timo@debian.org>  Tue, 10 Feb 2015 16:21:32 +0200
+
+suomi-malaga (1.17-1) unstable; urgency=medium
+
+  * Imported Upstream version 1.17
+
+ -- Timo Jyrinki <timo@debian.org>  Mon, 25 Aug 2014 12:00:31 +0300
+
+suomi-malaga (1.16-1) unstable; urgency=medium
+
+  * Imported Upstream version 1.16
+  * Update Standards-Version
+
+ -- Timo Jyrinki <timo@debian.org>  Wed, 02 Apr 2014 20:20:35 +0300
+
+suomi-malaga (1.15-1) unstable; urgency=low
+
+  * Update watch URL
+  * Update Homepage address and add Debian collab-maint git vcs addresses
+  * Imported Upstream version 1.15
+  * Switch more to debhelper defaults
+  * Bump debhelper from 5 to 9
+
+ -- Timo Jyrinki <timo@debian.org>  Mon, 11 Nov 2013 19:00:24 +0200
+
+suomi-malaga (1.14-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Timo Jyrinki <timo@debian.org>  Tue, 23 Jul 2013 14:53:03 +0300
+
+suomi-malaga (1.13-1) unstable; urgency=low
+
+  * New upstream release
+  * Update Standards-Version
+  * copyright: Update to fix lintian warning
+
+ -- Timo Jyrinki <timo@debian.org>  Mon, 13 May 2013 16:24:24 +0300
+
+suomi-malaga (1.12-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Timo Jyrinki <timo@debian.org>  Mon, 25 Jun 2012 22:25:28 +0300
+
+suomi-malaga (1.11-1) unstable; urgency=low
+
+  * New upstream release
+  * Update Standards-Version
+  * Add recommended build targets
+
+ -- Timo Jyrinki <timo@debian.org>  Tue, 27 Mar 2012 14:00:29 +0300
+
+suomi-malaga (1.10-1) unstable; urgency=low
+
+  * New upstream release
+  * Update Standards-Version
+  * Remove duplicate Section from control file
+  * Remove beginning article from the short description
+
+ -- Timo Jyrinki <timo@debian.org>  Fri, 23 Sep 2011 09:19:10 +0300
+
+suomi-malaga (1.9-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Timo Jyrinki <timo@debian.org>  Wed, 11 May 2011 12:47:31 +0300
+
+suomi-malaga (1.8-1) unstable; urgency=low
+
+  * New upstream release
+  * Update Standards-Version
+
+ -- Timo Jyrinki <timo@debian.org>  Mon, 13 Dec 2010 18:48:51 +0200
+
+suomi-malaga (1.6-1) unstable; urgency=low
+
+  * New upstream release
+  * Update Standards-Version to 3.8.4
+  * Change to 3.0 (quilt) source version
+
+ -- Timo Jyrinki <timo@debian.org>  Wed, 26 May 2010 21:39:32 +0300
+
+suomi-malaga (1.5-1) unstable; urgency=low
+
+  * New upstream release
+  * Fix lintian warning about relation form
+
+ -- Timo Jyrinki <timo@debian.org>  Wed, 27 Jan 2010 17:49:59 +0200
 
 suomi-malaga (1.4-1) unstable; urgency=low
 
