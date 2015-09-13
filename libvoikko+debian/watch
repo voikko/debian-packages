@@ -1,4 +1,4 @@
 version=3
 
-http://sf.net/voikko/libvoikko-(.*)\.tar\.gz
+http://www.puimula.org/voikko-sources/libvoikko/libvoikko-(.*)\.tar\.gz
 
