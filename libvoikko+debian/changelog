@@ -4,6 +4,7 @@ libvoikko (99devtest-1) unstable; urgency=low
   * Intentional differences to official Debian packages:
     - enable HFST backend (not yet available in Debian)
     - enable experimental VFST backend
+    - build python3-libvoikko instead of python-libvoikko
 
  -- Harri Pitkänen <hatapitk@iki.fi>  Sun, 13 Sep 2015 15:00:00 +0300
 

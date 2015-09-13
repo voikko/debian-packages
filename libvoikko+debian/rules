@@ -11,11 +11,11 @@ DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 export DEB_BUILD_HARDENING=1
 
 %:
-	dh $@ --fail-missing --with python2,autoreconf
+	dh $@ --fail-missing --with python3,autoreconf
 
 override_dh_auto_configure:
 	dh_auto_configure -- --host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE) --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info --with-dictionary-path=/usr/lib/voikko --libdir=/usr/lib/$(DEB_HOST_MULTIARCH) --enable-vfst --enable-buildtools --enable-hfst
 
 override_dh_auto_install:
 	dh_auto_install
-	install -m 644 -D python/libvoikko.py debian/python-libvoikko/usr/lib/$$(pyversions -d)/dist-packages/libvoikko.py
+	install -m 644 -D python/libvoikko.py debian/python3-libvoikko/usr/lib/$$(py3versions -d)/dist-packages/libvoikko.py
