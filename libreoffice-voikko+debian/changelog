@@ -1,9 +1,69 @@
 libreoffice-voikko (99-1) unstable; urgency=low
 
   * Dummy changelog entry to bump local version number.
-  * SDK path changed for LO 3.5.
+  * Changes needed to support version 5.0 written in Python, not C++.
 
- -- Harri Pitkänen <hatapitk@iki.fi>  Mon, 02 Jan 2012 17:00:00 +0200
+ -- Harri Pitkänen <hatapitk@iki.fi>  Tue, 06 Oct 2015 17:00:00 +0300
+
+libreoffice-voikko (4.1-1) unstable; urgency=medium
+
+  * Imported Upstream version 4.1
+
+ -- Timo Jyrinki <timo@debian.org>  Mon, 29 Sep 2014 14:33:52 +0300
+
+libreoffice-voikko (4.0-1) unstable; urgency=medium
+
+  * Update watch file
+  * Imported Upstream version 4.0
+  * Drop both patches not needed anymore
+  * Update package description to match current upstream description
+  * Add Vcs urls
+
+ -- Timo Jyrinki <timo@debian.org>  Sat, 07 Dec 2013 18:36:31 +0200
+
+libreoffice-voikko (3.4.1-2) unstable; urgency=low
+
+  [ Rene Engelhard ]
+  * fix build with LibreOffice 4.1.0
+
+ -- Timo Jyrinki <timo@debian.org>  Sun, 28 Jul 2013 20:21:05 +0300
+
+libreoffice-voikko (3.4.1-1) unstable; urgency=low
+
+  * New upstream release
+  * debian/rules: add clean/test targets, adjust install
+
+ -- Timo Jyrinki <timo@debian.org>  Tue, 23 Jul 2013 18:22:50 +0300
+
+libreoffice-voikko (3.4-1) unstable; urgency=low
+
+  * New upstream release
+  * Change to debhelper 9, simplify packaging
+  * Update Standards-Version
+  * Enable hardening-wrapper
+  * Add lintian-override for the image file
+
+ -- Timo Jyrinki <timo@debian.org>  Tue, 21 May 2013 19:08:10 +0300
+
+libreoffice-voikko (3.3-3) unstable; urgency=low
+
+  * Upload to unstable
+  * Update Standards-Version
+
+ -- Timo Jyrinki <timo@debian.org>  Wed, 04 Apr 2012 11:32:35 +0300
+
+libreoffice-voikko (3.3-2) experimental; urgency=low
+
+  [ Rene Engelhard ]
+  * stop using basis-link. it's gone (Closes: #661181)
+
+ -- Timo Jyrinki <timo@debian.org>  Sat, 25 Feb 2012 11:21:28 +0200
+
+libreoffice-voikko (3.3-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Timo Jyrinki <timo@debian.org>  Tue, 07 Feb 2012 20:54:27 +0200
 
 libreoffice-voikko (3.2-3) unstable; urgency=low
 

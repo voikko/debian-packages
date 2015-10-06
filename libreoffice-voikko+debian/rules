@@ -1,60 +1,13 @@
 #!/usr/bin/make -f
 
-CC_FLAGS = -Wall -g
+%:
+	dh $@ --fail-missing --parallel
 
-ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
-	VOIKKO_DEBUG = FULL
-else
-	VOIKKO_DEBUG = NO
-endif
+override_dh_auto_build:
+	$(MAKE) oxt
 
-build: build-arch build-indep
-build-arch: build-stamp
-build-indep: build-stamp
-build-stamp: 
-	dh_testdir
-	sh -c 'for sdk in /usr/lib/libreoffice/sdk/setsdkenv_unix.sh \
-			/usr/lib/libreoffice/basis-link/sdk/setsdkenv_unix.sh; \
-		do [ -r "$$sdk" ] && . "$$sdk"; done; \
-		$(MAKE) VOIKKO_DEBUG=$(VOIKKO_DEBUG) oxt'
-	touch build-stamp
-
-clean: 
-	dh_testdir
-	dh_testroot
-	rm -f build-stamp
-	-rm -rf build
-	dh_clean 
-
-install: build
-	dh_testdir
-	dh_testroot
-	dh_prep
-	dh_installdirs
+override_dh_auto_install:
 	mkdir -p debian/tmp/usr/lib/libreoffice/share/extensions/voikko
 	unzip -d debian/tmp/usr/lib/libreoffice/share/extensions/voikko/ build/voikko.oxt
 
-# Build architecture-independent files here.
-binary-indep: build install
-# We have nothing to do by default.
-
-# Build architecture-dependent files here.
-binary-arch: build install
-	dh_testdir
-	dh_testroot
-	dh_installchangelogs ChangeLog
-	dh_installdocs
-	dh_installexamples
-	dh_install
-	dh_link
-	dh_strip
-	dh_compress
-	dh_fixperms
-	dh_installdeb
-	dh_shlibdeps
-	dh_gencontrol
-	dh_md5sums
-	dh_builddeb
-
-binary: binary-indep binary-arch
-.PHONY: build clean binary-indep binary-arch binary install configure
+override_dh_auto_test:
