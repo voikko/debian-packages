@@ -124,13 +124,13 @@ mozvoikko() {
 	cd mozvoikko && build_deb
 }
 
-suomimalaga() {
+voikko-fi() {
 	local ref_src=$1
 	local ref_deb=$2
-	get_remote corevoikko "$ref_src" "*/suomimalaga/*" 2 suomimalaga
+	get_remote corevoikko "$ref_src" "*/voikko-fi/*" 2 voikko-fi
 	get_remote debian-packages "$ref_deb" \
-		"*/suomi-malaga+debian/*" 2 suomimalaga/debian
-	cd suomimalaga && build_deb
+		"*/voikko-fi+debian/*" 2 voikko-fi/debian
+	cd voikko-fi && build_deb
 }
 
 libreoffice-voikko () {
@@ -154,7 +154,7 @@ current directory.
 
 Usage: $name <component> [source ref] [debian ref]
 
-  <component>  = suomimalaga | libvoikko | libreoffice-voikko | mozvoikko
+  <component>  = voikko-fi | libvoikko | libreoffice-voikko | mozvoikko
 
   [source ref] = A reference to the commit of the source code to be
                  downloaded. It must be a valid Git commit reference
@@ -168,7 +168,7 @@ EOF
 }
 
 case "$component" in
-libvoikko|foma|hfstospell|libreoffice-voikko|suomimalaga|mozvoikko)
+libvoikko|foma|hfstospell|libreoffice-voikko|voikko-fi|mozvoikko)
 	debs build-essential fakeroot wget
 	"$component" "$ref_src" "$ref_deb"
 	;;
