@@ -3,10 +3,11 @@ libvoikko (99devtest-1) unstable; urgency=low
   * Dummy changelog entry to bump local version number.
   * Intentional differences to official Debian packages:
     - enable HFST backend (not yet available in Debian)
-    - enable experimental VFST backend
+    - enable VFST backend
+    - enable Malaga backend that is now disabled by default
     - build python3-libvoikko instead of python-libvoikko
 
- -- Harri Pitkänen <hatapitk@iki.fi>  Sun, 13 Sep 2015 15:00:00 +0300
+ -- Harri Pitkänen <hatapitk@iki.fi>  Sat, 31 Oct 2015 18:00:00 +0200
 
 libvoikko (3.7.1-1) unstable; urgency=medium
 
