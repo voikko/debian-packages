@@ -2,5 +2,5 @@
 version=3
 
 # Full-site-with-pattern  [Version  [Action]]
-http://www.puimula.org/voikko-sources/suomi-malaga/suomi-malaga-(.*)\.tar\.gz
+http://www.puimula.org/voikko-sources/voikko-fi/voikko-fi-(.*)\.tar\.gz
 

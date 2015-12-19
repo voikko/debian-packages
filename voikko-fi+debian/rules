@@ -4,8 +4,8 @@
 	dh $@ --fail-missing
 
 override_dh_auto_build:
-	$(MAKE) voikko SM_BUILDDATE="$(shell dpkg-parsechangelog | sed -n -e 's/^Date: //p')"
+	$(MAKE) vvfst SM_BUILDDATE="$(shell dpkg-parsechangelog | sed -n -e 's/^Date: //p')"
 	
 override_dh_auto_install:
-	$(MAKE) voikko-install DESTDIR=$(CURDIR)/debian/voikko-fi/usr/lib/voikko
+	$(MAKE) vvfst-install DESTDIR=$(CURDIR)/debian/voikko-fi/usr/lib/voikko
 

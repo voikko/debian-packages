@@ -1,12 +1,14 @@
-suomi-malaga (99devtest-1) unstable; urgency=low
+voikko-fi (99devtest-1) unstable; urgency=low
 
   * Bump local version number.
   * Intentional differences to official Debian packages:
     - linux-distributions.lex is not included because testing is done
       with vendor neutral vocabulary.
     - use timestamp from changelog
+    - new source package name
+    - build format 5 dictionary instead of format 2
 
- -- Harri Pitkänen <hatapitk@iki.fi>  Fri, 27 Feb 2015 14:00:00 +0200
+ -- Harri Pitkänen <hatapitk@iki.fi>  Sat, 19 Dec 2015 14:00:00 +0200
 
 suomi-malaga (1.18-1) experimental; urgency=medium
 

@@ -1,8 +1,8 @@
-Source: suomi-malaga
+Source: voikko-fi
 Section: text
 Priority: optional
 Maintainer: Timo Jyrinki <timo@debian.org>
-Build-Depends: debhelper (>= 9.0.0), malaga-bin (>= 7.8), python
+Build-Depends: debhelper (>= 9.0.0), foma, python3
 Standards-Version: 3.9.5
 Homepage: http://voikko.puimula.org/
 Vcs-Git: git://anonscm.debian.org/collab-maint/suomi-malaga.git
