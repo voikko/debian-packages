@@ -1,5 +1,5 @@
 etc
 usr/bin
-usr/share/man
-usr/share/locale
 usr/share/lintian/overrides
+usr/share/locale
+usr/share/man

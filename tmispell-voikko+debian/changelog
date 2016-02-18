@@ -1,11 +1,37 @@
-tmispell-voikko (0.7.2-1) unstable; urgency=low
+tmispell-voikko (0.7.3-1) unstable; urgency=low
 
   * Dummy changelog entry to bump local version number.
-  * Intentional differences to official Debian packages:
-    - Do not build-depend on libmalaga-dev.
-    - Do not depend on voikko-fi.
 
- -- Harri Pitkänen <hatapitk@iki.fi>  Thu, 12 Aug 2010 10:00:00 +0200
+ -- Harri Pitkänen <hatapitk@iki.fi>  Thu, 18 Feb 2016 20:00:00 +0200
+
+tmispell-voikko (0.7.1-4) unstable; urgency=medium
+
+  * Drop unneeded libmalaga-dev dependency.
+  * Update Standards-Version (no changes).
+  * Bump debian/compat and debhelper dependency to 9.
+  * Clean up debian/rules.
+  * Run wrap-and-sort -a -t.
+
+ -- Timo Jyrinki <timo@debian.org>  Wed, 17 Feb 2016 11:18:58 +0200
+
+tmispell-voikko (0.7.1-3) unstable; urgency=low
+
+  [ Harri Pitkänen]
+  * Add -vv option (Closes: #592698)
+
+ -- Timo Jyrinki <timo@debian.org>  Wed, 28 Mar 2012 10:43:15 +0300
+
+tmispell-voikko (0.7.1-2) unstable; urgency=low
+
+  * Update Standards-Version
+  * Add recommended build targets
+  * Bump dephelper, add ${misc:Depends}
+  * Switch to 3.0 (quilt) package format
+  * Add patch to not include individual glib headers (Closes: #665620)
+  * Remove duplicate section mention in debian/control
+  * Replace dh_clean -k with dh_prep
+
+ -- Timo Jyrinki <timo@debian.org>  Tue, 27 Mar 2012 14:56:44 +0300
 
 tmispell-voikko (0.7.1-1) unstable; urgency=low
 
