@@ -1,13 +1,74 @@
 libvoikko (99devtest-1) unstable; urgency=low
-
+ 
   * Dummy changelog entry to bump local version number.
   * Intentional differences to official Debian packages:
-    - enable HFST backend (not yet available in Debian)
-    - enable VFST backend
-    - enable Malaga backend that is now disabled by default
-    - build python3-libvoikko instead of python-libvoikko
+    - enable experimental VFST features
+ 
+ -- Harri Pitkänen <hatapitk@iki.fi>  Thu, 09 Mar 2017 22:00:00 +0200
 
- -- Harri Pitkänen <hatapitk@iki.fi>  Sat, 31 Oct 2015 18:00:00 +0200
+libvoikko (4.1-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Bump Standards-Version (no changes).
+
+ -- Timo Jyrinki <timo@debian.org>  Mon, 02 Jan 2017 13:02:06 +0200
+
+libvoikko (4.0.2-2) unstable; urgency=medium
+
+  * Release to unstable.
+
+ -- Timo Jyrinki <timo@debian.org>  Thu, 03 Mar 2016 17:31:28 +0200
+
+libvoikko (4.0.2-1) experimental; urgency=medium
+
+  [ Timo Jyrinki ]
+  * Run wrap-and-sort -a -t
+  * New upstream version.
+  * Enable HFST support and add /usr/share/voikko to dictionary paths.
+    - Build depend on hfst-ospell-dev
+  * Replace Conflicts with Breaks for the python package transition.
+  * Use https vcs urls.
+  * Remove use of hardening-wrapper but add hardening=+all to keep status quo.
+  * Update package description for the backend changes.
+
+  [ Tino Didriksen ]
+  * Clean up debian/rules and debian/control.
+  * Remove .la files.
+
+ -- Timo Jyrinki <timo@debian.org>  Thu, 25 Feb 2016 18:23:16 +0200
+
+libvoikko (4.0.1-3) unstable; urgency=medium
+
+  * Rename python-voikko to python3-voikko since it's for Python 3
+    since libvoikko 4.0.1 release.
+  * Add Replaces/Conflicts/Provides and a transitional package.
+
+ -- Timo Jyrinki <timo@debian.org>  Mon, 15 Feb 2016 10:19:37 +0200
+
+libvoikko (4.0.1-2) unstable; urgency=medium
+
+  * Fix python install location.
+
+ -- Timo Jyrinki <timo@debian.org>  Wed, 10 Feb 2016 17:39:20 +0200
+
+libvoikko (4.0.1-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Now requires Python 3.
+  * Use VFST backend only, HFST currently not in Debian.
+  * Disable tests because it'd mean circular dependency regarding voikko-fi.
+  * Breaks voikko-fi <= 2.0
+
+ -- Timo Jyrinki <timo@debian.org>  Tue, 09 Feb 2016 09:10:36 +0200
+
+libvoikko (3.8-1) unstable; urgency=medium
+
+  * Imported Upstream version 3.8
+  * Bump Standards-Version
+  * Remove Pre-Depends: multiarch-support
+  * Build-dep on dh-python
+
+ -- Timo Jyrinki <timo@debian.org>  Mon, 28 Sep 2015 17:33:36 +0300
 
 libvoikko (3.7.1-1) unstable; urgency=medium
 
