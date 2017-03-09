@@ -85,7 +85,7 @@ build_deb() {
 libvoikko() {
 	local ref_src=$1
 	local ref_deb=$2
-	debs libtool automake libhfstospell-dev
+	debs libtool automake hfst-ospell-dev
 	get_remote corevoikko "$ref_src" "*/libvoikko/*" 2 libvoikko
 	get_remote debian-packages "$ref_deb" \
 		"*/libvoikko+debian/*" 2 libvoikko/debian
@@ -103,16 +103,6 @@ foma() {
 	get_remote debian-packages "$ref_deb" \
 		"*/foma+debian/*" 2 foma/debian
 	cd foma && autoreconf --force --install && build_deb
-}
-
-hfstospell() {
-	local ref_src=$1
-	local ref_deb=$2
-	debs libtool automake libxml++2.6-dev libarchive-dev
-	svn co --revision $ref_src svn://svn.code.sf.net/p/hfst/code/trunk/hfst-ospell hfstospell || exit 1
-	get_remote debian-packages "$ref_deb" \
-		"*/hfstospell+debian/*" 2 hfstospell/debian
-	cd hfstospell && ./autogen.sh && build_deb
 }
 
 mozvoikko() {
@@ -168,7 +158,7 @@ EOF
 }
 
 case "$component" in
-libvoikko|foma|hfstospell|libreoffice-voikko|voikko-fi|mozvoikko)
+libvoikko|foma|libreoffice-voikko|voikko-fi|mozvoikko)
 	debs build-essential fakeroot wget
 	"$component" "$ref_src" "$ref_deb"
 	;;
