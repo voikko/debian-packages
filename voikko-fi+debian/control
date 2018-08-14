@@ -2,18 +2,25 @@ Source: voikko-fi
 Section: text
 Priority: optional
 Maintainer: Timo Jyrinki <timo@debian.org>
-Build-Depends: debhelper (>= 9.0.0), foma, python3
-Standards-Version: 3.9.5
+Build-Depends: debhelper (>= 9.0.0),
+               foma-bin,
+               libvoikko-dev (>= 4.0),
+               python3,
+Standards-Version: 4.0.0
 Homepage: http://voikko.puimula.org/
 Vcs-Git: git://anonscm.debian.org/collab-maint/suomi-malaga.git
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/suomi-malaga.git;a=summary
 
 Package: voikko-fi
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Breaks: libvoikko1 (<< 2.2-1)
-Description: Description of Finnish morphology written in Malaga
- Suomi-Malaga is a description of Finnish morphology written in Malaga.
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+Breaks: libvoikko1 (<< 2.2-1),
+Description: Description of Finnish morphology written for libvoikko
+ Voikko-fi (previously known as suomi-malaga) is a description of Finnish
+ morphology written for libvoikko.
  .
- This package contains a compiled version of Suomi-Malaga and basic Finnish
- vocabulary suitable for use in spell-checking and hyphenation system Voikko.
+ This package contains a compiled version of Voikko-fi using the new
+ unweighted VFST dictionary format. It is suitable for use in spell checking,
+ grammar checking and hyphenation system Voikko, provided by the libvoikko
+ library.

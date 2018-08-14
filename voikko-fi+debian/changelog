@@ -4,11 +4,58 @@ voikko-fi (99devtest-1) unstable; urgency=low
   * Intentional differences to official Debian packages:
     - linux-distributions.lex is not included because testing is done
       with vendor neutral vocabulary.
-    - use timestamp from changelog
-    - new source package name
-    - build format 5 dictionary instead of format 2
+    - source date epoch patch removed (included upstream)
 
- -- Harri Pitkänen <hatapitk@iki.fi>  Sat, 19 Dec 2015 14:00:00 +0200
+ -- Harri Pitkänen <hatapitk@iki.fi>  Tue, 14 Aug 2018 13:00:00 +0300
+
+voikko-fi (2.2-1) unstable; urgency=medium
+
+  * New upstream version.
+  * Rebase 10_source_date_epoch.patch
+  * Bump Standards-Version to 4.0.0.
+
+ -- Timo Jyrinki <timo@debian.org>  Fri, 08 Sep 2017 16:05:40 +0300
+
+voikko-fi (2.1-1) unstable; urgency=medium
+
+  * New upstream version.
+  * Run wrap-and-sort -a -f.
+  * Rebase 10_source_date_epoch.patch.
+  * Bump Standards-Version, no changes.
+
+ -- Timo Jyrinki <timo@debian.org>  Fri, 11 Nov 2016 11:06:22 +0200
+
+voikko-fi (2.0-3) unstable; urgency=medium
+
+  * Rename source to voikko-fi to match upstream project rename and
+    the fact that malaga is no longer used.
+
+ -- Timo Jyrinki <timo@debian.org>  Tue, 16 Feb 2016 14:10:04 +0200
+
+suomi-malaga (2.0-2) unstable; urgency=medium
+
+  * Improve package description now that malaga is no longer used.
+
+ -- Timo Jyrinki <timo@debian.org>  Thu, 11 Feb 2016 10:12:36 +0200
+
+suomi-malaga (2.0-1) unstable; urgency=medium
+
+  [ Timo Jyrinki ]
+  * New upstream major version.
+  * Drops malaga usage, uses now VFST (Varissuo Finite State Transducer).
+  * Require libvoikko-dev >= 4.0 for building. 
+  * Drop malaga-bin, switch to Python 3.
+  * Bump Standards-Version, no changes.
+  * debian/watch: update url (now called voikko-fi)
+  * debian/rules: adjust to build using vvfst parameter
+  * Require foma for building.
+  * Use C.UTF-8 locale for a successful (and more reproducible) build.
+
+  [ Chris Lamb ]
+  * debian/patches/10_source_date_epoch.patch: reproducible build
+    (Closes: #807161)
+
+ -- Timo Jyrinki <timo@debian.org>  Wed, 10 Feb 2016 17:04:22 +0200
 
 suomi-malaga (1.18-1) experimental; urgency=medium
 

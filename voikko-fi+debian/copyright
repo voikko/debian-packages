@@ -7,7 +7,7 @@ The current Debian maintainer is Timo Jyrinki <timo@debian.org>.
 It was downloaded from http://downloads.sourceforge.net/voikko/
 
 Upstream authors:
-Copyright (C) 2005-2008: Hannu Väisänen <hannu.vaisanen@joensuu.fi>, 
+Copyright (C) 2005-2008: Hannu Väisänen <hannu.vaisanen@joensuu.fi>,
 Harri Pitkänen <hatapitk@iki.fi> and:
 
 The following people have directly contributed material to the vocabulary:
@@ -65,7 +65,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 On Debian systems the complete text of GNU General Public License is
 located in the file /usr/share/common-licenses/GPL-2.
 
-The Debian packaging is Copyright (C) 2006, Teemu Likonen <tlikonen@iki.fi> 
-and Timo Jyrinki <timo.jyrinki@iki.fi> and is licensed under the GPL, see 
+The Debian packaging is Copyright (C) 2006, Teemu Likonen <tlikonen@iki.fi>
+and Timo Jyrinki <timo.jyrinki@iki.fi> and is licensed under the GPL, see
 above.
-

@@ -1,10 +1,13 @@
 #!/usr/bin/make -f
 
+LC_ALL := C.UTF-8
+export LC_ALL
+
 %:
 	dh $@ --fail-missing
 
 override_dh_auto_build:
-	$(MAKE) vvfst SM_BUILDDATE="$(shell dpkg-parsechangelog | sed -n -e 's/^Date: //p')"
+	$(MAKE) vvfst
 	
 override_dh_auto_install:
 	$(MAKE) vvfst-install DESTDIR=$(CURDIR)/debian/voikko-fi/usr/lib/voikko
