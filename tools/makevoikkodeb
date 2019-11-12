@@ -85,7 +85,7 @@ build_deb() {
 libvoikko() {
 	local ref_src=$1
 	local ref_deb=$2
-	debs libtool automake hfst-ospell-dev
+	debs libtool automake hfst-ospell-dev pkg-config gettext
 	get_remote corevoikko "$ref_src" "*/libvoikko/*" 2 libvoikko
 	get_remote debian-packages "$ref_deb" \
 		"*/libvoikko+debian/*" 2 libvoikko/debian
