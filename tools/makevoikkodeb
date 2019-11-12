@@ -85,7 +85,7 @@ build_deb() {
 libvoikko() {
 	local ref_src=$1
 	local ref_deb=$2
-	debs libtool automake hfst-ospell-dev pkg-config gettext
+	debs libtool automake hfst-ospell-dev pkg-config gettext dh-autoreconf dh-python
 	get_remote corevoikko "$ref_src" "*/libvoikko/*" 2 libvoikko
 	get_remote debian-packages "$ref_deb" \
 		"*/libvoikko+debian/*" 2 libvoikko/debian
@@ -159,7 +159,7 @@ EOF
 
 case "$component" in
 libvoikko|foma|libreoffice-voikko|voikko-fi|mozvoikko)
-	debs build-essential fakeroot wget
+	debs build-essential fakeroot wget debhelper python3
 	"$component" "$ref_src" "$ref_deb"
 	;;
 *)
