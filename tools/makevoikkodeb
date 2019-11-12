@@ -117,6 +117,7 @@ mozvoikko() {
 voikko-fi() {
 	local ref_src=$1
 	local ref_deb=$2
+	debs foma-bin libvoikko-dev
 	get_remote corevoikko "$ref_src" "*/voikko-fi/*" 2 voikko-fi
 	get_remote debian-packages "$ref_deb" \
 		"*/voikko-fi+debian/*" 2 voikko-fi/debian
