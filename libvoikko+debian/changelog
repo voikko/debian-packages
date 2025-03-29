@@ -3,6 +3,7 @@ libvoikko (99devtest-1) unstable; urgency=low
   * Dummy changelog entry to bump local version number.
   * Intentional differences to official Debian packages:
     - enable experimental VFST features
+    - enable "make test"
  
  -- Harri Pitkänen <hatapitk@iki.fi>  Sat, 29 Mar 2025 19:00:00 +0200
 
