@@ -4,7 +4,76 @@ libvoikko (99devtest-1) unstable; urgency=low
   * Intentional differences to official Debian packages:
     - enable experimental VFST features
  
- -- Harri Pitkänen <hatapitk@iki.fi>  Thu, 09 Mar 2017 22:00:00 +0200
+ -- Harri Pitkänen <hatapitk@iki.fi>  Sat, 29 Mar 2025 19:00:00 +0200
+
+libvoikko (4.3.2-1) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Use secure URI in Homepage field.
+  * Set debhelper-compat version in Build-Depends.
+  * Drop unnecessary dependency on dh-autoreconf.
+
+  [ Timo Jyrinki ]
+  * New upstream release. (Closes: #1037745)
+
+ -- Timo Jyrinki <timo@debian.org>  Wed, 14 Jun 2023 14:01:48 +0300
+
+libvoikko (4.3.1-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Bump Standards-Version (no changes).
+  * Bump watch file standard and use https.
+  * Remove trailing spaces from debian/changelog and debian/rules.
+  * Bump compat version to 13.
+  * Remove dh --fail-missing parameter.
+  * Remove autoreconf build deps no longer needed with newer debhelper.
+
+ -- Timo Jyrinki <timo@debian.org>  Fri, 01 Oct 2021 10:27:34 +0300
+
+libvoikko (4.3-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Timo Jyrinki <timo@debian.org>  Fri, 01 Nov 2019 10:53:43 +0200
+
+libvoikko (4.2-2) unstable; urgency=medium
+
+  * Drop transitional python-libvoikko package, force removal (Closes: #940747)
+  * Update Vcs-Git to be https one.
+  * Update Standards-Version.
+
+ -- Timo Jyrinki <timo@debian.org>  Wed, 25 Sep 2019 14:44:37 +0300
+
+libvoikko (4.2-1) unstable; urgency=medium
+
+  * control: Remove mention of malaga, support for which is now removed.
+  * copyright: Remove mention of malaga part, now dropped.
+  * control: Update Vcs URLs
+
+ -- Timo Jyrinki <timo@debian.org>  Wed, 13 Feb 2019 10:55:42 +0200
+
+libvoikko (4.2-0.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * New upstream release. (Closes: #911985)
+
+ -- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>  Sun, 25 Nov 2018 21:36:52 +0100
+
+libvoikko (4.1.1-1.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Remove "Priority: extra" from python-libvoikko package ("extra" is
+    deprecated)
+  * libvoikko-dev is wrongly marked as "Multi-Arch: foreign" (Closes: #872251)
+
+ -- Manuel A. Fernandez Montecelo <mafm@debian.org>  Mon, 20 Nov 2017 23:28:44 +0100
+
+libvoikko (4.1.1-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Bump Standards-Version (no changes).
+
+ -- Timo Jyrinki <timo@debian.org>  Thu, 03 Aug 2017 13:10:19 +0300
 
 libvoikko (4.1-1) unstable; urgency=medium
 
@@ -120,7 +189,7 @@ libvoikko (3.6.1-1) unstable; urgency=low
 libvoikko (3.6-2) unstable; urgency=low
 
   * Add 0001-Disable-voikkovfstc-by-default-since-VFST-is-still-e.patch
-    - Disable building experimental voikkovfstc reported by 
+    - Disable building experimental voikkovfstc reported by
       Mayhem (Closes: #716445).
     - Add also autoreconf.patch for autoreconf run changes
 
@@ -226,7 +295,7 @@ libvoikko (2.2.2-1) unstable; urgency=low
 
   * New upstream release
   * Fix lintian warnings: relation symbol, add misc:Depends
-  * Link specifically to GPL2, mention Bjoern in debian/copyright 
+  * Link specifically to GPL2, mention Bjoern in debian/copyright
 
  -- Timo Jyrinki <timo@debian.org>  Wed, 27 Jan 2010 17:27:23 +0200
 
@@ -235,10 +304,10 @@ libvoikko (2.2.1-1) unstable; urgency=low
   * New upstream release
   * Change libmalaga dependency to libglib dependency
   - Upstream has implemented minimal malaga functionality inside libvoikko
-  * Breaks suomi-malaga < 1.4 
-  * Update Standards-Version to 3.8.3 
-  * Add python-libvoikko package 
-  * Add patch to add #! sequence to the .py file (Lintian) 
+  * Breaks suomi-malaga < 1.4
+  * Update Standards-Version to 3.8.3
+  * Add python-libvoikko package
+  * Add patch to add #! sequence to the .py file (Lintian)
 
  -- Timo Jyrinki <timo@debian.org>  Wed, 14 Oct 2009 17:45:15 +0300
 
@@ -265,7 +334,7 @@ libvoikko (2.1-1) unstable; urgency=low
 
   * New upstream release
   * Update man page locations
-  * Update Standards-Version (no changes) 
+  * Update Standards-Version (no changes)
   * Bump debhelper dependency to 5
 
  -- Timo Jyrinki <timo@debian.org>  Wed, 29 Apr 2009 10:57:09 +0300
@@ -468,4 +537,3 @@ libvoikko (0.2-0hf1) unstable; urgency=low
   * Initial release
 
  -- Harri Pitkänen <hatapitk@iki.fi>  Sat, 15 Apr 2006 14:23:04 +0300
-
