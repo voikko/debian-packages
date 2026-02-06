@@ -4,9 +4,51 @@ voikko-fi (99devtest-1) unstable; urgency=low
   * Intentional differences to official Debian packages:
     - linux-distributions.lex is not included because testing is done
       with vendor neutral vocabulary.
-    - source date epoch patch removed (included upstream)
 
- -- Harri Pitkänen <hatapitk@iki.fi>  Tue, 14 Aug 2018 13:00:00 +0300
+ -- Harri Pitkänen <hatapitk@iki.fi>  Fri, 06 Feb 2026 13:00:00 +0300
+
+voikko-fi (2.5-2) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Trim trailing whitespace.
+  * Use secure URI in Homepage field.
+  * Bump debhelper from old 12 to 13.
+  * Update standards version to 4.6.0, no changes needed.
+
+  [ Timo Jyrinki ]
+  * Change foma dependency to not depend on a transitional package.
+    (Closes: #1077414)
+
+ -- Timo Jyrinki <timo@debian.org>  Sun, 18 Aug 2024 10:30:48 +0300
+
+voikko-fi (2.5-1) unstable; urgency=medium
+
+  * New upstream version.
+
+ -- Timo Jyrinki <timo@debian.org>  Thu, 03 Mar 2022 15:34:37 +0200
+
+voikko-fi (2.4-1) unstable; urgency=medium
+
+  * New upstream version.
+  * Bump debehelper version to 12.
+
+ -- Timo Jyrinki <timo@debian.org>  Fri, 08 Jan 2021 12:24:04 +0200
+
+voikko-fi (2.3-1) unstable; urgency=medium
+
+  * New upstream version.
+  * Drop 10_source_date_epoch.patch, merged upstream.
+  * Update git urls.
+  * Update Standards-Version.
+
+ -- Timo Jyrinki <timo@debian.org>  Wed, 25 Sep 2019 14:37:06 +0300
+
+voikko-fi (2.2-1.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Adjust debian/docs to what is shipped upstream. (Closes: #903343)
+
+ -- Adrian Bunk <bunk@debian.org>  Sat, 11 Aug 2018 16:41:17 +0300
 
 voikko-fi (2.2-1) unstable; urgency=medium
 
@@ -43,7 +85,7 @@ suomi-malaga (2.0-1) unstable; urgency=medium
   [ Timo Jyrinki ]
   * New upstream major version.
   * Drops malaga usage, uses now VFST (Varissuo Finite State Transducer).
-  * Require libvoikko-dev >= 4.0 for building. 
+  * Require libvoikko-dev >= 4.0 for building.
   * Drop malaga-bin, switch to Python 3.
   * Bump Standards-Version, no changes.
   * debian/watch: update url (now called voikko-fi)
@@ -154,9 +196,9 @@ suomi-malaga (1.5-1) unstable; urgency=low
 suomi-malaga (1.4-1) unstable; urgency=low
 
   * New upstream release
-  * Last part of installation directory no longer needs to be specified 
-  * Breaks libvoikko < 2.2 
-  * Update Standards-Version to 3.8.3 
+  * Last part of installation directory no longer needs to be specified
+  * Breaks libvoikko < 2.2
+  * Update Standards-Version to 3.8.3
 
  -- Timo Jyrinki <timo@debian.org>  Wed, 14 Oct 2009 17:18:20 +0300
 
@@ -169,9 +211,9 @@ suomi-malaga (1.3-3) unstable; urgency=low
 suomi-malaga (1.3-2) unstable; urgency=low
 
   * Change installation path to work with libvoikko 2.1
-  * Add Breaks to earlier libvoikko versions 
+  * Add Breaks to earlier libvoikko versions
   * Update Standards-Version (no changes)
-  * Bump debhelper to version 5 
+  * Bump debhelper to version 5
 
  -- Timo Jyrinki <timo@debian.org>  Tue, 05 May 2009 20:26:29 +0300
 
@@ -415,4 +457,3 @@ voikko-fi (0.4-0hf1) unstable; urgency=low
   * Initial release
 
  -- Teemu Likonen <tlikonen@iki.fi>  Sat, 15 Apr 2006 11:45:00 +0300
-
